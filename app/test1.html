@@ -56,7 +56,7 @@
         <div class="col"></div>
     </div>
     <div>
-        ====================================================================================================================================================
+        =====================================================================================================================================================================
     </div>
     
     <!--타이포그래피-->
@@ -224,10 +224,196 @@
         
 
     </div>
+    <!--경고-->
+    <div class = "container mt-3"> <!--margin top size = 3 -->
+        <div class = "row">
+            <div class = "col-md-3">
+                <div class = "alert alert-secondary"> <!--alert-secondary : 회색색상-->
+                    <!--<strong> 태그는 해당 콘텐츠의 중요성이나 심각함, 긴급함 등을 강조할 때 사용, 보통 굵게 나옴-->
+                    <strong>Success!</strong>
+                </div>
+            </div>
+            <div class = "col-md-3">
+                <!--링크-->
+                <div class = "alert alert-primary">
+                    <strong>Error!</strong>여기를<a herf ="#" class = "alert-link">클릭하세요</a>
+                </div>
+            </div>
+            <div class = "col-md-3">
+                <!--마감알림-->
+                <div class = "alert alert-success alert-dismissible">
+                    <!--alert-dismissible : 경고메시지를 닫으려면 컨테이너에 클래스 추가하고 
+                    링크, 버튼 요소에 class = "btn-close"추가
+                    data-bs-dismiss = "alert" : 클릭하면 경고상자가 사라진다-->
+                    <button type = "button" class = "btn-close" data-bs-dismiss = "alert"></button>
+                    <strong>GOOD!</strong>오늘 하루도 화이팅!!
+                </div>
+            </div>
+            <div class = "col-md-3">
+                <!--.fade는 .show경고 메시지를 닫을 때 페이딩 효과를 추가-->
+                <div class = "alert alert-danger alert-dismissible fade show">
+                    <button type = "button" class = "btn-close" data-bs-dismiss = "alert"></button>
+                    <strong>HAPPY!</strong>BIRTHDAY
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--button-->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info">보내기</button>
+            </div>
+            <!--이미지로 링크 넣기-->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-warning"><img src="send.png" alt="send" width="50"
+                        height="30"></button>
+            </div>
+            <!--여러가지 요소-->
+            <div class="col-md-2">
+                <a href="#" class="btn btn-success">link button</a>
+                <button type="button" class="btn btn-success">btn</button>
+            </div>
+            <div class="col">
+                <!--input : 버튼 안에 값으로 지정-->
+                <input type="button" class="btn btn-success" value="input button">
+                <input type="button" class="btn btn-success" value="submit button">
+                <input type="button" class="btn btn-success" value="reset button">
+            </div>
+            <!--hover-->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-primary">Primary</button>
+                <button type="button" class="btn btn-outline-light text-dark">Light</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!--button size-->
+                <button type="button" class="btn btn-primary btn-lg">large</button>
+                <button type="button" class="btn btn-primary">Default</button>
+                <button type="button" class="btn btn-primary btn-sm">Small</button>
+            </div>
+            <!--활성->눌린것처럼 보임 / 비활성화 버튼->클릭할 수 없는 상태-->
+            <div class="col">
+                <button type="button" class="btn btn-primary active">활성 기본</button>
+                <button type="button" class="btn btn-primary" disabled>비활성 기본</button>
+                <a href="#" class="btn btn-primary disabled">비활성 링크</a>
+                <!--disabled : 버튼을 클릭할 수 없게 만든다 , <a>요소는 비활성화된 속성을 지원x => 시각적으로 비활성화 된것처럼
+                            보이도록 클래스를 사용-->
+            </div>
+            <!--spinner/loader button-->
+            <div class="col">
+                <button type="button" class="btn btn-warning">
+                    <span class="spinner-border spinner-border-sm"></span>
+                </button>
+            </div>
+            <!--loader no button-->
+            <div class="col">
+                <div class="spinner-border text-warning"></div>
+            </div>
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <!--button group-->
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">coke</button>
+                <button type="button" class="btn btn-primary">sprite</button>
+                <div class="btn-group">
+                    <!--toggle을 만들어 줘서 메뉴를 넣어준다-->
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">juice</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">apple</a>
+                        <a class="dropdown-item" href="#">graph</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div clss="col">
+                <button type="button" class="btn btn-secondary">
+                    message<span class="badge bg-warning">5</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class = "container mt-3"> 
+        <!--탐색 게층 구조 내에서 현재 페이지 위치 표시-->
+        <div class = "col">
+            <ul class = "breadcrumb">
+                <li class = "breadcrumb-item"><a href = "#">html</a></li>
+                <li class = "breadcrumb-item"><a href = "#">css</a></li>
+                <li class = "breadcrumb-item"><a href = "#">js</a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <!--pagination justify-content-end : page right-aligned-->
+            <ul class="pagination justify-content-end" style = "margin:20px 0">
+                <li class="page-item"><a class="page-link" href="#">previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">next</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--card-->
+    <div class = "container mt-3">
+        <div class = "row">
+            <div class = "col">
+                <div class = "card">
+                    <div class = "card-body">
+                        <h4 class = "card-title">title</h4>  <!--제목-->
+                        <p class = "card-text">text</p>      <!--내용-->
+                        <li><a href = "#" class = "link1">link1</a></li>  <!--링크-->
+                        <li><a href = "#" class = "link2">link2</a></li> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "row">    
+            <!--이미지 상단에 위치-->
+            <div class = "card" style = "width :400px">
+                <img class = "card-img-top" src = "uj.png" alt = "card_image">
+                <div class = "card-body">
+                    <h5 class = "card-title">안유진</h5>
+                    <p class = "card-text">김유진보단 안유진</p>
+                    <a href = "#" class = "btn btn-secondary">profile</a>
+                </div>
+            </div>
+            <!--이미지 하단에 위치-->
+            <div class = "card" style = "width :400px">
+                <div class = "card-body">
+                    <h5 class = "card-title">김석진</h5>
+                    <p class = "card-text">bts</p>
+                    <a href = "#" class = "btn btn-secondary">profile</a>
+                </div>
+                <img class = "card-img-bottom" src = "jin3.jpg" alt = "card_image2" style = "width:100%">
+            </div>
+            <!--이미지 오버레이-->
+            <div class = "card" style = "width:400px">
+                <img class = "card-img-top" src = "7.png" alt = "dol" style = "width:100%">
+                <div class = "card-img-overlay">
+                    <h5 class = "card-title">안녕하세요저는바다를누비는바다의왕자돌고래라고합니다</h5>
+                    <p class = "card-text">항상웃어요저처럼요저잘웃죠?</p>
+                    <a href = "#" class = "btn btn-secondary">먹e</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col">
+                
+            </div>
+        </div>
+    </div>    
+    
 
-    
-    
-    
+
     
 
 </body>
