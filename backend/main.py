@@ -1,6 +1,7 @@
 from fastapi import FastAPI ,Request
 from fastapi.templating import Jinja2Templates #html띄우기 위헤
 from starlette.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel #보내고 받아오기 위해
 
 
@@ -8,6 +9,8 @@ app = FastAPI()
 
 # 템플릿 디렉토리 설정
 templates = Jinja2Templates(directory="templates")
+
+app.mount("/backend", StaticFiles(directory="templates"), name="static")
 
 class DataInput(BaseModel):  # 받을데이터
     data: str
@@ -18,7 +21,7 @@ class DataInput(BaseModel):  # 받을데이터
 @app.get("/")
 def read_root(request: Request):
     # HTML 템플릿을 사용하여 렌더링
-    return templates.TemplateResponse("soi.html", {"request": request})
+    return templates.TemplateResponse("nes.html", {"request": request})
 
 #post방식으로 받고
 @app.post("/")
