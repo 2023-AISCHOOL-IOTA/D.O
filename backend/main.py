@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates #html띄우기 위헤
 from starlette.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel #보내고 받아오기 위해
-
+import time
 
 app = FastAPI()
 
@@ -30,8 +30,8 @@ def read_root(request: Request):
 @app.post("/soi.html")
 def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
-    #이 say를 모델에서 나오는 값으로 만들면 되지 않을까?
-    say = "안녕하세요"
-    processed_data = "나:" + data_input.data +"<br>" +say  #"나" + 넘어온 데이터
 
+
+    processed_data = "알겠습니다"+"<br>"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
+    time.sleep(0.5) #대화 느낌  주기 위해 time.sleep
     return  {"processed_data": processed_data} #processed_data라는 값으로 return

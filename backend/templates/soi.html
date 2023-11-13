@@ -7,46 +7,53 @@
     <title>입력 하자여~</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
-    <form id="form">
-        <input type="text" id="data-input" placeholder="데이터를 입력하세요">
-        <button type="button" id="toyou" >제출</button>
-    </form>
+    <footer>
+        <form id="form">
+            <input type="text" id="data-input" placeholder="데이터를 입력하세요">
+            <button type="button" id="toyou">제출</button>
+        </form>
 
+        <div id="text"></div>
 
+        <script>
+            // 버튼 클릭 이벤트 처리
+            $("#toyou").click(function () {
+                // 입력된 데이터 가져오기
+                let inputData = $("#data-input").val();  // data-input의 값만 가져오기
 
-    <p id="result"></p>  <!-- 제출한 값을 나오게 만들 부분 p태그로 !-->
+                // text라는 ID를 가진 요소를 text 변수에 저장
+                let textContainer = $("#text-result-container");
+                let text = $("#text");
+                let result = $("#result");
 
+                // 새로운 <p> 태그를 동적으로 생성하여 text 요소에 추가
+                text.append("<p>" + inputData + "</p>");
 
-    <script>
-        // 버튼 클릭 이벤트 처리
-        $("#toyou").click(function () {
-    // 입력된 데이터 가져오기
-    let inputData = $("#data-input").val();  //data-input의 값만 가져오기
+                // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
+                // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
+                $.ajax({
+                    type: "post", // 어떤 방식으로 보낼지
+                    url: "http://127.0.0.1:8000/soi.html",  // 보낼 주소 (여기에는 엔드포인트만 필요합니다)
+                    contentType: "application/json",  // 서버에 JSON 형식임을 알려줌
+                    data: JSON.stringify({ data: inputData }),  // 데이터를 JSON 문자열로 변환
 
+                    // 성공적인 전송시 서버에서 반환된 response 받음
+                    success: function (response) {
+                        // 서버 응답을 성공하면 실행
+                         text.append("<P>" +response.processed_data+ "</P>");
+                    },
+                    // 현재 입력된 요소에 입력된 요소를 계속 더하기, <br>은 줄바꿈
+                    error: function () {
+                        alert("실패");
+                    }
+                });
 
-//fastapi의 BaseModel은 제이슨 형식을 받는데 그냥 data로 보내면 오류남
-//contentType으로 제이슨 임을 알려주고JSON.stringify로 데이터를 제이슨으로 변환
-    $.ajax({
-        type: "post", //어떤 방식으로 보낼껀지
-        url: "http://127.0.0.1:8000/soi.html", //보낼 주소
-        contentType: "application/json", // 서버에 JSON 형식임을 알려줌
-        data: JSON.stringify({ data: inputData }), // 데이터를 JSON 문자열로 변환(직렬화)
-
-        //성공적인 전송시 서버에서 반환된 responbse받음
-        success: function (response) {
-            // 서버 응답을 성공 하면 실행
-           let result = $("#result");  //result라는 아이디 가진 요소를 result라는 변수에 저장
-                let currentContent = result.html(); // jQuery 사용해 요소내의 HTML 내용을 가져옴
-                result.html(currentContent  + response.processed_data + "<br>");
-            },
-            //현재 입력된 요소에 입력된 요소를 계속 더하기 <br>는 줄바꿈
-            error: function () {
-                alert("실패");
-            }
-        });
-         $("#data-input").val(''); //값을 입력필드로 바꾸기
-        });
-    </script>
+                $("#data-input").val('');  // 값을 입력 필드로 바꾸기
+            });
+        </script>
+    </footer>
 </body>
+
 </html>
