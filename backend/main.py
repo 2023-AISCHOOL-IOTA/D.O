@@ -10,6 +10,7 @@ app = FastAPI()
 # 템플릿 디렉토리 설정
 templates = Jinja2Templates(directory="templates")
 
+
 app.mount("/backend", StaticFiles(directory="templates"), name="static")
 
 class DataInput(BaseModel):  # 받을데이터
@@ -27,14 +28,8 @@ def read_root(request: Request):
 @app.post("/")
 def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
-    processed_data = "나:" + data_input.data   #"나" + 넘어온 데이터
+    #이 say를 모델에서 나오는 값으로 만들면 되지 않을까?
+    say = "하....."
+    processed_data = "나:" + data_input.data +"<br>" +say  #"나" + 넘어온 데이터
+
     return {"processed_data": processed_data} #processed_data라는 값으로 return
-
-
-
-
-
-
-
-#request: Request
-
