@@ -23,13 +23,13 @@
         $("#toyou").click(function () {
     // 입력된 데이터 가져오기
     let inputData = $("#data-input").val();  //data-input의 값만 가져오기
-    
+
 
 //fastapi의 BaseModel은 제이슨 형식을 받는데 그냥 data로 보내면 오류남
 //contentType으로 제이슨 임을 알려주고JSON.stringify로 데이터를 제이슨으로 변환
     $.ajax({
         type: "post", //어떤 방식으로 보낼껀지
-        url: "http://127.0.0.1:8000/", //보낼 주소
+        url: "http://127.0.0.1:8000/soi.html", //보낼 주소
         contentType: "application/json", // 서버에 JSON 형식임을 알려줌
         data: JSON.stringify({ data: inputData }), // 데이터를 JSON 문자열로 변환(직렬화)
 

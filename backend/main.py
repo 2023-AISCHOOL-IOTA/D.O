@@ -9,10 +9,7 @@ app = FastAPI()
 
 # 템플릿 디렉토리 설정
 templates = Jinja2Templates(directory="templates")
-
-
-app.mount("/backend", StaticFiles(directory="templates"), name="static")
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 class DataInput(BaseModel):  # 받을데이터
     data: str
 
@@ -24,12 +21,17 @@ def read_root(request: Request):
     # HTML 템플릿을 사용하여 렌더링
     return templates.TemplateResponse("nes.html", {"request": request})
 
+@app.get("/soi.html")
+def read_root(request: Request):
+    # HTML 템플릿을 사용하여 렌더링
+    return templates.TemplateResponse("soi.html", {"request": request})
+
 #post방식으로 받고
-@app.post("/")
+@app.post("/soi.html")
 def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
     #이 say를 모델에서 나오는 값으로 만들면 되지 않을까?
-    say = "하....."
+    say = "안녕하세요"
     processed_data = "나:" + data_input.data +"<br>" +say  #"나" + 넘어온 데이터
 
-    return {"processed_data": processed_data} #processed_data라는 값으로 return
+    return  {"processed_data": processed_data} #processed_data라는 값으로 return
