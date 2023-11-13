@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOBOT</title>
+    <link rel="stylesheet" href="/templete/css/chat.css">
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <div class="card" id="chat1"  style="background-color: beige;">
+                    <div class="card-header d-flex justify-content-between align-items-center p-3">
+                        <div class="container">
+                            <a href="test2.html"><img src="/images/back.jpg" alt="back" width="30px" height="30px"></a>
+                            <img src="\images\dog.jpg" class="rounded-circle" alt="wtih" width="30px" height="30px">
+                            <h3 class="client"> 고객</h3>
+                        </div>
+                    </div>
+                    <div class="card-body" data-mdb-perfect-scrollbar="true" style="position : relative;">
+                        <div class="d-flex flex-row justify-content-start">
+                            <div id="chat-container">
+                                <img src="\images\logo.png" alt="manage" width="30px" height="30px">
+                                <div class="message-container">
+
+                                    <div class="bot-message">안녕하세요! 어떤 도움이 필요하세요?</div>
+
+                                </div>
+                                <img src="\images\dog.jpg" alt="wtih" width="30px" height="30px" float="right">
+                                <div class="message-container">
+
+                                    <div class="user-message">짬뽕을 주문하고 싶어요!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                        <div id="chat-container">
+                            <div id="chat-output"></div>
+                            <input type="text" id="user-input" placeholder="메시지를 입력하세용...">
+                            <button onclick="sendMessage()"><img src="\images\send.png" width="30px"
+                                    height="30px"></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    <script src="main.js"></script>
+
+
+</body>
+
+</html>
