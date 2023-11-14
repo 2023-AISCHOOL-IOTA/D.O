@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  <!--인코딩-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- initial-scale=1.0: 브라우저가 페이지를 처음 로드할 때 초기, 축소 설정-->
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!--mt-2 : margin top의 크기가 2이다(0~5크기가 있고 5가 가장 크다)-->
+    <div class="container p-3">  <!--p-3 : padding 사이즈-->
+        <div class="container p-3 my-3 border bg-dark text-white">  <!--my-3 : margin 사이즈-->
+            <h1>ONEPIECE</h1>
+            <p><mark>파워레인저 옐로우</mark></p>
+            <p>with 김동욱 멘토님</p>
+        </div>
+    </div>
+    <!--Control the column width, and how they should appear on different devices -->
+<!--(기본)열의 개수대로 col을 만들어준다-->
+    <div class="row">
+        <div class="col">팀장</div>
+        <div class="col">백엔드</div>
+        <div class="col">백엔드</div>
+        <div class="col">백엔드</div>
+        <div class="col">프론트엔드</div>
+    </div>
+
+    <div class="row">
+        <div class="col">김성준</div>
+        <div class="col">양우철</div>
+        <div class="col">박호균</div>
+        <div class="col">정소이</div>
+        <div class="col">윤혜민</div>
+    </div>
+
+<!--(반응형)열의 개수대로 col을 만들어준다-->
+    <div class="row">
+        <div class="col-md-3">팀장</div>
+        <div class="col-md-3">백엔드</div>
+        <div class="col-md-3">백엔드</div>
+        <div class="col-md-3">백엔드</div>
+        <div class="col-md-3">프론트엔드</div>
+    </div>
+
+<!--두 개의 동일하지 않은 반응 열-->
+    <div class="row">
+        <div class="col-sm-4">.col-sm-4</div>
+        <div class="col-sm-8">.col-sm-8</div>
+    </div>
+
+    <!-- Or let Bootstrap automatically handle the layout -->
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <div>
+        =====================================================================================================================================================================
+    </div>
+    
+    <!--타이포그래피-->
+    <div class = "container">
+        <div class = "row">
+            <!--col-md-6 클래스는 컨테이너를 반으로 나누는 역할을 합니다. 
+            md는 중간 크기의 화면 이상에서 적용되며, 6은 12칸 그리드 시스템에서 절반-->
+            <div class = "col-md-4">
+                <h1>11월 2일</h1>
+                <small><abbr title = "Thursday">목요일</abbr></small>
+                <h5>- 앞으로 월요일송 <mark>5번</mark> 남음
+                </h5>
+            </div>
+
+            <div class = "col-md-4">  
+                <h1>MUSIC</h1>
+                <p>오늘의 음악 추천:</p>
+                <dl>
+                    <dt>RUN BTS</dt>
+                    <dd>- BTS</dd>
+                    <dt>손오공</dt>
+                    <dd>- 세븐틴</dd>
+                </dl>
+            </div>
+    
+            <div class = "col-md-4">
+                <h1>불투명도 테스트</h1>
+                <p class = "text-black-50">검정 글씨를 50% 투명도를 줄거야 하얀색 배경에</p>
+                <p class = "text-white-50 bg-dark">흰색 글씨를 50% 투명도를 줄거야 검은색 배경에</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-md-6">
+                <div class = "container mt-3">
+                    <table class = "table table-striped">  <!--zebra-striped rows-->
+                        <thead><!--컬럼제목-->
+                            <tr><!--행추가-->
+                                <th>음식</th>
+                                <th>음식점</th>
+                                <th>재료</th>
+                            </tr>
+                        </thead>
+                        <tbody><!--표내용-->
+                            <tr><!--행추가-->
+                                <td>김밥</td>
+                                <td>후토루</td>
+                                <td>연어, 김, 밥, 채소</td>
+                            </tr>
+                            <tr><!--행추가-->
+                                <td>자장면</td>
+                                <td>아리산</td>
+                                <td>삼겹살, 고추, 밀가루, 자장</td>
+                            </tr>
+                            <tr><!--행추가-->
+                                <td>돈까스</td>
+                                <td>동백카츠</td>
+                                <td>안심, 등심, 항정살, 밥, 채소</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class = "col-md-6">
+                <div class = "container mt-3">
+                    <table class = "table table-bordered table-hover"> <!--bordered table & hover & head colors-->
+                        <thead class = "table-primary">
+                            <tr>
+                                <th>음식</th>
+                                <th>음식점</th>
+                                <th>재료</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>김밥</td>
+                                <td>후토루</td>
+                                <td>연어, 김, 밥, 채소</td>
+                            </tr>
+                            <tr>
+                                <td>자장면</td>
+                                <td>아리산</td>
+                                <td>삼겹살, 고추, 밀가루, 자장</td>
+                            </tr>
+                            <tr>
+                                <td>돈까스</td>
+                                <td>동백카츠</td>
+                                <td>안심, 등심, 항정살, 밥, 채소</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        <div class = "row">
+            <div class = "col-md-4">
+                <div class = "container mt-3">
+                    <div class="table-responsive"><!--내용이 많을 때 옆으로 스크롤을 이용할 수 있는 것-->
+                        <table class = "table table-bordered"><!--table-bordered : 테이블 테두리를 만들어준다-->
+                            <thead class = "table-success"><!--success : green-->
+                                <tr>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>  
+                                    <th>1</th>  
+                                    <th>1</th>
+                                    <th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-md-4">
+                <div class = "container">
+                    <p>참잘했어여</p>
+                     <!--alt : 해당 이미지를 위한 대체 텍스트를 명시함.
+                    만약 이미지가 단순한 장식이라면 alt=""와 같이 사용-->
+                    <img src = "good.png" class = "rounded" alt = "good" width = "300" height = "230"> 
+                    <!--rounded : 각이 둥글-->
+                </div>
+            </div>
+            <div class = "col-md-4">
+                <div class = "container">
+                    <p>우리 사이좋아요</p>
+                    <img src = "dog.jpg" class = "rounded-circle" alt = "wtih" width = "300" height = "230"> 
+                    <!--rounded-circle : 타원-->
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    <!--경고-->
+    <div class = "container mt-3"> <!--margin top size = 3 -->
+        <div class = "row">
+            <div class = "col-md-3">
+                <div class = "alert alert-secondary"> <!--alert-secondary : 회색색상-->
+                    <!--<strong> 태그는 해당 콘텐츠의 중요성이나 심각함, 긴급함 등을 강조할 때 사용, 보통 굵게 나옴-->
+                    <strong>Success!</strong>
+                </div>
+            </div>
+            <div class = "col-md-3">
+                <!--링크-->
+                <div class = "alert alert-primary">
+                    <strong>Error!</strong>여기를<a herf ="#" class = "alert-link">클릭하세요</a>
+                </div>
+            </div>
+            <div class = "col-md-3">
+                <!--마감알림-->
+                <div class = "alert alert-success alert-dismissible">
+                    <!--alert-dismissible : 경고메시지를 닫으려면 컨테이너에 클래스 추가하고 
+                    링크, 버튼 요소에 class = "btn-close"추가
+                    data-bs-dismiss = "alert" : 클릭하면 경고상자가 사라진다-->
+                    <button type = "button" class = "btn-close" data-bs-dismiss = "alert"></button>
+                    <strong>GOOD!</strong>오늘 하루도 화이팅!!
+                </div>
+            </div>
+            <div class = "col-md-3">
+                <!--.fade는 .show경고 메시지를 닫을 때 페이딩 효과를 추가-->
+                <div class = "alert alert-danger alert-dismissible fade show">
+                    <button type = "button" class = "btn-close" data-bs-dismiss = "alert"></button>
+                    <strong>HAPPY!</strong>BIRTHDAY
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--button-->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info">보내기</button>
+            </div>
+            <!--이미지로 링크 넣기-->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-warning"><img src="send.png" alt="send" width="50"
+                        height="30"></button>
+            </div>
+            <!--여러가지 요소-->
+            <div class="col-md-2">
+                <a href="#" class="btn btn-success">link button</a>
+                <button type="button" class="btn btn-success">btn</button>
+            </div>
+            <div class="col">
+                <!--input : 버튼 안에 값으로 지정-->
+                <input type="button" class="btn btn-success" value="input button">
+                <input type="button" class="btn btn-success" value="submit button">
+                <input type="button" class="btn btn-success" value="reset button">
+            </div>
+            <!--hover-->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-primary">Primary</button>
+                <button type="button" class="btn btn-outline-light text-dark">Light</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!--button size-->
+                <button type="button" class="btn btn-primary btn-lg">large</button>
+                <button type="button" class="btn btn-primary">Default</button>
+                <button type="button" class="btn btn-primary btn-sm">Small</button>
+            </div>
+            <!--활성->눌린것처럼 보임 / 비활성화 버튼->클릭할 수 없는 상태-->
+            <div class="col">
+                <button type="button" class="btn btn-primary active">활성 기본</button>
+                <button type="button" class="btn btn-primary" disabled>비활성 기본</button>
+                <a href="#" class="btn btn-primary disabled">비활성 링크</a>
+                <!--disabled : 버튼을 클릭할 수 없게 만든다 , <a>요소는 비활성화된 속성을 지원x => 시각적으로 비활성화 된것처럼
+                            보이도록 클래스를 사용-->
+            </div>
+            <!--spinner/loader button-->
+            <div class="col">
+                <button type="button" class="btn btn-warning">
+                    <span class="spinner-border spinner-border-sm"></span>
+                </button>
+            </div>
+            <!--loader no button-->
+            <div class="col">
+                <div class="spinner-border text-warning"></div>
+            </div>
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <!--button group-->
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">coke</button>
+                <button type="button" class="btn btn-primary">sprite</button>
+                <div class="btn-group">
+                    <!--toggle을 만들어 줘서 메뉴를 넣어준다-->
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">juice</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">apple</a>
+                        <a class="dropdown-item" href="#">graph</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div clss="col">
+                <button type="button" class="btn btn-secondary">
+                    message<span class="badge bg-warning">5</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class = "container mt-3"> 
+        <!--탐색 게층 구조 내에서 현재 페이지 위치 표시-->
+        <div class = "col">
+            <ul class = "breadcrumb">
+                <li class = "breadcrumb-item"><a href = "#">html</a></li>
+                <li class = "breadcrumb-item"><a href = "#">css</a></li>
+                <li class = "breadcrumb-item"><a href = "#">js</a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <!--pagination justify-content-end : page right-aligned-->
+            <ul class="pagination justify-content-end" style = "margin:20px 0">
+                <li class="page-item"><a class="page-link" href="#">previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">next</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--card-->
+    <div class = "container mt-3">
+        <div class = "row">
+            <div class = "col">
+                <div class = "card">
+                    <div class = "card-body">
+                        <h4 class = "card-title">title</h4>  <!--제목-->
+                        <p class = "card-text">text</p>      <!--내용-->
+                        <li><a href = "#" class = "link1">link1</a></li>  <!--링크-->
+                        <li><a href = "#" class = "link2">link2</a></li> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "row">    
+            <!--이미지 상단에 위치-->
+            <div class = "card" style = "width :400px">
+                <img class = "card-img-top" src = "uj.png" alt = "card_image">
+                <div class = "card-body">
+                    <h5 class = "card-title">안유진</h5>
+                    <p class = "card-text">김유진보단 안유진</p>
+                    <a href = "#" class = "btn btn-secondary">profile</a>
+                </div>
+            </div>
+            <!--이미지 하단에 위치-->
+            <div class = "card" style = "width :400px">
+                <div class = "card-body">
+                    <h5 class = "card-title">김석진</h5>
+                    <p class = "card-text">bts</p>
+                    <a href = "#" class = "btn btn-secondary">profile</a>
+                </div>
+                <img class = "card-img-bottom" src = "jin3.jpg" alt = "card_image2" style = "width:100%">
+            </div>
+            <!--이미지 오버레이-->
+            <div class = "card" style = "width:400px">
+                <img class = "card-img-top" src = "7.png" alt = "dol" style = "width:100%">
+                <div class = "card-img-overlay">
+                    <h5 class = "card-title">안녕하세요저는바다를누비는바다의왕자돌고래라고합니다</h5>
+                    <p class = "card-text">항상웃어요저처럼요저잘웃죠?</p>
+                    <a href = "#" class = "btn btn-secondary">먹e</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--축소-->
+    <div class = "container">
+        <div class = "row">
+            <div class = "col">
+                <button datat-bs-toggle = "collapse" data-bs-target = "#demo">collapsible</button>
+                <div id = "demo" class = "collapse">
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+    
+
+
+    
+
+</body>
+</html>
