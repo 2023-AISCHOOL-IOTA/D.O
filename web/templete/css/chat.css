@@ -1,35 +1,61 @@
+/* CARD HEADERr */
 .container{
-    display : flex;
-    align-items : center;
+    display : flex;  /*자식 요소들을 수평으로 정렬*/
+    align-items : center;  /* 수직으로 중앙 정렬*/
 }
-body {
+#full{
+    display : flex;
+    justify-content: center;
+}
+/* CARD BODY */
+.body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-#chat-container {
+.chat-container-1 {
     max-width: 400px;
     margin: 20px auto;
     border: 1px solid #ccc;
     padding: 10px;
+    height: 500px;
 }
 
-.message-container {
+.message-container-1 {
     margin-bottom: 10px;
     overflow: hidden;
+    float : left;
 }
 
+.message-container-2 {
+    margin-bottom: 10px;
+    overflow: hidden;
+    float:right;
+}
+/*BODY안 채팅*/
+/* USER */
 .user-message {
     background-color: #e0f7fa;
     padding: 8px;
     border-radius: 10px;
-    float: right;
+    float: left;
 }
 
 .bot-message {
     background-color: #eceff1;
     padding: 8px;
     border-radius: 10px;
-    float: left;
+    float: right;
+}
+/*FOOTER안 입력창*/
+.chat-container-2 {
+    max-width: 400px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+img{
+    float: right;
 }
