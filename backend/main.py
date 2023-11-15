@@ -8,8 +8,10 @@ import time
 app = FastAPI()
 
 # 템플릿 디렉토리 설정
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="templates/html")
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 class DataInput(BaseModel):  # 받을데이터
     data: str
 
@@ -19,15 +21,15 @@ class DataInput(BaseModel):  # 받을데이터
 @app.get("/")
 def read_root(request: Request):
     # HTML 템플릿을 사용하여 렌더링
-    return templates.TemplateResponse("nes.html", {"request": request})
+    return templates.TemplateResponse("home.html", {"request": request})  #이 주소로 요청이 오면 HOME이 열리게 
 
-@app.get("/soi.html")
+@app.get("/dobot.html") # 로고 누르면 여기로 요청이 옴 그럼이 HTML이 열림
 def read_root(request: Request):
     # HTML 템플릿을 사용하여 렌더링
-    return templates.TemplateResponse("soi.html", {"request": request})
+    return templates.TemplateResponse("dobot.html", {"request": request})
 
 #post방식으로 받고
-@app.post("/soi.html")
+@app.post("/dobot.html") #POST방식으로 요청이 들어오면 
 def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
 
@@ -35,3 +37,8 @@ def process_data( data_input: DataInput):
     processed_data = "알겠습니다"+"<br>"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
     time.sleep(0.5) #대화 느낌  주기 위해 time.sleep
     return  {"processed_data": processed_data} #processed_data라는 값으로 return
+
+#챗봇 페이지에서 뒤로 가기 누르면 홈으로 넘어가게
+@app.get("/home.html")
+def backward(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
