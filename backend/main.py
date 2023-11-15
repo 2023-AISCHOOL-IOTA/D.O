@@ -34,8 +34,8 @@ def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
 
 
-    processed_data = "알겠습니다"+"<br>"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
-    time.sleep(0.5) #대화 느낌  주기 위해 time.sleep
+    processed_data = "알겠습니다"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
+    time.sleep(0.6) #대화 느낌  주기 위해 time.sleep
     return  {"processed_data": processed_data} #processed_data라는 값으로 return
 
 #챗봇 페이지에서 뒤로 가기 누르면 홈으로 넘어가게

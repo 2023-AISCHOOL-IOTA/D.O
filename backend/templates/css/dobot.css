@@ -19,34 +19,30 @@
     margin: 20px auto;
     border: 1px solid #ccc;
     padding: 10px;
-    height: 500px;
+    overflow: auto; /* 스크롤이 필요한 경우만 표시되도록 설정 */
+    display: flex; /* 부모 컨테이너를 flex로 설정 */
+    flex-direction: column; /* 자식 요소를 세로로 정렬 */
 }
 
-.message-container-1 {
-    margin-bottom: 10px;
-    overflow: hidden;
-    float : left;
-}
-
+.message-container-1,
 .message-container-2 {
     margin-bottom: 10px;
     overflow: hidden;
-    float:right;
 }
-/*BODY안 채팅*/
-/* USER */
-.user-message {
+
+.user-message,
+.bot-message {
     background-color: #e0f7fa;
     padding: 8px;
     border-radius: 10px;
-    float: left;
+}
+
+.user-message {
+    align-self: flex-start; /* 사용자 메시지를 왼쪽 정렬 */
 }
 
 .bot-message {
-    background-color: #eceff1;
-    padding: 8px;
-    border-radius: 10px;
-    float: right;
+    align-self: flex-end; /* 봇 메시지를 오른쪽 정렬 */
 }
 /*FOOTER안 입력창*/
 .chat-container-2 {
