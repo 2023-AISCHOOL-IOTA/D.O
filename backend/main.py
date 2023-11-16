@@ -4,6 +4,7 @@ from starlette.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel #보내고 받아오기 위해
 import time
+from pymongo import MongoClient
 
 app = FastAPI()
 
@@ -14,6 +15,15 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 class DataInput(BaseModel):  # 받을데이터
     data: str
+
+client = MongoClient("mongodb://localhost:27017/")
+
+
+db = client["now"]
+collection = db["users"]
+
+
+
 
 
 #  responsebody통해  받아옴 넘어오는 Request는  여기서 request라고 지정
@@ -33,7 +43,9 @@ def read_root(request: Request):
 def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
 
-
+    user_input = data_input.data
+    conversation = {"user_input": user_input, "timestamp": int(time.time())}
+    inserted_data = collection.insert_one(conversation)
     processed_data = "안녕"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
     time.sleep(0.6) #대화 느낌  주기 위해 time.sleep
     return  {"processed_data": processed_data} #processed_data라는 값으로 return
