@@ -21,7 +21,7 @@ class DataInput(BaseModel):  # 받을데이터
 @app.get("/")
 def read_root(request: Request):
     # HTML 템플릿을 사용하여 렌더링
-    return templates.TemplateResponse("dobot.html", {"request": request})  #이 주소로 요청이 오면 HOME이 열리게
+    return templates.TemplateResponse("home.html", {"request": request})  #이 주소로 요청이 오면 HOME이 열리게
 
 @app.get("/dobot") # 로고 누르면 여기로 요청이 옴 그럼이 HTML이 열림
 def read_root(request: Request):
@@ -34,7 +34,7 @@ def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
 
 
-    processed_data = "알겠습니다"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
+    processed_data = "안녕"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
     time.sleep(0.6) #대화 느낌  주기 위해 time.sleep
     return  {"processed_data": processed_data} #processed_data라는 값으로 return
 
@@ -43,7 +43,7 @@ def process_data( data_input: DataInput):
 def backward(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
 
-
+"""
 @app.post("/model_response") #POST방식으로 요청이 들어오면
 def process_data( data_input: DataInput):
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
@@ -51,4 +51,4 @@ def process_data( data_input: DataInput):
 
     processed_data = "알겠습니다"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
     time.sleep(0.6) #대화 느낌  주기 위해 time.sleep
-    return  {"processed_data": processed_data} #processed_data라는 값으로 return
+    return  {"processed_data": processed_data} #processed_data라는 값으로 return """

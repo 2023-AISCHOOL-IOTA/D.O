@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="{{ url_for('static', path = '/css/dobot.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', path = '/js/chat.js')}}">
+    
 </head>
 
 <body>
     <div class="container mt-4 chat-container">
         <div class="header">
             <div>
-                <a href="home.html"><img src="{{ url_for('static', path = '/images/back.jpg')}}" alt="back" width="30px"  height="30px"></a>
+                <a href="home"><img src="{{ url_for('static', path = '/images/back.jpg')}}" alt="back" width="30px"  height="30px"></a>
                 <img src="{{ url_for('static', path ='/images/good.png')}}" alt="user-icon">
                 <span>사용자 이름</span>
             </div>
@@ -30,8 +31,11 @@
                     height="30px"></button>
         </div>
     </div>
+    <script  src="{{ url_for('static', path = '/js/chat.js')}}"></script> >
+       
+    
 
-
+  
 </body>
 
 </html>

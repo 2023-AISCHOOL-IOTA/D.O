@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>채팅봇</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/templete/css/test.css">
-        
+
 </head>
+
 <body>
     <div class="container mt-4 chat-container">
         <div class="header">
             <div>
-                <button onclick="goBack()"><img src = "/images/back.jpg" alt = "back"></button>
+                <button onclick="goBack()"><img src="/images/back.jpg" alt="back"></button>
                 <img src="/images/good.png" alt="user">
                 <span>user</span>
             </div>
@@ -21,11 +23,12 @@
         <div class="card" id="chat-body">
             <!-- 대화를 동적으로 추가할 공간 -->
         </div>
-    
+
 
         <div class="input-container">
             <input type="text" id="message-input" class="form-control mr-2" placeholder="메시지를 입력하세요...">
-            <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" width = "40px" height="40px">
+            <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" width="40px"
+                height="40px">
         </div>
     </div>
 
@@ -48,14 +51,14 @@
             messageSender.className = 'message-sender';
             messageTime.className = 'message-time';
 
-            messageBubble.textContent = message;            
+            messageBubble.textContent = message;
             messageSender.textContent = sender;
             messageTime.textContent = getTime(); // 현재 시간을 얻어옴
 
             messageContainer.appendChild(messageBubble);
             messageContainer.appendChild(messageSender);
             messageContainer.appendChild(messageTime);
-            
+
 
             // 사용자와 챗봇에 따라 클래스를 추가
             if (sender === 'user') {
@@ -108,9 +111,10 @@
         });
 
         // 초기 대화 시작
-        setTimeout(function() {
+        setTimeout(function () {
             addMessage('안녕하세요! 어떤 도움이 필요하세요?', 'DOBOT');
         }, 500);
     </script>
 </body>
+
 </html>
