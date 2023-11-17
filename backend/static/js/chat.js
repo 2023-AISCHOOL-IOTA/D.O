@@ -1,10 +1,11 @@
+//처음 나오는 메세지 출력 함수
 function addMessage(message, sender) {
-  var chatBody = document.getElementById("chat-body");
-  var messageContainer = document.createElement("div");
+  var chatBody = document.getElementById("chat-body"); //div태그 선택
+  var messageContainer = document.createElement("div"); 
   var messageBubble = document.createElement("div");
   var messageSender = document.createElement("div");
   var messageTime = document.createElement("div");
-  var botContainer = document.getElementById("first");
+  var botContainer = $("#first");
   messageContainer.className = "message-container";
   messageBubble.className = "message-bubble";
   messageSender.className = "message-sender";
@@ -25,6 +26,7 @@ function addMessage(message, sender) {
   messageContainer.appendChild(timeElement);
 
   var botContainer = document.getElementById("bot");
+  
 
   if (botContainer) {
     // 'bot' 아이디를 가진 div 태그가 존재하는 경우
@@ -34,9 +36,11 @@ function addMessage(message, sender) {
     messageContainer.classList.add("chatbot-message");
   }
   chatBody.appendChild(messageContainer);
+  
 
   chatBody.scrollTop = chatBody.scrollHeight;
 }
+let realtime = getTime();
 function getTime() {
   var now = new Date();
   var hours = now.getHours();
@@ -77,6 +81,9 @@ $("#toyou").click(function () {
         getTime() +
         "</div>"
     );
+     var chatBody = document.getElementById("chat-body");
+     chatBody.scrollTop = chatBody.scrollHeight;
+    
 
     // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
     // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
@@ -85,7 +92,7 @@ $("#toyou").click(function () {
       type: "post", // 어떤 방식으로 보낼지
       url: "http://127.0.0.1:8000/dobot", // 보낼 주소
       contentType: "application/json", // 서버에 JSON 형식임을 알려줌
-      data: JSON.stringify({ data: inputData }), // 데이터를 JSON 문자열로 변환
+      data: JSON.stringify({ data: [inputData, realtime]}), // 데이터를 JSON 문자열로 변환
 
       // 성공적인 전송시 서버에서 반환된 response 받음
       success: function (response) {
@@ -104,6 +111,8 @@ $("#toyou").click(function () {
             getTime() +
             "</div>"
         );
+         var chatBody = document.getElementById("chat-body");
+         chatBody.scrollTop = chatBody.scrollHeight;
       },
 
       error: function () {
@@ -140,6 +149,9 @@ $("#message-input").keyup(function (event) {
           getTime() +
           "</div>"
       );
+       var chatBody = document.getElementById("chat-body");
+       chatBody.scrollTop = chatBody.scrollHeight;
+      
 
       // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
       // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
@@ -148,7 +160,7 @@ $("#message-input").keyup(function (event) {
         type: "post", // 어떤 방식으로 보낼지
         url: "http://127.0.0.1:8000/dobot", // 보낼 주소
         contentType: "application/json", // 서버에 JSON 형식임을 알려줌
-        data: JSON.stringify({ data: inputData }), // 데이터를 JSON 문자열로 변환
+        data: JSON.stringify({ data: [inputData, realtime]}), // 데이터를 JSON 문자열로 변환
 
         // 성공적인 전송시 서버에서 반환된 response 받음
         success: function (response) {
@@ -167,6 +179,8 @@ $("#message-input").keyup(function (event) {
               getTime() +
               "</div>"
           );
+           var chatBody = document.getElementById("chat-body");
+           chatBody.scrollTop = chatBody.scrollHeight;
         },
 
         error: function () {
