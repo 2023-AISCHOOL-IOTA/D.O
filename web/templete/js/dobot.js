@@ -48,7 +48,7 @@ function addMessage(message, sender) {
     // chatbotImage.innerHTML = '<img src="/images/logo.png" alt="logo">';
     messageName.appendChild(messageSender);
     messageName.appendChild(messageBubble);
-
+    
     // messageContainer에 각 요소들을 넣겠다~
     messageContainer.appendChild(aImage);
     // messageContainer.appendChild(messageBubble);

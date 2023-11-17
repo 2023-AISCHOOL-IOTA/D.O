@@ -35,6 +35,10 @@
     overflow-y: auto;
 }
 
+#chatBody {
+    overflow : hidden;
+}
+
 /* 메시지를 포함한 말풍선이 있는 컨테이너->한 층 한 층을 갖게 해준다 */
 .message-container {
     display: flex;  /* 수평으로 배치 컨테이너 안에 들어가는 요소에는 flex를 안넣어도 돼 */
@@ -79,6 +83,7 @@
     width : 40px;
     height : 40px;
     border-radius : 50%;  /*이미지를 원형*/
+    margin-left : 10px;
 }
 
 
@@ -99,7 +104,8 @@
 .chatbot-message .message-time {
     font-size: 12px;
     color: #777;
-    margin-top: 50px;
+    display: flex;
+    align-items: flex-end;
 }
 
 
@@ -136,13 +142,15 @@
 /* 사용자 sender */
 .user-message .message-name .message-sender{
     text-align: right;
+    /* flex-direction: row-reverse; */
 }
 
 /* 사용자 시간 */
 .user-message .message-time {
     font-size: 12px;
     color: #777;
-    margin-top: 50px;
+    display: flex;
+    align-items: flex-end;
 }
 
 /* =========================================================================================== */
