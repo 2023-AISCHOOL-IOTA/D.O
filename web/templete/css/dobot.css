@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh; /* 뷰포트 높이에 맞추어 전체 화면을 사용 */
+    padding: 5px;
 }
 
 .header {
@@ -17,7 +18,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f5f5f5;
+    background-color: whitesmoke;
+    height: 100px;
 }
 
 .header img {
@@ -35,10 +37,9 @@
     overflow-y: auto;
 }
 
-#chatBody {
-    overflow : hidden;
+#chat-body{
+    padding-top: 5px;
 }
-
 /* 메시지를 포함한 말풍선이 있는 컨테이너->한 층 한 층을 갖게 해준다 */
 .message-container {
     display: flex;  /* 수평으로 배치 컨테이너 안에 들어가는 요소에는 flex를 안넣어도 돼 */
@@ -106,6 +107,7 @@
     color: #777;
     display: flex;
     align-items: flex-end;
+    padding: 5px;
 }
 
 
@@ -151,6 +153,8 @@
     color: #777;
     display: flex;
     align-items: flex-end;
+    padding: 5px;
+
 }
 
 /* =========================================================================================== */
@@ -168,18 +172,23 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 5px;
-    /* padding: 5px; */
+    padding-bottom: 5px;
+    padding-top: 5PX;
     border-top: 1px solid #ccc;
     /* height: 250px; */
 }
 
 .input-container input {
     flex: 1; /* 입력창이 가능한 영역을 최대로 확장 */
-    height: 100px;
+    height: 150px;
+    
 }
 
 .send-button {
     cursor: pointer;
     margin-left: 10px;
+    bottom: 25px;
+    right: 20px;
+    position: absolute; 
    
 }
