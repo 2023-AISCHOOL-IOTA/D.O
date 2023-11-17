@@ -65,14 +65,14 @@ function addMessage(message, sender) {
 
         //TODO - 정연
         aaa = "user";    
-        aImage.innerHTML = `<img src="/images/${aaa}.png" alt="${aaa}">`;
+        aImage.innerHTML = `<img src="/web/images/${aaa}.png" alt="${aaa}">`;
        
     } else {
         messageContainer.classList.add('chatbot-message');
 
         //TODO - 정연
         aaa = "chatbot"; 
-        aImage.innerHTML = `<img src="/images/${aaa}.png" alt="${aaa}">`;
+        aImage.innerHTML = `<img src="/web/images/${aaa}.png" alt="${aaa}">`;
 
     }
 
