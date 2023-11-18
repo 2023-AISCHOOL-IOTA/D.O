@@ -1,3 +1,5 @@
+/* @media : 화면 너비가 576px 이하일 때, 말풍선의 최대 너비를 100%로 설정하여 반응형 디자인을 구현가능.
+ -> 좁은 화면에서도 말풍선이 가득 차도록 조절. Bootstrap의 그리드 시스템을 사용하여 레이아웃을 유연하게 조절 */
 @media (max-width: 576px) {
     .message-bubble {
         max-width: 100%;
@@ -25,40 +27,7 @@
     margin-right: 10px;
 }
 
-/* 채팅창 */
-.card {
-    flex: 1; /* 채팅창이 차지하는 영역을 최대로 확장 */
-    overflow-y: auto;
-}
-
-/* 메시지를 포함한 말풍선이 있는 컨테이너->한 층 한 층을 갖게 해준다 */
-.message-container {
-    display: flex;@media (max-width: 576px) {
-    .message-bubble {
-        max-width: 100%;
-    }
-}
-
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* 뷰포트 높이에 맞추어 전체 화면을 사용 */
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f5f5f5;
-}
-
-.header img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+/* ============================================================================================ */
 
 /* 채팅창 */
 .card {
@@ -66,52 +35,148 @@
     overflow-y: auto;
 }
 
+#chatBody {
+    overflow : hidden;
+}
+
 /* 메시지를 포함한 말풍선이 있는 컨테이너->한 층 한 층을 갖게 해준다 */
 .message-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* 말풍선을 왼쪽으로 정렬 */
+    display: flex;  /* 수평으로 배치 컨테이너 안에 들어가는 요소에는 flex를 안넣어도 돼 */
+    flex-direction: row; 
+    /*align-items: flex-start; /* 말풍선을 왼쪽으로 정렬 */
     margin: 10px;
+    
+    
 }
 
-.user-message {
-    align-self: flex-end;
+/* 챗봇 */
+.chatbot-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* flex-direction: row;   이미지와 말풍선이 가로로 배치*/
+    
 }
-.message-bubble{
+/* sender+bubble을 같이 묶어준거야 */
+.message-name{
+    max-width: 100%;
+}
+
+
+.message-container.chatbot-message {   
+    justify-content: flex-start;   /* 아이템들이 컨테이너의 뒤에 정렬됩니다 (오른쪽 정렬). */
+    flex-direction: row; 
+}
+
+
+
+
+/* 챗봇 이미지를 왼쪽에 위치 */
+.chatbot-message .chatbot-image {
+    /* position : relative; */
+    margin-right: 10px;
+    
+
+} 
+
+.chatbot-image img{
+    width : 40px;
+    height : 40px;
+    border-radius : 50%;  /*이미지를 원형*/
+    margin-left : 10px;
+}
+
+
+/* 챗봇 말풍선 */
+
+.chatbot-message .message-bubble {
     background-color: #F7CAC9;
     padding: 10px;
-    border-radius: 10px;
-    max-width: 70%; /* 말풍선 최대 너비 */
+    border-radius: 10px;   /* 약간 둥글게*/
+    /* margin-top : 10px; 글이 길어져도 뒤로 넘어가지 않도록 */
+    max-width: 100%; /* 말풍선 최대 너비 */
     word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
+    display: inline-block; /* 텍스트 양에 따라 다르게 제공*/
     position: relative;
-
 }
-
 #bot{
     background-color: #F7CAC9;
     padding: 10px;
-    border-radius: 10px;
-    max-width: 70%; /* 말풍선 최대 너비 */
+    border-radius: 10px;   /* 약간 둥글게*/
+    /* margin-top : 10px; 글이 길어져도 뒤로 넘어가지 않도록 */
+    max-width: 100%; /* 말풍선 최대 너비 */
     word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
+    display: inline-block; /* 텍스트 양에 따라 다르게 제공*/
     position: relative;
 }
-
-#user{
-    background-color: #92A8D1;
+#user{background-color: #92A8D1;
     padding: 10px;
-    border-radius: 10px;
-    max-width: 70%; /* 말풍선 최대 너비 */
+    border-radius: 10px;  /* 약간 둥글게*/
+    max-width: 100%; /* 말풍선 최대 너비 */
     word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
+    display: inline-block; /* 텍스트 양에 따라 다르게 제공*/
     position: relative;
+    justify-content: end;   /* 아이템들이 컨테이너의 뒤에 정렬됩니다 (오른쪽 정렬). */
+    flex-direction: row-reverse;  /* 거꾸로*/
     
 }
 
-.message-time {
+
+
+/* 챗봇 시간 */
+.chatbot-message .message-time {
     font-size: 12px;
     color: #777;
-    margin-top: 5px;
+    display: flex;
+    align-items: flex-end;
 }
 
+
+/* 사용자 */
+.message-container.user-message {   
+    justify-content: end;   /* 아이템들이 컨테이너의 뒤에 정렬됩니다 (오른쪽 정렬). */
+    flex-direction: row-reverse;  /* 거꾸로*/
+    
+}
+
+/* 사용자 이미지를 제일 오른쪽에 위치 */
+.user-message .user-image{
+    margin-right : 10px;   /*이미지 오른쪾으로부터 margin*/
+    
+}
+
+.user-image img{
+    width : 40px;
+    height : 40px;
+    border-radius : 50%;  /*이미지를 원형*/
+}
+
+/* 사용자 말풍선 */
+.user-message .message-bubble{
+    background-color: #92A8D1;
+    padding: 10px;
+    border-radius: 10px;  /* 약간 둥글게*/
+    max-width: 100%; /* 말풍선 최대 너비 */
+    word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
+    display: inline-block; /* 텍스트 양에 따라 다르게 제공*/
+    position: relative;
+    
+}
+/* 사용자 sender */
+.user-message .message-name .message-sender{
+    text-align: right;
+    /* flex-direction: row-reverse; */
+}
+
+/* 사용자 시간 */
+.user-message .message-time {
+    font-size: 12px;
+    color: #777;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* =========================================================================================== */
 
 /* 입력창 */
 .message-sender {
@@ -125,90 +190,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    margin-top: 5px;
+    /* padding: 5px; */
     border-top: 1px solid #ccc;
+    /* height: 250px; */
 }
 
 .input-container input {
     flex: 1; /* 입력창이 가능한 영역을 최대로 확장 */
+    height: 100px;
 }
 
 .send-button {
     cursor: pointer;
     margin-left: 10px;
-}
-
-    flex-direction: column;
-    align-items: flex-start; /* 말풍선을 왼쪽으로 정렬 */
-    margin: 10px;
-}
-#u {
-    align-self: flex-end;
-}
-#u2 {
-    align-self: flex-end;
-}
-
-#user {
-    align-self: flex-end;
-}
-.first{
-    background-color: #F7CAC9;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 70%; /* 말풍선 최대 너비 */
-    word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
-    position: relative;
-
-}
-
-#bot {
-    background-color: #F7CAC9;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 70%; /* 말풍선 최대 너비 */
-    word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
-    position: relative;
-}
-
-#user{
-    background-color: #92A8D1;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 70%; /* 말풍선 최대 너비 */
-    word-wrap: break-word; /* 긴 단어가 말풍선을 벗어나지 않도록 처리 */
-    position: relative;
-    
-}
-
-.message-time {
-    font-size: 12px;
-    color: #777;
-    margin-top: 5px;
-}
-
-
-/* 입력창 */
-.message-sender {
-    margin-top: 5px;
-    font-size: 12px;
-    color: #777;
-}
-
-
-.input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-}
-
-.input-container input {
-    flex: 1; /* 입력창이 가능한 영역을 최대로 확장 */
-}
-
-.send-button {
-    cursor: pointer;
-    margin-left: 10px;
+   
 }

@@ -31,9 +31,9 @@ client = MongoClient("mongodb://localhost:27017/")
 
 
 db = client["new"]
-collection = db["User"]
+collection_user = db["User"]
 
-
+collection2 = db["Dialog"]
 
 
 
@@ -58,8 +58,8 @@ def process_data( data_input: DataInput):
     realtime = data_input.data[1]
 
     processed_data = "알겠습니다!"   #"오니까 반환하는 데이터 나중에 여기에 모델 연결
-    conversation = {"user_input": user_input, "timestamp": realtime, "processed_data":processed_data}
-    inserted_data = collection.insert_one(conversation)
+    conversation = {"message": user_input, "timestamp": realtime, "answer":processed_data}
+    inserted_data = collection2.insert_one(conversation)
     time.sleep(0.6) #대화 느낌  주기 위해 time.sleep
     return  {"processed_data": processed_data} #processed_data라는 값으로 return
 
@@ -80,12 +80,12 @@ def process_data( data_input: DataInput):
 
 @app.get('/review')
 def review(request: Request):
-    documents = list(collection.find({}, {"_id": 0, "user_input": 1, "timestamp": 1, "processed_data":1} ))  # MongoDB에서 모든 문서를 리스트로 변환
+    documents = list(collection_user.find({}, {"_id": 0, "user_input": 1, "timestamp": 1, "processed_data":1} ))  # MongoDB에서 모든 문서를 리스트로 변환
     return templates.TemplateResponse("review.html", {"request": request, "documents": documents})
     
 @app.post('/review')
 def review(request: Request):
-    documents = list(collection.find())  # 모든 문서를 리스트로 변환
+    documents = list(collection_user.find())  # 모든 문서를 리스트로 변환
     return templates.TemplateResponse("review.html", {"request": request, "documents": documents})
 
 @app.get('/login')
@@ -97,7 +97,7 @@ def Gologin(request: Request):
 def login(user: login):
      login = user.login[0]
      password = user.login[1]
-     user_in_db = collection.find_one({"User_id": login})
+     user_in_db = collection_user.find_one({"User_id": login})
      if user_in_db is None:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
      
@@ -112,11 +112,11 @@ def Gologin(request: Request):
 
 @app.post('/join')
 def Gologin(user: User):
-    # 삭제할 문서들의 쿼리
+    
      new_user = {
         "User_id": user.id,
         "password": user.password,
         "name": user.name
     }
-     collection.insert_one(new_user)
+     collection_user.insert_one(new_user)
      return {"message": "Data added successfully"}
