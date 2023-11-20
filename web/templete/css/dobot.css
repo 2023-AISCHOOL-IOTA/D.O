@@ -35,11 +35,10 @@
 .card {
     flex: 1; /* 채팅창이 차지하는 영역을 최대로 확장 */
     overflow-y: auto;
-}
-
-#chat-body{
     padding-top: 5px;
 }
+
+
 /* 메시지를 포함한 말풍선이 있는 컨테이너->한 층 한 층을 갖게 해준다 */
 .message-container {
     display: flex;  /* 수평으로 배치 컨테이너 안에 들어가는 요소에는 flex를 안넣어도 돼 */
@@ -157,6 +156,70 @@
 
 }
 
+/* 스피너 */
+.card .spinner-container {    /*스피너 부모 컨테이너*/
+  position: fixed;       /*스크롤 상관없이 항상 화면 하단에 위치*/
+  bottom: 100px;         /*가운데 정렬*/
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.spinner {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .spinner div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: gray;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .spinner div:nth-child(1) {
+    left: 8px;
+    animation: spinner1 0.6s infinite;
+  }
+  .spinner div:nth-child(2) {
+    left: 8px;
+    animation: spinner2 0.6s infinite;
+  }
+  .spinner div:nth-child(3) {
+    left: 32px;
+    animation: spinner2 0.6s infinite;
+  }
+  .spinner div:nth-child(4) {
+    left: 56px;
+    animation: spinner3 0.6s infinite;
+  }
+  @keyframes spinner1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes spinners3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes spinner2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+  
 /* =========================================================================================== */
 
 /* 입력창 */
@@ -168,6 +231,7 @@
 
 
 .input-container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -179,16 +243,23 @@
 }
 
 .input-container input {
-    flex: 1; /* 입력창이 가능한 영역을 최대로 확장 */
-    height: 150px;
-    
+    flex: 1; /*  입력창이 가능한 영역을 최대로 확장 */
+
+     /* height: 150px;  /*입력창 높이 조절   */
+ 
 }
+
+#message-input {
+    width: calc(100% - 40px);  /* 입력창 너비 조절 */
+    word-wrap: break-word;  /* 텍스트 길이에 따라 줄 바꿈 */
+}
+
 
 .send-button {
     cursor: pointer;
     margin-left: 10px;
-    bottom: 25px;
-    right: 20px;
+    bottom: 2px;  
+    right: 10px;
     position: absolute; 
    
 }
