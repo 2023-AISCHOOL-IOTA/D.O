@@ -78,6 +78,11 @@ function addMessage(message, sender, id) {
   // perfect scrollbar
   chatBody.scrollTop = chatBody.scrollHeight;
 }
+// localStorage에서 username을 가져와 변수에 할당
+var username = localStorage.getItem("username");
+
+
+$("#usernameDisplay").innerText = username;
 
 // 현재 시간 함수
 function getTime() {
@@ -119,7 +124,6 @@ $("#toyou").click(function () {
       url: "http://127.0.0.1:8000/dobot", // 보낼 주소
       contentType: "application/json", // 서버에 JSON 형식임을 알려줌
       data: JSON.stringify({ data: [inputData, getTime()] }), // 데이터를 JSON 문자열로 변환
-
       // 성공적인 전송시 서버에서 반환된 response 받음
       success: function (response) {
         // 서버 응답을 성공하면 실행

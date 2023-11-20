@@ -12,14 +12,26 @@
             <div>
                 <a href="home"><img src="{{ url_for('static', path = '/images/back.jpg')}}" alt="back" width="30px" height="30px"></a>
                 <img src=" {{ url_for('static', path= 'images/user.png') }}" alt="user">
-                <span>user</span>
+                <span>{{username}}</span>
+                
+
             </div>
-
+            <!-- HTML 파일 -->
+           
         </div>
-
+        
         <div class="card" id="chat-body" data-mdb-perfect-scrollbar="true"> <!--스크롤바가 자동으로 초기화-->
             <!-- 대화를 동적으로 추가할 공간 -->
+            <div class="spinner-container">
+                <div class="spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
         </div>
+        
 
 
         <!-- <div class = "footer">
@@ -32,10 +44,14 @@
         <div class="footer">
             <div class="input-container">
                 <input type="text" id="message-input" class="form-control mr-2" placeholder="메시지를 입력하세요...">
-                <span style="position: relative; display: inline-block;">
-                    <button id=toyou><img src="{{ url_for('static',path = 'images/send.png')}}" alt="send" width="40px"
+                <!--<span style="position: relative; display: inline-block;">-->
+                    <button id="toyou"><img src="{{ url_for('static',path = 'images/send.png')}}" alt="send" width="40px"
                             height="40px" class="send-button"></button>
-                </span>
+                </span> 
+            </div>
+            <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+                <span>DOBOT can make mistakes. Consider checking important information.</span>
+                <p>made by DO(DONGWOOK WITH ONEPIECE)</p>
             </div>
         </div>
 

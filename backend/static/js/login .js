@@ -10,7 +10,7 @@ $("#toyou").click(function () {
       contentType: "application/json", // 서버에 JSON 형식임을 알려줌
       data: JSON.stringify({ login: [inputData, inputpassword] }), // 데이터를 JSON 문자열로 변환
       success: function (response) {
-        alert(response.message);
+        alert(response.message);       
         window.location.href = "/dobot";
       },
       error: function () {
