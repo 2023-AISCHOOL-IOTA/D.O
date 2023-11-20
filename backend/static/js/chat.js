@@ -96,6 +96,15 @@ function getTime() {
 
   return hours + ":" + minutes;
 }
+// AJAX 요청이 시작될 때 스피너 표시
+function showSpinner() {
+    document.querySelector('.spinner-container').style.display = 'block';
+}
+
+// AJAX 요청이 완료되면 스피너 숨기기
+function hideSpinner() {
+    document.querySelector('.spinner-container').style.display = 'none';
+}
 
 // 초기 대화 시작 -> jinja2로 이걸 띄워야 해
 setTimeout(function () {
@@ -132,10 +141,17 @@ $("#toyou").click(function () {
         
         var chatBody = document.getElementById("chat-body");
         chatBody.scrollTop = chatBody.scrollHeight;
+        $("#spinner").hide();
+      },
+       beforeSend:function(){
+        $("#spinner").show();
+
       },
 
       error: function () {
         alert("실패");
+        $("#spinner").hide();
+
       },
     });
 
@@ -175,11 +191,17 @@ $("#message-input").keyup(function (event) {
        addMessage(response.processed_data, "DOBOT");
         var chatBody = document.getElementById("chat-body");
         chatBody.scrollTop = chatBody.scrollHeight;
+        $("#spinner").hide();
+      },
+       beforeSend:function(){
+        $('#spinner').show();
+
       },
 
       error: function () {
         alert("실패");
-      },
+        $("#spinner").hide();
+      }
     });
 
     $("#message-input").val(""); // 입력 필드 새로고침
