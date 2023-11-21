@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/templete/css/signup.css">
+    <title>회원가입</title>
+</head>
+
+<body>
+    <div class="signup-container">
+        <h2>Sign up</h2>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td><input type="text" id="userId"></td>
+                <td><button onclick="checkid()">중복확인</button></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" id="userPassword"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" id="userPassword"></td>
+                <td><button onclick="checkpassword()">확인</button></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="name" id="username"></td>
+            </tr>
+        </table>
+        <button onclick="signup()">Sign Up</button>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    height : 100px;
+}
+
+
+main {
+    margin-top: 100px; /* Adjust as needed based on the header and navigation height */
+    padding: 20px;
+    padding-top: 80px; /* header의 높이만큼 여백을 주세요 */
+    padding-bottom: 60px; /* footer의 높이만큼 여백을 주세요 */
+    height: 720px;
+
+}
+
+#newChatBtn {
+    display: block;
+    width: 100%;
+    max-width: 500px; 
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
+footer {
+    /*position: fixed;*/
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}

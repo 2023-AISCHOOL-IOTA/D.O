@@ -4,45 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="/templete/css/chat.css"> -->
-    <style>
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-
-        .fff {
-            width: 100%;
-            height: 100%;
-            background: ivory;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-/* 
-        #logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        } */
-
-        /* .row {
-            display: flex;
-            align-items: center;
-        } */
-    </style>
+    <link rel="stylesheet" href="/templete/css/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>home</title>
 </head>
 
 <body>
-    <div class="fff">
-        <div class="row">
-            <a href="test3.html"><img src="/images/logo.png" alt="logo" width="300px" height="300px"></a>
+    <header>
+        <div class = "container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- 슬라이드 목록버튼 -->
+                    <ul class="nav justify-content-start">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">목록</button>
+                    </ul>
+                </div>
+                <div class="col-md-4 offset-md-4">  <!--offset : md-4(왼쪽열)만큼 열을 오른쪽으로 이동-->
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="login.html">login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sign.html">signup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 슬라이드바 -->
+            <div class="offcanvas offcanvas-start" id="demo">
+                <div class="offcanvas-header">
+                    <h1 class="offcanvas-title">DO님 안녕하세요</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>Some text lorem ipsum.</p>
+                    <p>Some text lorem ipsum.</p>
+                    <p>Some text lorem ipsum.</p>
+                    <button class="btn btn-secondary" type="button">A Button</button>
+                </div>
+            </div>               
         </div>
+    </header>
+    
 
-    </div>
+    <main>
+        <div class = "container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class = "carousel">
+                        <div class="carousel-container">
+                            <!-- Your carousel content goes here -->
+                            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                                        aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="/images/dog.png" class="d-block w-100" alt="dog">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>나 귀엽지?</h5>
+                                            <p>엉니야~ 나랑 놀자</p>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="/images/food.png" class="d-block w-100" alt="food">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Second slide label</h5>
+                                            <p>Some representative placeholder content for the second slide.</p>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="/images/map.png" class="d-block w-100" alt="map">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Third slide label</h5>
+                                            <p>Some representative placeholder content for the third slide.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "container">
+            <div class= "row">
+                <div class ="col">
+                    <a href="dobot.html" id="newChatBtn">Go to New Chat</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
+        </div>
+    </footer>
+
+    <script src="/templete/js/home.js"></script>
 </body>
 
 </html>
