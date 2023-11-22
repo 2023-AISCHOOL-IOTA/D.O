@@ -4,29 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link rel="stylesheet" href="/templete/css/login.css">
-    <title>로그인</title>
+    <script defer src="login-page.js"></script>
 </head>
 
 <body>
+    <header id="login_head">
+        <div class="container">
+            <div class="row">
+                <h1 class="back" id="back">
+                    <a href="home.html" alt="home"><img src="/images/logo.png" height="60px"></a>
+                </h1>
+            </div>
+        </div>
+    </header>
+    <main id="main-holder">
+        <h1 id="login-header">Login</h1>
 
-    <div class="login-container">
-        <h2>Login</h2>
-        <table>
-            <tr>
-                <td>ID</td>
-                <td><input type="text" id="userId"></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" id="userPassword"></td>
-            </tr>
-        </table>
-        <button onclick="login()">Login</button>
-        <button onclick="signup()">Sign Up</button>
-    </div>
+        <div id="login-error-msg-holder">
+            <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+        </div>
 
-    <script src="/templete/js/login.js"></script>
+        <form id="login-form">
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+            <input type="submit" value="Login" id="login-form-submit">
+        </form>
+
+    </main>
+    <footer>
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
+        </div>
+    </footer>
 </body>
 
-</html>
+</html>ㄴ
