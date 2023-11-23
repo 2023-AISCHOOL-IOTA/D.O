@@ -11,58 +11,74 @@
 </head>
 
 <body>
-    <header>
-        <div class = "container">
-            <div class="row">
-                <div class="col-md-4">
-                    <!-- 슬라이드 목록버튼 -->
-                    <ul class="nav justify-content-start">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">목록</button>
-                    </ul>
-                </div>
-                <div class="col-md-4 offset-md-4">  <!--offset : md-4(왼쪽열)만큼 열을 오른쪽으로 이동-->
-                    <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="login.html">login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sign.html">signup</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="home.html">home</a>
-                        </li>
-                    </ul>
-                </div>
+    <header id="head" class="header_nav">
+        <div class="inner_header">
+            <div class="col order-first" id="list">
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src="/images/list_icon.png" width="40px;"></button>
+                </h2>
+
+
+                <!-- 로고 -->
+                <h1 clss="logo">
+                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a> 
+                </h1>
             </div>
-            
-            <!-- 슬라이드바 -->
-            <div class="offcanvas offcanvas-start" id="demo">
-                <div class="offcanvas-header">
-                    <h1 class="offcanvas-title">DO님 안녕하세요</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <p>Some text lorem ipsum.</p>
-                    <p>Some text lorem ipsum.</p>
-                    <p>Some text lorem ipsum.</p>
-                    <button class="btn btn-secondary" type="button">A Button</button>
-                </div>
-            </div>               
+
+
+            <!--nav1 -->
+            <div class="col-md-6 justify-content-center">
+                <nav id="nav1" class="nav1">
+                    <ul class="nav1_list">
+                        <li><a href="menu.html">메뉴 추천</a></li>
+                        <li><a href="map.html">근처맛집</a></li>
+                        <li><a href="game.html">게임</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!--nav2-->
+            <div class="col order-last justify-content-end">
+                <nav id="nav2" class="nav2">
+                    <ul class="nav2_list">
+                        <li><a href="login.html">login</a></li>
+                        <li><a href="sign.html">signup</a></li>
+                        <!-- <li><a href="home.html">home</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- 슬라이드바 -->
+        <div class="offcanvas offcanvas-start" id="demo">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title">DO님 안녕하세요</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>마이페이지.</p>
+                <p>.</p>
+                <p>Some text lorem ipsum.</p>
+                <button class="btn btn-secondary" type="button">A Button</button>
+            </div>
+        </div>
         </div>
     </header>
-    
 
-    <main>
-        <div class = "container">
+
+    <main id="homemain" class="cont_main">
+        <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <div class = "carousel">
+                    <div class="carousel">
                         <div class="carousel-container">
                             <!-- Your carousel content goes here -->
                             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                                        aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
                                         aria-label="Slide 2"></button>
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
@@ -91,13 +107,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                                    data-bs-slide="prev">
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                                    data-bs-slide="next">
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
@@ -108,9 +124,9 @@
                 </div>
             </div>
         </div>
-        <div class = "container">
-            <div class= "row">
-                <div class ="col">
+        <div class="container">
+            <div class="row">
+                <div class="col">
                     <a href="dobot.html" id="newChatBtn">Go to New Chat</a>
                 </div>
             </div>
