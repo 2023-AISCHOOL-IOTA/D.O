@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/templete/css/login.css">
+    <script defer src="login-page.js"></script>
+</head>
+
+<body>
+    <header id="login_head" class="header_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                </div>
+                <h1 class="back" id="back">
+                    <a href="home.html" alt="home"><img src="/images/logo.png" height="150px"></a>
+                </h1>
+            </div>
+        </div>
+    </header>
+    <main id="main-holder">
+        <h1 id="login-header">Login</h1>
+
+        <div id="login-error-msg-holder">
+            <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+        </div>
+
+        <form id="login-form">
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+            <input type="submit" value="Login" id="login-form-submit">
+        </form>
+
+    </main>
+    <footer>
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
+        </div>
+    </footer>
+</body>
+
+</html>
