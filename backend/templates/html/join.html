@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ url_for('static', path='/images/logo.png') }}" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path= 'css/signup.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>회원가입</title>
 </head>
+
 <body>
-    <div class="input-container">
-        <input type="text" id="login" placeholder="아이디">
-        <input type="text" id="password" placeholder="비밀번호">
-        <input type="text" id="name" placeholder="이름">
-        <button id=toyou>회원가입</button>
-    
-</body>
+    <div class="signup-container">
+        <h2>Sign up</h2>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td><input type="text" id="userId"></td>
+            </tr>
+            <tr>
+                <td><p id  = "id_check"></p></td>
+                <td><span><button type="button" id = "check_button">중복확인</button></span></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" id="userPassword"></td>
+                
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" id="check_password"></td>
+                <td><p id  = "pw_check"></p></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="name" id="username"></td>
+            </tr>
+        </table>
+        <button id ="toyou">Sign Up</button>
+    </div>
 <script src="{{ url_for('static', path= 'js/join.js') }}"></script>
 
+    
+</body>
 
 
-
-
-
-
-
-    </script>
 </html>

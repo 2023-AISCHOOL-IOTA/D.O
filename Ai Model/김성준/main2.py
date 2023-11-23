@@ -20,13 +20,18 @@ model.to(device)
 @app.post("/chat")
 def chat(request: UserRequest):
     model.eval()
-    input_ids = tokenizer.encode(request.question + tokenizer.eos_token, return_tensors="pt").to(device)
+    # 질문에 특수 토큰을 추가하지 않음
+    input_ids = tokenizer.encode(request.question, add_special_tokens=True, return_tensors="pt").to(device)
     
-    # 모델이 응답 생성
     with torch.no_grad():
         output = model.generate(input_ids, max_length=100)
-    
+
+    # 모델의 출력에서 입력 질문 제거
     reply = tokenizer.decode(output[0], skip_special_tokens=True)
+    if request.question in reply:
+        reply = reply.replace(request.question, "").strip()
+
     return {"reply": reply}
+
 
 

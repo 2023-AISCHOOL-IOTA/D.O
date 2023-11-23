@@ -4,22 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ url_for('static', path='/images/logo.png') }}" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>로그인 페이지</title>
+    <title>Login</title>
+    <link rel="stylesheet" href=" {{ url_for('static', path= 'css/login.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src=" {{ url_for('static', path= 'js/login.js')}}"></script>
 </head>
 
 <body>
-    <h1>로그인</h1>
-    <a href="join"><button>회원가입</button></a>
-    <div class="input-container">
-        <input type="text" id="login" placeholder="아이디">
-        <input type="text" id="password" placeholder="비밀번호">
-        <button id="toyou"><img src="{{ url_for('static',path = 'images/send.png')}}" alt="send" width="30px"
-                height="30px"></button>
-</body>
-<script src="{{ url_for('static', path= 'js/login .js') }}"></script>
+    <header id="login_head">
+        <div class="container">
+            <div class="row">
+                <h1 class="back" id="back">
+                    <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo.png')}}" height="60px"></a>
+                </h1>
+            </div>
+        </div>
+    </header>
+    <main id="main-holder">
+        <h1 id="login-header">Login</h1>
 
-</script>
+        <div id="login-error-msg-holder">
+            <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+        </div>
+
+        
+            <input type="text" name="username" id="userId" class="login-form-field" placeholder="Username">
+            <input type="password" name="password" id="userPassword" class="login-form-field" placeholder="Password">
+            <button id="toyou"></button>
+        
+
+    </main>
+    <footer>
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
+            <script src=" {{ url_for('static', path= 'js/login.js')}}"></script>
+        </div>
+    </footer>
+</body>
 
 </html>
