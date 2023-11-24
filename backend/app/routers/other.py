@@ -75,3 +75,14 @@ def map(request:Request):
             user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
             message  = user_name+ "님 안녕하세요!"
     return templates.TemplateResponse("menu.html", {"request": request, "message":message})
+
+@router.get("/game")
+def map(request:Request):
+    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
+    if top_login:  # 값이 존재하는 경우
+        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
+        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
+        if user_document:  # 사용자 정보가 존재하는 경우
+            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
+            message  = user_name+ "님 안녕하세요!"
+    return templates.TemplateResponse("game.html", {"request": request, "message":message})

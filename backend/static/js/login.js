@@ -11,7 +11,7 @@ $("#login-form-submit").click(function () {
       data: JSON.stringify({ id: inputData, password: inputpassword }), // 데이터를 JSON 문자열로 변환
       success: function (response) {
         alert(response.message);
-        window.location.href = "/dobot";
+        window.location.href = "/";
       },
       error: function () {
         $("#login-error-msg").text("아이디 나 비밀번호가 틀립니다");
