@@ -1,4 +1,4 @@
-$("#toyou").click(function () {
+$("#sign-form-submit").click(function () {
   // 입력된 데이터 가져오기
 
   let id = $("#username-field").val(); // message-input의 값만 가져오기

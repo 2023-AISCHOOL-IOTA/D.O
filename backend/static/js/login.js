@@ -2,7 +2,7 @@ $("#login-form-submit").click(function () {
   // 입력된 데이터 가져오기
 
   let inputData = $("#username-field").val(); // message-input의 값만 가져오기
-  let inputpassword = $("#password-field").val();
+  let inputpassword= $("#password-field").val();
   if (inputData !== "" && inputpassword !== "") {
     $.ajax({
       type: "post", // 어떤 방식으로 보낼지
@@ -14,9 +14,9 @@ $("#login-form-submit").click(function () {
         window.location.href = "/dobot";
       },
       error: function () {
-        alert("아이디 나 비밀번호가 틀립니다");
-        $("#userId").val("");
-        $("#userPassword").val("");
+        $("#login-error-msg").text("아이디 나 비밀번호가 틀립니다");
+        $("#username-field").val("");
+        $("#password-field").val("");
       },
     });
   }

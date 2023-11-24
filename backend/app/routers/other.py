@@ -49,19 +49,29 @@ def read_dobot(request: Request):
         user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
         if user_document:  # 사용자 정보가 존재하는 경우
             user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
-            return templates.TemplateResponse("dobot.html", {"request": request, "user_name": user_name})
-        else:
-            return templates.TemplateResponse("dobot.html", {"request": request})
-    else:
-        message="로그인을 먼저 진행해 주세요"
-        return templates.TemplateResponse("login.html", {"request": request})
+            message  = user_name+ "님 안녕하세요!"
+    return templates.TemplateResponse("dobot.html", {"request": request, "message":message})
 
 
 
 @router.get("/map")
 def map(request:Request):
-    return templates.TemplateResponse("map.html", {"request": request})
+    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
+    if top_login:  # 값이 존재하는 경우
+        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
+        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
+        if user_document:  # 사용자 정보가 존재하는 경우
+            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
+            message  = user_name+ "님 안녕하세요!"
+    return templates.TemplateResponse("map.html", {"request": request, "message":message})
 
 @router.get("/menu")
 def map(request:Request):
-    return templates.TemplateResponse("menu.html", {"request": request})
+    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
+    if top_login:  # 값이 존재하는 경우
+        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
+        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
+        if user_document:  # 사용자 정보가 존재하는 경우
+            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
+            message  = user_name+ "님 안녕하세요!"
+    return templates.TemplateResponse("menu.html", {"request": request, "message":message})
