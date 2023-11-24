@@ -63,6 +63,12 @@ def map(request:Request):
         if user_document:  # 사용자 정보가 존재하는 경우
             user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
             message  = user_name+ "님 안녕하세요!"
+            
+        else:
+              message = "로그인을 해주세요"
+              
+    else:
+        message = "로그인을 해주세요"
     return templates.TemplateResponse("map.html", {"request": request, "message":message})
 
 @router.get("/menu")
@@ -74,6 +80,12 @@ def map(request:Request):
         if user_document:  # 사용자 정보가 존재하는 경우
             user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
             message  = user_name+ "님 안녕하세요!"
+            
+        else:
+              message = "로그인을 해주세요"
+              
+    else:
+        message = "로그인을 해주세요"
     return templates.TemplateResponse("menu.html", {"request": request, "message":message})
 
 @router.get("/game")
@@ -85,4 +97,10 @@ def map(request:Request):
         if user_document:  # 사용자 정보가 존재하는 경우
             user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
             message  = user_name+ "님 안녕하세요!"
+            
+        else:
+              message = "로그인을 해주세요"
+              
+    else:
+        message = "로그인을 해주세요"
     return templates.TemplateResponse("game.html", {"request": request, "message":message})
