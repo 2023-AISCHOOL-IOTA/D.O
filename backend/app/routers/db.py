@@ -6,6 +6,7 @@ from pydantic import BaseModel #보내고 받아오기 위해
 from fastapi.staticfiles import StaticFiles
 from fastapi.security import APIKeyCookie, APIKeyHeader
 from pymongo import MongoClient
+import hashlib
 
 
 router = APIRouter()
@@ -44,15 +45,20 @@ def gologin(request: Request):
 @router.post('/login')
 def login(user: login):
     user_in_db = collection_user.find_one({"id": user.id})
+    password = user.password
+
+# 비밀번호를 sha256으로 해싱
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
     if user_in_db is None:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
      
-    elif user_in_db["password"] != user.password:
+    elif user_in_db["password"] != hashed_password:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
+    
     
     login_log_data = {
         "id": user_in_db["id"],
-        "password":user_in_db["password"]}
+        "password":hashed_password}
     
     collection_login.insert_one(login_log_data)
 
@@ -62,7 +68,7 @@ def login(user: login):
 
 @router.get('/join')
 def gojoin(request: Request):
-    # 삭제할 문서들의 쿼리
+    # 회원가입
     return templates.TemplateResponse("join.html", {"request": request})
 
 @router.post('/join')
@@ -70,10 +76,12 @@ def join(user: User):
      existing_user = collection_user.find_one({"id": user.id})
      if existing_user:
         return {"message": "이미 아이디가 존재합니다"}
+      # 비밀번호 해시화
+     hashed_password = hashlib.sha256(user.password.encode()).hexdigest()
     
      new_user = {
         "id": user.id,
-        "password": user.password,
+        "password": hashed_password,
         "nickname": user.name
     }
      collection_user.insert_one(new_user)

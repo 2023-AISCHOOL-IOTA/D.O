@@ -5,48 +5,81 @@ html {
 
 body {
     height: 100%;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    background-color: lightgray;
-}
-
-#main-holder {
-    width: 50%;
-    height: 400px;
-    display: grid;
-    justify-items: center;
-    align-items: center;
+    /* display: grid; */
     background-color: white;
-    border-radius: 7px;
-    box-shadow: 0px 0px 5px 2px black;
+    margin: 0;
+    padding: 0;
+    font-family: Kakao, 맑은 고딕, Malgun Gothic, Apple SD Gothic Neo, 돋움, dotum, sans-serif;
+    -webkit-text-size-adjust: none;
 }
 
-#login-error-msg-holder {
+/* 로고가 있는 헤더 */
+.head-container {
     width: 100%;
-    height: 100%;
-    display: grid;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 80px;
+}
+
+
+/* 메인(바디) */
+main {
+    margin-top: 0px;
+    padding: 10px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    /* height: auto; */
     justify-items: center;
     align-items: center;
+    display: grid;
+
+}
+
+/* 로그인 박스 */
+#login-container {
+    width: 40%;
+    height: 600px;
+    display: grid;
+    /* align-content:space-around; */
+    justify-items: center;
+    /* align-items: center; */
+    border-radius: 7px;
+    box-shadow: 0px 0px 2px 2px black;
+}
+
+#login-header {
+    display: grid;
+    align-content: center;
+}
+
+/* 로그인 알림창 */
+
+/* 경고 상자 placeholder */
+.alert-placeholder {
+    height: 120px;
+    /* 경고 상자와 동일한 높이 */
+    width: 330px;
+    /* 경고 상자와 동일한 너비 */
+    margin-top: 40px;
+    visibility: hidden;
+    /* 보이지 않도록 설정 */
+}
+
+/* 수정된 경고 상자 */
+.alert-danger {
+    height: 120px;
+    width: 330px;
+    margin-top: 40px;
+    /* 기타 스타일... */
 }
 
 #login-error-msg {
-    width: 23%;
-    text-align: center;
-    margin: 0;
-    padding: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #8a0000;
-    border: 1px solid #8a0000;
-    background-color: #e58f8f;
-    opacity: 0;
+    margin-top: 25px;
+
 }
 
-#error-msg-second-line {
-    display: block;
+/* 로그인 입력창 */
+.login-input container {
+    position: fixed;
 }
 
 #login-form {
@@ -56,36 +89,65 @@ body {
     align-items: center;
 }
 
+#username-field,
+#password-field {
+    width: 300px;
+    height: 50px;
+}
+
 .login-form-field::placeholder {
     color: #3a3a3a;
 }
 
 .login-form-field {
-    border: none;
-    border-bottom: 1px solid #3a3a3a;
-    margin-bottom: 10px;
+    border: none;  /*밑에만 나오게한다*/
+    border-bottom: 1px solid #3a3a3a;  /*두께*/
+    margin-bottom: 30px;
     border-radius: 3px;
     outline: none;
     padding: 0px 0px 5px 5px;
 }
 
-#login-form-submit {
+
+.btn-container {
     width: 100%;
-    padding: 7px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    background-color: #3a3a3a;
-    cursor: pointer;
-    outline: none;
+    display:grid;
+    align-content:center;
+
 }
 
+#signup-text {
+    display: inline-block;   /* 인라인 블록 요소로 변경 */
+    margin-left: 320px;      /* 버튼과의 간격 조정 */
+    vertical-align: bottom;   /* 버튼의 하단과 정렬 */
+    padding-bottom: 3px;
+    
+}
+
+
+#login-form-submit, #sign-form-submit {
+
+    width: 30%;
+    padding: 7px;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    float: right;
+    margin-right: 10px;
+
+}
+
+
+/* footer */
 footer {
+    /* position: fixed; */
     bottom: 0;
     width: 100%;
-    background-color: #333;
-    color: #fff;
+    background-color: lightgray;
+    color: black;
     text-align: center;
     padding: 10px;
 }

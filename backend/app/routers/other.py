@@ -61,3 +61,7 @@ def read_dobot(request: Request):
 @router.get("/map")
 def map(request:Request):
     return templates.TemplateResponse("map.html", {"request": request})
+
+@router.get("/menu")
+def map(request:Request):
+    return templates.TemplateResponse("menu.html", {"request": request})

@@ -1,69 +1,166 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}FastAPI Starter{% endblock %}
-{% block head %}
-{{ super() }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href=" {{ url_for('static', path= 'css/dobot.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-{% endblock %}
-{% block content %}
-<body style="overflow:hidden;">
-    <div class="container mt-4 chat-container">
-        <div class="header">
-            <div>
-                <a href="/"><img src="{{ url_for('static', path = '/images/back.jpg')}}" alt="back" width="30px" height="30px"></a>
-                <img src=" {{ url_for('static', path= 'images/user.png') }}" alt="user">
-                <span>{{user_name}}</span>
-                
 
+</head>
+
+<body>
+    <header id="head" class="header_nav">
+        <div class="inner_header">
+            <div class="col order-first" id="list">
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src=" {{ url_for('static', path= 'images/list_icon.png')}}" width="40px;"></button>
+                </h2>
+
+
+                <!-- 로고 -->
+                <h1 clss="logo">
+                    <a href="/"><img src=" {{ url_for('static', path= 'images/logo2.png')}}" width="110px;"></a>
+                </h1>
             </div>
-            <!-- HTML 파일 -->
-           
+
+
+            <!--nav1 -->
+            <div class="col-md-6 justify-content-center">
+                <nav id="nav1" class="nav1">
+                    <ul class="nav1_list">
+                        <li><a href="menu">메뉴 추천</a></li>
+                        <li><a href="map">근처맛집</a></li>
+                        <li><a href="game">게임</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!--nav2-->
+            <div class="col order-last justify-content-end">
+                <nav id="nav2" class="nav2">
+                    <ul class="nav2_list">
+                        <li><a href="login">login</a></li>
+                        <li><a href="join">signup</a></li>
+                        <!-- <li><a href="home.html">home</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+
         </div>
-        
-        <div class="card" id="chat-body" data-mdb-perfect-scrollbar="true"> <!--스크롤바가 자동으로 초기화-->
-            <!-- 대화를 동적으로 추가할 공간 -->
-            <div class="spinner-container">
-                <div class="spinner" id = "spinner">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        <!-- 슬라이드바 -->
+        <div class="offcanvas offcanvas-start" id="demo">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title">{{message}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>Some text lorem ipsum.</p>
+                <p>Some text lorem ipsum.</p>
+                <p>Some text lorem ipsum.</p>
+                <button class="btn btn-secondary" type="button">A Button</button>
+            </div>
+        </div>
+        </div>
+    </header>
+
+
+    <main id="chat_container">
+        <!-- 채팅창 -->
+        <section style="background-color: #eee;">
+            <div class="container py-5">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+
+                        <div class="card" id="chat1" style="border-radius: 15px;">
+                            <div class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+                                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                <i class="fas fa-angle-left"></i>
+                                <p class="mb-0 fw-bold">Live chat</p>
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="d-flex flex-row justify-content-start mb-4">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                        alt="avatar 1" style="width: 45px; height: 100%;">
+                                    <div class="p-3 ms-3"
+                                        style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+                                        <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click
+                                            the video
+                                            below.</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row justify-content-end mb-4">
+                                    <div class="p-3 me-3 border"
+                                        style="border-radius: 15px; background-color: #fbfbfb;">
+                                        <p class="small mb-0">Thank you, I really like your product.</p>
+                                    </div>
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                                        alt="avatar 1" style="width: 45px; height: 100%;">
+                                </div>
+
+                                <div class="d-flex flex-row justify-content-start mb-4">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                        alt="avatar 1" style="width: 45px; height: 100%;">
+                                    <div class="ms-3" style="border-radius: 15px;">
+                                        <div class="bg-image">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/screenshot1.webp"
+                                                style="border-radius: 15px;" alt="video">
+                                            <a href="#!">
+                                                <div class="mask"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row justify-content-start mb-4">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                        alt="avatar 1" style="width: 45px; height: 100%;">
+                                    <div class="p-3 ms-3"
+                                        style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+                                        <p class="small mb-0">...</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-outline">
+                                    <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                                    <label class="form-label" for="textAreaExample">Type your message</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
+        </section>
+    </main>
+
+
+
+    <footer id="content_footer">
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
         </div>
-        
+    </footer>
 
-
-        <!-- <div class = "footer">
-            <div class="input-container">
-                <input type="text" id="message-input" class="form-control mr-2" placeholder="메시지를 입력하세요...">
-                <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" 
-                width = "40px" height="40px" style="position:absolute; top:0; right:0;">
-            </div>
-        </div> -->
-        <div class="footer">
-            <div class="input-container">
-                <input type="text" id="message-input" class="form-control mr-2" placeholder="메시지를 입력하세요...">
-                <!--<span style="position: relative; display: inline-block;">-->
-                    <img src="{{ url_for('static',path = 'images/send.png')}}" alt="send" width="40px"
-                            height="40px" class="send-button" id="toyou">
-                </span> 
-            </div>
-            <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
-                <span>DOBOT can make mistakes. Consider checking important information.</span>
-                <p>made by DO(DONGWOOK WITH ONEPIECE)</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <script src="{{ url_for('static', path= 'js/chat.js') }}"></script>
+    <script src=" {{ url_for('static', path= 'js/dobot.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
 </body>
-{% endblock %}
 
 </html>
