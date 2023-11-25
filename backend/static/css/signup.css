@@ -1,23 +1,144 @@
+html {
+    height: 100%;
+}
+
+
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    height: 100%;
+    /* display: grid; */
+    background-color: white;
     margin: 0;
+    padding: 0;
+    font-family: Kakao, 맑은 고딕, Malgun Gothic, Apple SD Gothic Neo, 돋움, dotum, sans-serif;
+    -webkit-text-size-adjust: none;
 }
 
-.signup-container {
+/* 로고가 있는 헤더 */
+.head-container {
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 80px;
+}
+
+
+/* 메인(바디) */
+main {
+    margin-top: 0px;
+    padding: 10px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    /* height: auto; */
+    justify-items: center;
+    align-items: center;
+    display: grid;
+  
+
+}
+
+/* 로그인 박스 */
+#sign-container {
+    width: 40%;
+    height: 600px;
+    display: grid;
+    /* align-content:space-around; */
+    justify-items: center;
+    /* align-items: center; */
+    border-radius: 7px;
+    box-shadow: 0px 0px 2px 2px black;
+}
+
+#sign-header {
+    display: grid;
+    align-content: center;
+}
+
+
+
+
+.sign-input container {
+    position: fixed;
+}
+
+#sign-form {
+    align-self: flex-start;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+#username-field,
+#password-field,
+#check_password,
+#name-field {
+    width: 300px;
+    height: 50px;
+}
+
+#id_check-form-submit{
+    margin-left: 220px;
+    padding: 7px;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.sign-form-field::placeholder {
+    color: #3a3a3a;
+}
+
+.sign-form-field {
+    border: none;  /*밑에만 나오게한다*/
+    border-bottom: 1px solid #3a3a3a;  /*두께*/
+    margin-bottom: 30px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px 0px 5px 5px;
+}
+
+
+.btn-container {
+    width: 100%;
+    display:grid;
+    align-content:center;
+
+}
+
+#signup-text {
+    display: inline-block;   /* 인라인 블록 요소로 변경 */
+    margin-left: 320px;      /* 버튼과의 간격 조정 */
+    vertical-align: bottom;   /* 버튼의 하단과 정렬 */
+    padding-bottom: 3px;
+    
+}
+
+
+#sign-form-submit {
+
+    width: 30%;
+    padding: 7px;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    float: right;
+    margin-right: 10px;
+
+}
+
+
+/* footer */
+footer {
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+    background-color: lightgray;
+    color: black;
     text-align: center;
-}
-
-table {
-    margin: 10px auto;
-}
-
-td {
-    padding: 5px;
-}
-
-button {
-    margin: 5px;
+    padding: 10px;
 }

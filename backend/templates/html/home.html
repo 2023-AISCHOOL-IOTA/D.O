@@ -1,6 +1,7 @@
 {% extends 'header.html' %}
 
 {% block title %}DOBOT{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', path= 'css/home.css')}}">
 
 
 
@@ -8,10 +9,10 @@
     <main id="homemain" class="cont_main">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-md-6 offset-md-3"> <!--중간에 위치-->
                     <div class="carousel">
                         <div class="carousel-container">
-                            <!-- Your carousel content goes here -->
+                            <!-- carousel content  -->
                             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
@@ -23,24 +24,26 @@
                                 </div>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img src=" {{ url_for('static', path= 'images/dog.png')}}" class="d-block w-100" alt="dog">
+                                        <a href="game"><img src="{{ url_for('static', path= 'images/game.png')}}" class="d-block w-100"
+                                                alt="game"></a>
                                         <div class="carousel-caption d-none d-md-block">
-                                            <h5>나 귀엽지?</h5>
-                                            <p>엉니야~ 나랑 놀자</p>
+                                            <!-- <h5 style="color:black;">나 귀엽지?</h5>
+                                                <p style="color:black;">엉니야~ 나랑 놀자</p> -->
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <img src=" {{ url_for('static', path= 'images/food.png')}}" class="d-block w-100" alt="food">
+                                        <a href="menu"><img src="{{ url_for('static', path= 'images/food.png')}}" class="d-block w-100"
+                                                alt="food"></a>
                                         <div class="carousel-caption d-none d-md-block">
-                                            <h5>Second slide label</h5>
-                                            <p>Some representative placeholder content for the second slide.</p>
+                                            <!-- <h5 style="color:black;">오늘의 메뉴는 OOO!</h5>
+                                                <p style="color:black;">맛있는 식사 되세요</p> -->
                                         </div>
                                     </div>
                                     <div class="carousel-item">
-                                        <img src=" {{ url_for('static', path= 'images/map.png')}}" class="d-block w-100" alt="map">
+                                        <a href="map"><img src="{{ url_for('static', path= 'images/map.png')}}" class="d-block w-100" alt="map"></a>
                                         <div class="carousel-caption d-none d-md-block">
-                                            <h5>Third slide label</h5>
-                                            <p>Some representative placeholder content for the third slide.</p>
+                                            <!-- <h5 style="color:black;">우리 주변에는 뭐가 있을까요?</h5>
+                                                <p style="color:black;">근처 맛집을 찾아보세용</p> -->
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +59,7 @@
                                 </button>
                             </div>
                         </div>
-
+    
                     </div>
                 </div>
             </div>
@@ -64,19 +67,15 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <a href="dobot" id="newChatBtn">Go to New Chat</a>
+                    <h3><a href="dobot" id="newChatBtn">Go to New Chat</a></h3>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer>
-        <!-- Your footer content goes here -->
-        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
-            <span>DOBOT can make mistakes. Consider checking important information.</span>
-            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
-        </div>
-    </footer>
+{% endblock %}
 
-    <script src=" {{ url_for('static', path= 'js/home.js')}}"></script>
+{% block footer %}
+{{ super() }}
+    <!--<script src=" {{ url_for('static', path= 'js/home.js')}}"></script>-->
 {% endblock %}

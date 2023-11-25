@@ -1,9 +1,9 @@
-$("#toyou").click(function () {
+$("#sign-form-submit").click(function () {
   // 입력된 데이터 가져오기
 
-  let id = $("#userId").val(); // message-input의 값만 가져오기
-  let password = $("#userPassword").val();
-  let name = $("#username").val();
+  let id = $("#username-field").val(); // message-input의 값만 가져오기
+  let password = $("#password-field").val();
+  let name = $("#name-field").val();
   if (id !== "" && password !== "" && name !== "") {
     $.ajax({
       type: "post", // 어떤 방식으로 보낼지
@@ -24,10 +24,10 @@ $("#toyou").click(function () {
   }
 });
 
-$("#check_button").click(function () {
+$("#id_check-form-submit").click(function () {
   // 입력된 데이터 가져오기
 
-  let id = $("#userId").val(); // message-input의 값만 가져오기
+  let id = $("#username-field").val(); // message-input의 값만 가져오기
 
   if (id !== "") {
     $.ajax({
@@ -47,9 +47,9 @@ $("#check_button").click(function () {
 });
 
 $(document).ready(function () {
-  $("#check_password, #userPassword").on("input", function () {
+  $("#check_password, #password-field").on("input", function () {
     let check_pw = $("#check_password").val();
-    let pw = $("#userPassword").val();
+    let pw = $("#password-field").val();
 
     if (check_pw !== "" && pw !== "") {
       if (check_pw !== pw) {

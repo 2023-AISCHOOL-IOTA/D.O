@@ -1,88 +1,35 @@
-// 채팅창
-// 메시지를 추가할때!!
-function addMessage(message, sender, id) {
-  var chatBody = document.getElementById("chat-body");
-  // 요소를 생성할때 div에 넣어서 만든다
-  var messageContainer = document.createElement("div");
-  var messageSender = document.createElement("div");
-  var messageBubble = document.createElement("div");
-  var messageTime = document.createElement("div");
-  
-  var messageName = document.createElement("div");
-  // var userImage = document.createElement('div');
-  // var chatbotImage = document.createElement('div');
+// 페이지 로드 시 챗봇의 첫 메시지를 추가합니다.
+document.addEventListener("DOMContentLoaded", function () {
+  addChatMessage("Bot", "무엇을 도와드릴까요?", getTime());
+  toggleSpinner(false); // 스피너 비활성화
+});
 
-  //TODO - 정연
-  var aImage = document.createElement("div");
 
-  // 클래스 생성해준다
-  messageContainer.className = "message-container";
 
-  //말풍선이랑 이름 묶을 컨테이너
-  messageName.className = "message-name";
+// 이미지를 생성하고 설정하는 함수
+function addImage(imgPath, altText) {
+  var img = document.createElement("img"); // 새 이미지 요소 생성
+  img.src = "/images/chatbot.png"; // 이미지 경로 설정
+  img.alt = "Bot Avatar"; // 대체 텍스트 설정
+  img.classList.add("avatar"); // CSS 클래스 추가
 
-  messageBubble.className = "message-bubble";
-  messageSender.className = "message-sender";
-  messageTime.className = "message-time";
-  // userImage.className = 'user-image';
-  // chatbotImage.className = 'chatbot-image';
-
-  //TODO - 정연
-  aaa = "chatbot";
-  aImage.className = `${aaa}-image`;
-
-  // 매개변수 지정
-  messageBubble.textContent = message;
-  messageSender.textContent = sender;
-  messageTime.textContent = getTime(); // 현재 시간을 얻어옴
-
-  // 이미지 지정
-  // userImage.innerHTML = '<img src="/images/user.png" alt="user">';
-  // chatbotImage.innerHTML = '<img src="/images/logo.png" alt="logo">';
-  messageName.appendChild(messageSender);
-  messageName.appendChild(messageBubble);
-
-  // messageContainer에 각 요소들을 넣겠다~
-  messageContainer.appendChild(aImage);
-  // messageContainer.appendChild(messageBubble);
-  // messageContainer.appendChild(messageSender);
-  messageContainer.appendChild(messageName);
-  messageContainer.appendChild(messageTime);
-
-  // messageContainer.appendChild(userImage);
-
-  // 사용자와 챗봇에 따라 클래스를 추가
-  if (sender === "user") {
-    messageContainer.classList.add("user-message"); // 보내는 게 user이면 usermessage를 더해준다
-
-    //TODO - 정연
-    aaa = "user";
-    aImage.innerHTML = `<img src="/static/images/${aaa}.png" alt="${aaa}">`;
-  } else {
-    messageContainer.classList.add("chatbot-message");
-
-    //TODO - 정연
-    aaa = "chatbot";
-    aImage.innerHTML = `<img src="/static/images/${aaa}.png" alt="${aaa}">`;
-  }
-
-  // if (sender === 'user') {
-  //     chatBody.appendChild(messageContainer);
-  // } else {
-  //     chatBody.insertBefore(messageContainer, chatBody.firstChild);
-  // }
-
-  // (메시지를 보낼때마다) chatBody에 messageContainer를 붙이겠다
-  chatBody.appendChild(messageContainer);
-
-  // perfect scrollbar
-  chatBody.scrollTop = chatBody.scrollHeight;
+  return img; // 생성된 이미지 요소 반환
 }
-// localStorage에서 username을 가져와 변수에 할당
-var username = localStorage.getItem("username");
 
+// 이미지를 생성하고 설정하는 함수
+function addImage(imgPath, altText) {
+  var img = document.createElement("img"); // 새 이미지 요소 생성
+  img.src = "/images/user.png";
+  img.alt = "User Avatar";
+  img.classList.add("avatar"); // CSS 클래스 추가
 
-$("#usernameDisplay").innerText = username;
+  return img; // 생성된 이미지 요소 반환
+}
+// 스피너 토글 함수입니다.
+function toggleSpinner(show) {
+  var spinner = document.querySelector(".spinner-container");
+  spinner.style.display = show ? "flex" : "none"; // 스피너 표시 상태 설정
+}
 
 // 현재 시간 함수
 function getTime() {
@@ -96,114 +43,156 @@ function getTime() {
 
   return hours + ":" + minutes;
 }
-// AJAX 요청이 시작될 때 스피너 표시
-function showSpinner() {
-    document.querySelector('.spinner-container').style.display = 'block';
-}
 
-// AJAX 요청이 완료되면 스피너 숨기기
-function hideSpinner() {
-    document.querySelector('.spinner-container').style.display = 'none';
-}
-
-// 초기 대화 시작 -> jinja2로 이걸 띄워야 해
-setTimeout(function () {
-  addMessage("안녕하세요! 어떤 도움이 필요하세요?", "DOBOT");
-}, 500);
-$("#toyou").click(function () {
-  // 입력된 데이터 가져오기
-
-  let inputData = $("#message-input").val(); // message-input의 값만 가져오기
-  if (inputData !== "") {
-    //  text 변수에 저장
-
-    let text = $(".message-container");
-
-    // text에 append해 요소 추가
-    addMessage(inputData, "user");
-    text.val("");
-    var chatBody = document.getElementById("chat-body");
-    chatBody.scrollTop = chatBody.scrollHeight;
-
-    // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
-    // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
-
-    $.ajax({
-      type: "post", // 어떤 방식으로 보낼지
-      url: "http://127.0.0.1:8000/dobot", // 보낼 주소
-      contentType: "application/json", // 서버에 JSON 형식임을 알려줌
-      data: JSON.stringify({ data: [inputData, getTime()] }), // 데이터를 JSON 문자열로 변환
-      // 성공적인 전송시 서버에서 반환된 response 받음
-      success: function (response) {
-        // 서버 응답을 성공하면 실행
-
-        addMessage(response.processed_data, "DOBOT");
-        
-        var chatBody = document.getElementById("chat-body");
-        chatBody.scrollTop = chatBody.scrollHeight;
-        $("#spinner").hide();
-      },
-       beforeSend:function(){
-        $("#spinner").show();
-
-      },
-
-      error: function () {
-        alert("실패");
-        $("#spinner").hide();
-
-      },
-    });
-
-    $("#message-input").val(""); // 입력 필드 새로고침
+// 사용자가 메시지를 보낼 때 실행됩니다.
+function sendUserMessage() {
+  var input = document.getElementById("chat-input");
+  var message = input.value.trim();
+  if (message !== "") {
+    addChatMessage("User", message, getTime());
+    input.value = "";
+    toggleSpinner(true); // 사용자가 메시지를 보낼 때 스피너 활성화
+    // 챗봇의 답변을 시뮬레이션합니다.
+   
   }
-});
+}
 
-// 엔터시 작동
-$("#message-input").keyup(function (event) {
-  if (event.key === "Enter") {
+// 채팅창에 메시지 요소를 추가하는 함수입니다.
+function addChatMessage(sender, text, time) {
+  var chatBox = document.getElementById("chat-box");
+  var messageWrapper = document.createElement("div");
+  messageWrapper.classList.add(
+    "chat-message",
+    sender.toLowerCase() + "-message"
+  );
+
+  // var avatarImg = document.createElement('img');
+  // avatarImg.classList.add('avatar');
+  // avatarImg.src = sender === "Bot" ? "chatbot.png" : "user.png";
+
+  var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출
+  var imgPath = sender === "Bot" ? "/static/images/chatbot.png" : "/images/user.png"; // 이미지 파일 경로와 대체 텍스트
+  var altText = sender === "Bot" ? "Bot Avatar" : "User Avatar";
+
+  var senderName = document.createElement("div");
+  senderName.classList.add("sender-name");
+  senderName.textContent = sender;
+
+  var chatBubble = document.createElement("div");
+  chatBubble.classList.add("chat-bubble");
+  chatBubble.textContent = text;
+
+  var timestamp = document.createElement("div");
+  timestamp.classList.add("timestamp");
+  timestamp.textContent = time;
+
+  if (sender === "User") {
+    messageWrapper.appendChild(timestamp);
+    messageWrapper.appendChild(chatBubble);
+    messageWrapper.appendChild(senderName);
+    messageWrapper.appendChild(avatarImg);
+  } else {
+    messageWrapper.appendChild(avatarImg);
+    messageWrapper.appendChild(senderName);
+    messageWrapper.appendChild(chatBubble);
+    messageWrapper.appendChild(timestamp);
+  }
+
+  chatBox.appendChild(messageWrapper);
+ // chatBox.scrollTop = chatBox.scrollHeight;
+}
+  $("#send-btn").click(function () {
     // 입력된 데이터 가져오기
 
-   let inputData = $("#message-input").val(); // message-input의 값만 가져오기
-  if (inputData !== "") {
-    //  text 변수에 저장
+    let inputData = $("#chat-input").val(); // message-input의 값만 가져오기
+    if (inputData !== "") {
+      //  text 변수에 저장
 
-    let text = $(".message-container");
+      let text = $(".message-container");
 
-    // text에 append해 요소 추가
-    addMessage(inputData, "user");
-    var chatBody = document.getElementById("chat-body");
-    chatBody.scrollTop = chatBody.scrollHeight;
+      // text에 append해 요소 추가
+      sendUserMessage();
+      text.val("");
+      var chatBody = document.getElementById("chat-body");
+      chatBody.scrollTop = chatBody.scrollHeight;
 
-    // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
-    // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
+      // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
+      // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
 
-    $.ajax({
-      type: "post", // 어떤 방식으로 보낼지
-      url: "http://127.0.0.1:8000/dobot", // 보낼 주소
-      contentType: "application/json", // 서버에 JSON 형식임을 알려줌
-      data: JSON.stringify({ data: [inputData, getTime()] }), // 데이터를 JSON 문자열로 변환
+      $.ajax({
+        type: "post", // 어떤 방식으로 보낼지
+        url: "http://127.0.0.1:8000/dobot", // 보낼 주소
+        contentType: "application/json", // 서버에 JSON 형식임을 알려줌
+        data: JSON.stringify({ data: [inputData, getTime()] }), // 데이터를 JSON 문자열로 변환
+        // 성공적인 전송시 서버에서 반환된 response 받음
+        success: function (response) {
+          // 서버 응답을 성공하면 실행
 
-      // 성공적인 전송시 서버에서 반환된 response 받음
-      success: function (response) {
-        // 서버 응답을 성공하면 실행
+          addChatMessage("Bot", response.processed_data, getTime());
 
-       addMessage(response.processed_data, "DOBOT");
+          var chatBody = document.getElementById("chat-body");
+          //chatBody.scrollTop = chatBody.scrollHeight;
+          $("#spinner").hide();
+        },
+        beforeSend: function () {
+          $("#spinner").show();
+        },
+
+        error: function () {
+          alert("실패");
+          $("#spinner").hide();
+        },
+      });
+
+      $("#chat-input").val(""); // 입력 필드 새로고침
+    }
+  });
+
+  // 엔터시 작동
+  $("#chat-input").keyup(function (event) {
+    if (event.key === "Enter") {
+      // 입력된 데이터 가져오기
+
+      let inputData = $("#chat-input").val(); // message-input의 값만 가져오기
+      if (inputData !== "") {
+        //  text 변수에 저장
+
+        let text = $(".message-container");
+
+        // text에 append해 요소 추가
+        sendUserMessage();
         var chatBody = document.getElementById("chat-body");
-        chatBody.scrollTop = chatBody.scrollHeight;
-        $("#spinner").hide();
-      },
-       beforeSend:function(){
-        $('#spinner').show();
+        //chatBody.scrollTop = chatBody.scrollHeight;
 
-      },
+        // fastapi의 BaseModel은 JSON 형식을 받는데 그냥 data로 보내면 오류남
+        // contentType으로 JSON임을 알려주고 JSON.stringify로 데이터를 JSON으로 변환
 
-      error: function () {
-        alert("실패");
-        $("#spinner").hide();
+        $.ajax({
+          type: "post", // 어떤 방식으로 보낼지
+          url: "http://127.0.0.1:8000/dobot", // 보낼 주소
+          contentType: "application/json", // 서버에 JSON 형식임을 알려줌
+          data: JSON.stringify({ data: [inputData, getTime()] }), // 데이터를 JSON 문자열로 변환
+
+          // 성공적인 전송시 서버에서 반환된 response 받음
+          success: function (response) {
+            // 서버 응답을 성공하면 실행
+
+            addChatMessage("Bot", response.processed_data, getTime());
+            var chatBody = document.getElementById("chat-body");
+           // chatBody.scrollTop = chatBody.scrollHeight;
+            $("#spinner").hide();
+          },
+          beforeSend: function () {
+            $("#spinner").show();
+          },
+
+          error: function () {
+            alert("실패");
+            $("#spinner").hide();
+          },
+        });
+
+        $("#chat-input").val(""); // 입력 필드 새로고침
       }
-    });
-
-    $("#message-input").val(""); // 입력 필드 새로고침
-  }
-}});
+    }
+  });

@@ -1,8 +1,8 @@
-$("#toyou").click(function () {
+$("#login-form-submit").click(function () {
   // 입력된 데이터 가져오기
 
-  let inputData = $("#userId").val(); // message-input의 값만 가져오기
-  let inputpassword = $("#userPassword").val();
+  let inputData = $("#username-field").val(); // message-input의 값만 가져오기
+  let inputpassword= $("#password-field").val();
   if (inputData !== "" && inputpassword !== "") {
     $.ajax({
       type: "post", // 어떤 방식으로 보낼지
@@ -11,12 +11,12 @@ $("#toyou").click(function () {
       data: JSON.stringify({ id: inputData, password: inputpassword }), // 데이터를 JSON 문자열로 변환
       success: function (response) {
         alert(response.message);
-        window.location.href = "/dobot";
+        window.location.href = "/";
       },
       error: function () {
-        alert("아이디 나 비밀번호가 틀립니다");
-        $("#userId").val("");
-        $("#userPassword").val("");
+        $("#login-error-msg").text("아이디 나 비밀번호가 틀립니다");
+        $("#username-field").val("");
+        $("#password-field").val("");
       },
     });
   }

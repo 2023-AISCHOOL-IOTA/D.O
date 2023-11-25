@@ -61,7 +61,7 @@ def chat(data_input: DataInput):
     user_input = data_input.data[0]
     realtime = data_input.data[1]
 
-   # input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors="pt").to(device)
+   
     input_ids = tokenizer.encode(user_input + tokenizer.eos_token, add_special_tokens=True, return_tensors="pt").to(device)
     
     # 모델이 응답 생성
