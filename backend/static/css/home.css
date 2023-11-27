@@ -6,7 +6,6 @@ body {
 }
 
 header {
-    
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -15,7 +14,7 @@ header {
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
-    height: 72px;
+    height: 80px;
     max-width: 1296px;
     margin: 0 auto;
     padding: 19px 0;
@@ -83,13 +82,25 @@ header {
 #nav1 li a:hover, #nav2 li a:hover {
     color: #555;
 }
-
-main {
+/*기존 코드*/
+/* main {
     margin-top: 100px;
     padding: 20px;
-    padding-top: 80px;  /* header의 높이만큼 여백을 주세요 */
-    padding-bottom: 60px;  /* footer의 높이만큼 여백을 주세요 */
-    height: 650px;
+    padding-top: 60px; 
+    padding-bottom: 60px;  
+    height: 550px;
+} */
+
+main {
+    margin-top: 0px;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    /* height: auto; */
+    justify-items: center;
+    align-items: center;
+    display: grid;
+
 }
 
 #newChatBtn {
@@ -105,7 +116,7 @@ main {
 }
 
 footer {
-    
+    /* position:fixed; */
     bottom: 0;
     width: 100%;
     background-color:lightgray;

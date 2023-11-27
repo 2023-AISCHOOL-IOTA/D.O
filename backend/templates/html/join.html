@@ -16,7 +16,7 @@
 <body>
     <header id="logo">
         <div class="head-container">
-            <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo2.png')}}" height="100px"></a>
+            <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo.png')}}" height="100px"></a>
         </div>
     </header>
 
@@ -48,6 +48,8 @@
                     </div>
                 </div>
             </div>
+            <img id="logoImage" data-imageurl="{{ url_for('static', path='images/logo.png') }}" alt="Logo">
+            <img id="logoImage" data-imageurl="{{ url_for('static', path='images/logo.png') }}" alt="Logo">
     </main>
 
     <footer>

@@ -15,14 +15,31 @@ document.getElementById('chat-input').addEventListener('keypress', function(e) {
 // 이미지를 생성하고 설정하는 함수
 function addImage(imgPath, altText) {
     var img = document.createElement('img'); // 새 이미지 요소 생성
+<<<<<<< Updated upstream
     img.src = imgPath; // 이미지 경로 설정
     img.alt = altText; // 대체 텍스트 설정
+=======
+    img.src = "/static/images/${aaa}.png"; // 이미지 경로 설정
+    img.alt = "Bot Avatar"; // 대체 텍스트 설정
+>>>>>>> Stashed changes
     img.classList.add('avatar'); // CSS 클래스 추가
   
     return img; // 생성된 이미지 요소 반환
   }
 
+<<<<<<< Updated upstream
 
+=======
+  // 이미지를 생성하고 설정하는 함수
+function addImage(imgPath, altText) {
+    var img = document.createElement('img'); // 새 이미지 요소 생성
+    //img.src = "/images/user.png";
+    img.alt = "User Avatar";
+    img.classList.add('avatar'); // CSS 클래스 추가
+  
+    return img; // 생성된 이미지 요소 반환
+  }
+>>>>>>> Stashed changes
 // 스피너 토글 함수입니다.
 function toggleSpinner(show) {
     var spinner = document.querySelector('.spinner-container');
@@ -76,8 +93,13 @@ function addChatMessage(sender, text, time) {
     // }
     // avatarImg.alt = sender + " Avatar"; // 대체 텍스트 설정
 
+<<<<<<< Updated upstream
     
     var imgPath = sender === "Bot" ? "/images/chatbot.png" : "/images/user.png";      // 이미지 파일 경로와 대체 텍스트
+=======
+    var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출
+    var imgPath = aaa === "Bot" ? "/static/images/chatbot.png" : "/images/user.png";      // 이미지 파일 경로와 대체 텍스트
+>>>>>>> Stashed changes
     var altText = sender === "Bot" ? "Bot Avatar" : "User Avatar";
     
     var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출

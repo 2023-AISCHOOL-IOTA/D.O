@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,21 +13,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/templete/css/menu.css">
     <style>
-        *{
+        * {
             font-family: 'Noto Sans KR', sans-serif;
             box-sizing: border-box;
         }
 
-        html,body{
+        html,
+        body {
             margin: 0;
             padding: 0;
         }
 
-        #app{
+        #app {
             text-align: center;
         }
 
-        .roulette-outer{
+        .roulette-outer {
             position: relative;
 
             overflow: hidden;
@@ -40,22 +42,22 @@
             margin-right: auto;
             border-radius: 50%;
             background: #ADE1E1;
-           
+
         }
 
-        .roulette-outer > .roulette{
-            position:absolute;
-            top:5%;
-            left:5%;
-            right:5%;
-            bottom:5%;
+        .roulette-outer>.roulette {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 5%;
 
             border-radius: 50%;
-    
+
             border: 2px solid black;
         }
 
-        .roulette-outer > .roulette-pin{
+        .roulette-outer>.roulette-pin {
             position: absolute;
             top: 3%;
             left: 50%;
@@ -68,20 +70,20 @@
 
         }
 
-        .roulette-outer > .roulette > .item-wrapper > .item{
+        .roulette-outer>.roulette>.item-wrapper>.item {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            
+
             padding-top: 7%;
             text-align: center;
             display: flex;
             justify-content: center;
         }
 
-        .roulette-outer > .roulette > .line-wrapper > .line{
+        .roulette-outer>.roulette>.line-wrapper>.line {
             position: absolute;
             top: 0;
             bottom: 50%;
@@ -93,11 +95,12 @@
             transform-origin: bottom;
         }
 
-        .roulette-outer > .roulette{
-            transition:transform 5s ease-in-out;
+        .roulette-outer>.roulette {
+            transition: transform 5s ease-in-out;
         }
     </style>
 </head>
+
 <body>
     <header id="head" class="header_nav">
         <div class="inner_header">
@@ -111,7 +114,7 @@
 
                 <!-- 로고 -->
                 <h1 clss="logo">
-                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a> 
+                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a>
                 </h1>
             </div>
 
@@ -164,14 +167,13 @@
 
                 <!-- 값 영역 -->
                 <div class="item-wrapper">
-                   <div class="item" v-for="(item,index) in items"
-                              v-bind:style="itemStyles[index]">{{item.value}}</div>
+                    <div class="item" v-for="(item,index) in items" v-bind:style="itemStyles[index]">{{item.value}}
+                    </div>
                 </div>
 
                 <!-- 선 영역 -->
                 <div class="line-wrapper">
-                    <div class="line" v-for="(item,index) in items"
-                             v-bind:style="lineStyles[index]"></div>
+                    <div class="line" v-for="(item,index) in items" v-bind:style="lineStyles[index]"></div>
                 </div>
 
             </div>
@@ -193,69 +195,68 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         Vue.createApp({
-            data(){
-                return{
+            data() {
+                return {
                     count: 0,
-                    items:[
-                        {value:"한식"},
-                        {value:"중식"},
-                        {value:"양식"},
-                        {value:"일식"},
-                        {value:"지중해식"},
-                        {value:"인도식"},
-                        {value:"남미식"},
-                        {value:"멕시코식"},
-                        {value:"프랑스식"},
-                        {value:"이탈리안식"},
+                    items: [
+                        { value: "한식" },
+                        { value: "중식" },
+                        { value: "양식" },
+                        { value: "일식" },
+                        { value: "지중해식" },
+                        { value: "인도식" },
+                        { value: "남미식" },
+                        { value: "멕시코식" },
+                        { value: "프랑스식" },
+                        { value: "이탈리안식" },
                     ],
-                    itemStyles:[],
-                    lineStyles:[],
-                    current:0,// 실제 가리키는 데이터 위치
+                    itemStyles: [],
+                    lineStyles: [],
+                    current: 0,// 실제 가리키는 데이터 위치
                 };
             },
-            computed:{
-                segment(){
+            computed: {
+                segment() {
                     return 360 / this.items.length;
                 },
-                offset(){
-                    return this.segment/2;
+                offset() {
+                    return this.segment / 2;
                 },
-                angle(){
+                angle() {
                     let temp = -this.current * this.segment;
-                    let randomOffset = Math.floor(Math.random()* this.segment);
+                    let randomOffset = Math.floor(Math.random() * this.segment);
                     let cycle = this.count * 360 * 5;
-                    return - (temp + randomOffset +cycle);
+                    return - (temp + randomOffset + cycle);
                 },
-                rouletteStyle(){
-                    return{
-                        "transform":"rotate("+this.angle+"deg)"
+                rouletteStyle() {
+                    return {
+                        "transform": "rotate(" + this.angle + "deg)"
                     };
                 },
-                currentItem(){
+                currentItem() {
                     return this.items[this.current];
                 }
             },
-            methods:{
-                play(){
+            methods: {
+                play() {
                     this.count++;
-                    this.current = Math.floor(Math.random()*this.items.length);
+                    this.current = Math.floor(Math.random() * this.items.length);
                 },
             },
-            mounted(){
+            mounted() {
                 //itemStyles 정의
-                this.items.forEach((el,idx)=>{
+                this.items.forEach((el, idx) => {
                     this.itemStyles.push({
-                        "transform":"rotate(" + (this.segment * idx) + "deg)",
+                        "transform": "rotate(" + (this.segment * idx) + "deg)",
                     });
                     // lineStyles 정의
                     this.lineStyles.push({
-                        "transform":"rotate(" + (this.segment * idx + this.offset) +"deg)",
+                        "transform": "rotate(" + (this.segment * idx + this.offset) + "deg)",
                     });
                 });
             },
         }).mount("#app");
     </script>
 </body>
+
 </html>
-
-

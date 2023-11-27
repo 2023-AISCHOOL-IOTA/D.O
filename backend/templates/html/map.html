@@ -63,13 +63,25 @@
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	67d709c3026e7543769d57957cb2f1f8&libraries=services"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp">
+</script>
 <script>
     // 마커를 담을 배열입니다
     var markers = [];
+    navigator.geolocation.getCurrentPosition(geoSuccess, getError);
+    function accessToGeo(position) {
+            const positionObj = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            }
+            return positionObj;
+        }
+        // 함수 호출 후 반환된 객체 사용 예시
+            const geoPosition = accessToGeo(somePosition);
 
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
-            center: new kakao.maps.LatLng(35.1468202, 126.84052097), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(geoPosition.latitude, geoPosition.longitude), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 

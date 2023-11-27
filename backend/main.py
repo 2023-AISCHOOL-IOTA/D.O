@@ -70,23 +70,38 @@ def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식�
         return templates.TemplateResponse("login.html", {"request": request}) #로그인 페이지로 보냄
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     user_id = payload.get("ID")
+
 #이제 이 아이디를 가지고 collection_user에서 nickname가져와서 return해주는 코드 연결 예정
 
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
     # 모델 및 토크나이저 로딩
     user_input = data_input.data[0] # 사용자의 메세지 넘어온 데이터(list)중 0번째에 있음
+    model = GPT2LMHeadModel.from_pretrained('C:\\Users\\gjaischool\\Documents\\GitHub\\D.O\\backend\\saved_model')
+    tokenizer = PreTrainedTokenizerFast.from_pretrained('C:\\Users\\gjaischool\\Documents\\GitHub\\D.O\\backend\\saved_model')
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+
+    model.eval()  #평가 모드로 설정 하겠다
+    user_input = data_input.data[0] # 사용자의 메세지
     
+    input_ids = tokenizer.encode(user_input + tokenizer.eos_token, add_special_tokens=True, return_tensors="pt").to(device)
+    
+    # 모델이 응답 생성
+    with torch.no_grad():
+        output = model.generate(input_ids, max_length=100)
+    
+    reply = tokenizer.decode(output[0], skip_special_tokens=True)  #숫자를 다시 문자로 바꿈
+    if user_input in reply:
+        reply = reply.replace(user_input, "").strip()
 
-
-
-    processed_data = "알겠습니다"  #"오니까 반환하는 데이터 나중에 여기에 모델 연결
+    chat_id = get_next_sequence_value("chat_id")
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    
     #chat_id = get_next_sequence_value("chat_id") #위에 만든 몽고디비에서 AI구현 코드 호출 만든 값을 chat _id라는 변수에 넣기 
     today_date = datetime.now().strftime("%Y-%m-%d") #날짜위해 년-월-일 형식으로 시간 
-
-
-
-
-    conversation = { "message": user_input, "answer": processed_data, "date":today_date, id:user_id}
+    conversation = {"chat_ID": chat_id,"message": user_input, "answer": reply, "date":today_date, "id":user_id}
     inserted_data = collection_dialog.insert_one(conversation)
+    
     #user_input, 모델에서 나온 값, 날짜, 유저 아이디를 제이슨 타입으로 묶기 
-	  # collection_dialog에 제이슨 형식으로 넣기(원래 몽고디비 넣을때 제이슨 형식  처럼 key value형식으로 넣어야 함
+	# collection_dialog에 제이슨 형식으로 넣기(원래 몽고디비 넣을때 제이슨 형식  처럼 key value형식으로 넣어야 함
+    return  {"processed_data": reply} #processed_data라는 값으로 return

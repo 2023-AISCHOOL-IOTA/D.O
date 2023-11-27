@@ -8,6 +8,10 @@ import hashlib #해싱 함수 -> 주어진 입력값이 고정된 출력값으�
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from utils.middleware import create_jwt_token 
+from starlette.responses import RedirectResponse
+
+import secrets
+
 
 #주석 참조
 router = APIRouter()
@@ -37,11 +41,19 @@ collection_user = db["User"]
 collection_Dialog = db['Dialog']
 
 
-
+#여기서 로그인 버튼을 누르면 가는건데 로그인이 되어 있으면 log를 로그아웃으로 보낼꺼고 토큰이 있으면 토큰 삭제하고 홈으로
 @router.get('/login')
-def gologin(request: Request):
+def gologin(request: Request, response: Response):  
     # 로그인
-    return templates.TemplateResponse("login.html", {"request": request})
+     token = request.cookies.get("access_token")
+     if not token:    
+        return templates.TemplateResponse("login.html", {"request": request})
+     response.delete_cookie(key = "access_token") 
+     log = "login"
+     message = "로그인을 해주세요"
+     
+     return RedirectResponse(url='/', status_code=307)
+         
 
 
 @router.post('/login')
@@ -49,7 +61,7 @@ def login(user: login, response: Response):
     user_in_db = collection_user.find_one({"id": user.id}) #로그인시 들어온 user라는 값에 있는 id를 가지고 일치하는게 있는지 검색
     password = user.password #비밀번호는 어차피 해싱 해야 되서 그냥 그대로 
 
-# 비밀번호를 sha256으로 해싱 -> 해싱 시 16진수의 해시값이 됨
+# 비밀번호를 sha256으로 해싱 -> 해싱 시 16진수의 해시값이 됨ㅈ
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     if user_in_db is None: #-> db #일치하는 값이 없다면(맞는 아이디조차 없다면)
         raise HTTPException(status_code=400, detail="Incorrect username or password")
@@ -61,7 +73,7 @@ def login(user: login, response: Response):
     response.set_cookie(key="access_token", value=token, httponly=True, secure=True) 
 #   #쿠키에 저장 이름: access_token, 형식: tolen,httponly: 자바스크립트에서 쿠키 접근X 보안 강화를 위해  
 #   #secure: 쿠키가 https에서만 전송 될 수 있게 이게 false면 그냥 http도 됨 
-
+   
     return {"message": "로그인 성공"}
 
     
@@ -97,6 +109,9 @@ def review_get(request: Request):
         return templates.TemplateResponse("login.html", {"request": request}) # 토큰이 없는 경우 로그인 페이지로 리디렉션
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     user_id = payload.get("ID")
+    users = collection_user.find_one({"id":user_id})
+    user_name = users.get("nickname")
+    message = user_name +"님 안녕하세요!"
 
     user_info_list = []
     
@@ -111,7 +126,7 @@ def review_get(request: Request):
             }
             user_info_list.append(user_info)
     
-    return templates.TemplateResponse("review.html", {"request": request, "user_info_list": user_info_list, "message":user_id})
+    return templates.TemplateResponse("review.html", {"request": request, "user_info_list": user_info_list, "message":message})
 
 
     

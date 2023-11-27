@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // 이미지를 생성하고 설정하는 함수
 function addImage(imgPath, altText) {
   var img = document.createElement("img"); // 새 이미지 요소 생성
-  img.src = "/images/chatbot.png"; // 이미지 경로 설정
+  img.src = imgPath; // 이미지 경로 설정
   img.alt = "Bot Avatar"; // 대체 텍스트 설정
   img.classList.add("avatar"); // CSS 클래스 추가
 
@@ -19,9 +19,10 @@ function addImage(imgPath, altText) {
 // 이미지를 생성하고 설정하는 함수
 function addImage(imgPath, altText) {
   var img = document.createElement("img"); // 새 이미지 요소 생성
-  img.src = "/images/user.png";
-  img.alt = "User Avatar";
+  img.src = imgPath;  
+  img.alt = altText;
   img.classList.add("avatar"); // CSS 클래스 추가
+  console.log(imgPath);
 
   return img; // 생성된 이미지 요소 반환
 }
@@ -53,9 +54,10 @@ function sendUserMessage() {
     input.value = "";
     toggleSpinner(true); // 사용자가 메시지를 보낼 때 스피너 활성화
     // 챗봇의 답변을 시뮬레이션합니다.
-   
+  
   }
 }
+
 
 // 채팅창에 메시지 요소를 추가하는 함수입니다.
 function addChatMessage(sender, text, time) {
@@ -70,9 +72,11 @@ function addChatMessage(sender, text, time) {
   // avatarImg.classList.add('avatar');
   // avatarImg.src = sender === "Bot" ? "chatbot.png" : "user.png";
 
-  var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출
-  var imgPath = sender === "Bot" ? "/static/images/chatbot.png" : "/images/user.png"; // 이미지 파일 경로와 대체 텍스트
+   // 이미지 요소를 생성하는 함수 호출
+  var imgPath =
+    sender === "Bot" ? "/static/images/chatbot.png" : "/static/images/user.png"; // 이미지 파일 경로와 대체 텍스트
   var altText = sender === "Bot" ? "Bot Avatar" : "User Avatar";
+  var avatarImg = addImage(imgPath, altText);
 
   var senderName = document.createElement("div");
   senderName.classList.add("sender-name");
@@ -129,18 +133,18 @@ function addChatMessage(sender, text, time) {
           // 서버 응답을 성공하면 실행
 
           addChatMessage("Bot", response.processed_data, getTime());
+          
 
           var chatBody = document.getElementById("chat-body");
-          //chatBody.scrollTop = chatBody.scrollHeight;
-          $("#spinner").hide();
+          chatBody.scrollTop = chatBody.scrollHeight;
+          
         },
-        beforeSend: function () {
-          $("#spinner").show();
-        },
+        
+          
 
         error: function () {
           alert("실패");
-          $("#spinner").hide();
+          
         },
       });
 
@@ -179,16 +183,16 @@ function addChatMessage(sender, text, time) {
 
             addChatMessage("Bot", response.processed_data, getTime());
             var chatBody = document.getElementById("chat-body");
-           // chatBody.scrollTop = chatBody.scrollHeight;
-            $("#spinner").hide();
+            chatBody.scrollTop = chatBody.scrollHeight;
+            
           },
           beforeSend: function () {
-            $("#spinner").show();
+           
           },
 
           error: function () {
             alert("실패");
-            $("#spinner").hide();
+            
           },
         });
 
