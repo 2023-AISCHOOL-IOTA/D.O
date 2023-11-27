@@ -1,36 +1,53 @@
-<div class="col">
-    <a href="home.html"><img src="/images/back.jpg" alt="back"></a>
-    <span>user</span>
-</div>
-</div>
-</div>
-<div class = "chat-container">
-<div class = "row">
-<div class = "col">
-    <div class="card" id="chat-body" data-mdb-perfect-scrollbar="true"> <!--스크롤바가 자동으로 초기화-->
-        <!-- 대화를 동적으로 추가할 공간 -->
+<!DOCTYPE html>
+<html lang="en">
 
-        <!--spinner-->
-        <div class="spinner-container">
-            <div class="spinner">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style src="/templete/css/test.css"></style>
+    <title>기존chatting</title>
+</head>
+
+<body>
+    <div class="col">
+        <a href="home.html"><img src="/images/back.jpg" alt="back"></a>
+        <span>user</span>
+    </div>
+    </div>
+    </div>
+    <div class="chat-container">
+        <div class="row">
+            <div class="col">
+                <div class="card" id="chat-body" data-mdb-perfect-scrollbar="true"> <!--스크롤바가 자동으로 초기화-->
+                    <!-- 대화를 동적으로 추가할 공간 -->
+
+                    <!--spinner-->
+                    <div class="spinner-container">
+                        <div class="spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-<!--입력창-->
-<div class="input-contianer">
-<div clss = "row">
-<div class ="col">
-    <input type="text" id="message-input" class="form-control mr-2" placeholder="메시지를 입력하세요...">
-    <!-- <span style="position: relative; display: inline-block;">
-            <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" width="40px" height="40px">
-        </span> -->
-        <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" width="40px"
-            height="40px">
-</div>
+    <!--입력창-->
+    <div class="input-contianer">
+        <div clss="row">
+            <div class="col">
+                <input type="text" id="message-input" class="form-control mr-2" placeholder="메시지를 입력하세요...">
+                <!-- <span style="position: relative; display: inline-block;">
+                <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" width="40px" height="40px">
+            </span> -->
+                <img src="/images/send.png" alt="send" class="send-button" onclick="sendMessage()" width="40px"
+                    height="40px">
+            </div>
+            <script src="/templete/js/test.js"></script>
+</body>
+
+</html>

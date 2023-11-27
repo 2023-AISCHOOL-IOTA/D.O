@@ -1,12 +1,17 @@
-body {
+/* body {
     margin: 0;
     padding: 0;
     font-family: Kakao, 맑은 고딕, Malgun Gothic, Apple SD Gothic Neo, 돋움, dotum, sans-serif;
     -webkit-text-size-adjust: none;
+} */
+body{
+    font-family: 'Noto Sans KR', sans-serif;
 }
+
 
 header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position:sticky;
 }
 
 .inner_header {
@@ -14,13 +19,14 @@ header {
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
-    height: 72px;
+    height: 80px;
     max-width: 1296px;
     margin: 0 auto;
     padding: 19px 0;
     background: #fff;
     position: relative;
     z-index: 1000;
+    
 }
 
 #list{
@@ -40,6 +46,13 @@ header {
 #nav1, #nav2 {
     display: flex;
     justify-content: center;
+   
+}
+#nav2{
+    min-width: 260px;
+}
+#nav1{
+    min-width:500px;
 }
 
 #nav1 ul, #nav2 ul {
@@ -80,15 +93,35 @@ header {
 }
 
 #nav1 li a:hover, #nav2 li a:hover {
-    color: #555;
+    color: darkkhaki;
+}
+/*기존 코드*/
+/* main {
+    margin-top: 100px;
+    padding: 20px;
+    padding-top: 60px; 
+    padding-bottom: 60px;  
+    height: 550px;
+} */
+
+/* 화면이 줄어들어도 최소 공간을 차지하기 위한 스타일 */
+@media(min-width:600px){
+    .cont_mainl{
+        width: 600px;
+        height: 700px;
+    }
 }
 
 main {
-    margin-top: 100px;
     padding: 20px;
-    padding-top: 80px;  /* header의 높이만큼 여백을 주세요 */
-    padding-bottom: 60px;  /* footer의 높이만큼 여백을 주세요 */
-    height: 650px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: auto;
+    justify-items: center;
+    align-items: center;
+    display: grid;
+   
+
 }
 
 #newChatBtn {
@@ -101,14 +134,16 @@ main {
     color: black;
     text-align: center;
     text-decoration: none;
+    min-width:600px;
 }
 
 footer {
-    position:fixed;
+    /* position:fixed; */
     bottom: 0;
     width: 100%;
     background-color:lightgray;
     color: black;
     text-align: center;
     padding: 10px;
+    min-width:600px;
 }

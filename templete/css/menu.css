@@ -1,0 +1,106 @@
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inner_header {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    max-width: 1296px;
+    margin: 0 auto;
+    padding: 19px 0;
+    background: #fff;
+    position: relative;
+    z-index: 1000;
+}
+
+#list {
+    display: flex;
+}
+
+
+.list_btn {
+    display: flex;
+    align-items: center;
+}
+
+.list_btn .btn {
+    padding: 0px 25px;
+}
+
+#nav1,
+#nav2 {
+    display: flex;
+    justify-content: center;
+}
+
+/*최소 크기 : 줄여도 글자가 재졍렬 되지 않을 크기*/
+#nav2{
+    min-width: 260px;   
+}
+#nav1{
+    min-width:500px;
+}
+
+#nav1 ul,
+#nav2 ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#nav1 li {
+    list-style: none;
+    margin-right: 50px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#nav2 li {
+    list-style: none;
+}
+
+
+/* 현재 페이지에 대한 메뉴 표시 */
+#nav1 li a[aria-current="page"] {
+    text-decoration: none;  /*클릭시 밑줄 없애기*/
+    color: darkkhaki;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+}
+
+/* #nav1 li a[aria-current="page"]:after{
+    position:absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 0px;
+    content:"";
+    height: 3px;
+    background-color:darkkhaki
+} */
+
+#nav1 li a{
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+}
+
+#nav2 li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+    margin-right: 20px;
+}
+
+#nav1 li a:hover,
+#nav2 li a:hover {
+    color: #555;
+}

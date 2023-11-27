@@ -1,0 +1,192 @@
+/* @media : 화면 너비가 576px 이하일 때, 말풍선의 최대 너비를 100%로 설정하여 반응형 디자인을 구현가능.
+ -> 좁은 화면에서도 말풍선이 가득 차도록 조절. Bootstrap의 그리드 시스템을 사용하여 레이아웃을 유연하게 조절 */
+@media (max-width: 576px) {
+    .message-bubble {
+        max-width: 100%;
+    }
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+/* =============================================header=============================================== */
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inner_header {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  max-width: 1296px;
+  margin: 0 auto;
+  padding: 19px 0;
+  background: #fff;
+  position: relative;
+  z-index: 1000;
+}
+
+#list{
+  display: flex;
+}
+
+.list_btn {
+  display: flex;
+  align-items: center;
+}
+
+.list_btn .btn {
+  padding: 0px 25px;
+}
+
+#nav1, #nav2 {
+  display: flex;
+  justify-content: center;
+}
+
+#nav1 ul, #nav2 ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#nav1 li{
+  list-style: none;
+  margin-right: 50px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#nav2 li {
+  list-style: none;
+}
+
+
+
+#nav1 li a, #nav2 li a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s;
+  display: block;
+  padding: 5px 10px;
+}
+
+#nav1 li a:hover, #nav2 li a:hover {
+  color: #555;
+}
+
+/* =============================================채팅창=============================================== */
+#chat1 .form-outline .form-control~.form-notch div {
+  pointer-events: none;
+  border: 1px solid;
+  border-color: #eee;
+  box-sizing: border-box;
+  background: transparent;
+  }
+  
+  #chat1 .form-outline .form-control~.form-notch .form-notch-leading {
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-right: none;
+  border-radius: .65rem 0 0 .65rem;
+  }
+  
+  #chat1 .form-outline .form-control~.form-notch .form-notch-middle {
+  flex: 0 0 auto;
+  max-width: calc(100% - 1rem);
+  height: 100%;
+  border-right: none;
+  border-left: none;
+  }
+  
+  #chat1 .form-outline .form-control~.form-notch .form-notch-trailing {
+  flex-grow: 1;
+  height: 100%;
+  border-left: none;
+  border-radius: 0 .65rem .65rem 0;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-notch .form-notch-leading {
+  border-top: 0.125rem solid #39c0ed;
+  border-bottom: 0.125rem solid #39c0ed;
+  border-left: 0.125rem solid #39c0ed;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-notch .form-notch-leading,
+  #chat1 .form-outline .form-control.active~.form-notch .form-notch-leading {
+  border-right: none;
+  transition: all 0.2s linear;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-notch .form-notch-middle {
+  border-bottom: 0.125rem solid;
+  border-color: #39c0ed;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-notch .form-notch-middle,
+  #chat1 .form-outline .form-control.active~.form-notch .form-notch-middle {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  transition: all 0.2s linear;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-notch .form-notch-trailing {
+  border-top: 0.125rem solid #39c0ed;
+  border-bottom: 0.125rem solid #39c0ed;
+  border-right: 0.125rem solid #39c0ed;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-notch .form-notch-trailing,
+  #chat1 .form-outline .form-control.active~.form-notch .form-notch-trailing {
+  border-left: none;
+  transition: all 0.2s linear;
+  }
+  
+  #chat1 .form-outline .form-control:focus~.form-label {
+  color: #39c0ed;
+  }
+  
+  #chat1 .form-outline .form-control~.form-label {
+  color: #bfbfbf;
+  }
+
+/* ============================================== 입력창 =================================================== */
+
+
+.input-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+footer {
+  /* position:fixed; */
+  bottom: 0;
+  width: 100%;
+  background-color:lightgray;
+  color: black;
+  text-align: center;
+  padding: 10px;
+}

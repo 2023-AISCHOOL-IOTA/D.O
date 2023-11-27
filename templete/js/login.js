@@ -14,3 +14,5 @@ function signup() {
     // 여기에 회원가입 처리 로직을 추가하세요.
     console.log("Redirect to signup page.");
 }
+
+
