@@ -14,7 +14,7 @@ $("#login-form-submit").click(function () {
         window.location.href = "/";
       },
       error: function () {
-        $("#login-error-msg").text("아이디 나 비밀번호가 틀립니다");
+        $(".alert-danger").val("아이디 나 비밀번호가 틀립니다");
         $("#username-field").val("");
         $("#password-field").val("");
       },

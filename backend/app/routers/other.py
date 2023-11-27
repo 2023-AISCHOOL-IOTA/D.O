@@ -1,15 +1,15 @@
-from fastapi import FastAPI, Request, Form, APIRouter
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Request, APIRouter, HTTPException # API라우터 앤드포인트를 구조화 하기 위해 사용 HTTPException 예외 처리 하기 위한 클래스 일부러 에러 일으킬 수 있음
+from fastapi.templating import Jinja2Templates #메인 파일 주석 참조
+from fastapi.staticfiles import StaticFiles#메인 파일 주석 참조
 from fastapi.security import APIKeyCookie, APIKeyHeader
-from pymongo import MongoClient
-import atexit
+from pymongo import MongoClient#메인 파일 주석 참조
+from utils.middleware import create_jwt_token #메인 파일 주석 참조
+from jose import JWTError, jwt#메인 파일 주석 참조
 
-
+SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 #그외 모아둔 라우터
-router = APIRouter()
-
+router = APIRouter()  # apirouter이라는 인스턴스 생성
+#메인 파일 주석 참조
 client = MongoClient("mongodb://localhost:27017/")
 db = client["chat"]
 collection_user = db["User"]
@@ -22,85 +22,70 @@ templates = Jinja2Templates(directory="templates/html")
 
 #  responsebody통해  받아옴 넘어오는 Request는  여기서 request라고 지정
 #get방식
-@router.get("/")
+@router.get("/" )
 def read_home(request: Request):
-    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
-    if top_login:  # 값이 존재하는 경우
-        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
-        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
-        if user_document:  # 사용자 정보가 존재하는 경우
-            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
-            message  = user_name+ "님 안녕하세요!"
-            
-        else:
-              message = "로그인을 해주세요"
-              
-    else:
+    token = request.cookies.get("access_token")
+    if not token:
         message = "로그인을 해주세요"
-    return templates.TemplateResponse("home.html",{"request": request, "message":message})
+        return templates.TemplateResponse("home.html", {"request": request, "message": message})
+    
+    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    user_id = payload.get("ID")
+    return templates.TemplateResponse("home.html", {"request": request, "message": user_id})
+    
+    
+
+    
+
     
     
 
 @router.get("/dobot")
 def read_dobot(request: Request):
-    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
-    if top_login:  # 값이 존재하는 경우
-        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
-        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
-        if user_document:  # 사용자 정보가 존재하는 경우
-            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
-            message  = user_name+ "님 안녕하세요!"
-    return templates.TemplateResponse("dobot.html", {"request": request, "message":message})
+    token = request.cookies.get("access_token")
+    if not token:
+        message = "로그인을 해주세요"
+        return templates.TemplateResponse("login.html", {"request": request, "message": message})
+    
+    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    user_id = payload.get("ID")
+    return templates.TemplateResponse("dobot.html", {"request": request, "message": user_id})
 
 
 
 @router.get("/map")
 def map(request:Request):
-    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
-    if top_login:  # 값이 존재하는 경우
-        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
-        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
-        if user_document:  # 사용자 정보가 존재하는 경우
-            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
-            message  = user_name+ "님 안녕하세요!"
-            
-        else:
-              message = "로그인을 해주세요"
-              
-    else:
+    token = request.cookies.get("access_token")
+    if not token:
         message = "로그인을 해주세요"
-    return templates.TemplateResponse("map.html", {"request": request, "message":message})
+        return templates.TemplateResponse("map.html", {"request": request, "message": message})
+    
+    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    user_id = payload.get("ID")
+    return templates.TemplateResponse("map.html", {"request": request, "message": user_id})
 
+
+
+    
 @router.get("/menu")
 def map(request:Request):
-    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
-    if top_login:  # 값이 존재하는 경우
-        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
-        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
-        if user_document:  # 사용자 정보가 존재하는 경우
-            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
-            message  = user_name+ "님 안녕하세요!"
-            
-        else:
-              message = "로그인을 해주세요"
-              
-    else:
+    token = request.cookies.get("access_token")
+    if not token:
         message = "로그인을 해주세요"
-    return templates.TemplateResponse("menu.html", {"request": request, "message":message})
+        return templates.TemplateResponse("menu.html", {"request": request, "message": message})
+    
+    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    user_id = payload.get("ID")
+    return templates.TemplateResponse("menu.html", {"request": request, "message": user_id})
+
 
 @router.get("/game")
 def map(request:Request):
-    top_login = collection_login.find_one()  # 최상위 로그인 정보 가져오기
-    if top_login:  # 값이 존재하는 경우
-        login_id = top_login.get("id")  # 가져온 로그인 정보의 ID
-        user_document = collection_user.find_one({"id": login_id})  # 해당 ID로 사용자 정보 찾기
-        if user_document:  # 사용자 정보가 존재하는 경우
-            user_name = user_document.get("nickname")  # 사용자 닉네임 가져오기
-            message  = user_name+ "님 안녕하세요!"
-            
-        else:
-              message = "로그인을 해주세요"
-              
-    else:
+    token = request.cookies.get("access_token")
+    if not token:
         message = "로그인을 해주세요"
-    return templates.TemplateResponse("game.html", {"request": request, "message":message})
+        return templates.TemplateResponse("game.html", {"request": request, "message": message})
+    
+    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    user_id = payload.get("ID")
+    return templates.TemplateResponse("game.html", {"request": request, "message": user_id})
