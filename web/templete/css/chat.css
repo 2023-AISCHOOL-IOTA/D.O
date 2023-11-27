@@ -1,8 +1,9 @@
 /* /* @media : 화면 너비가 576px 이하일 때, 말풍선의 최대 너비를 100%로 설정하여 반응형 디자인을 구현가능.
  -> 좁은 화면에서도 말풍선이 가득 차도록 조절. Bootstrap의 그리드 시스템을 사용하여 레이아웃을 유연하게 조절 */
-/* @media (max-width: 576px) {
-    .message-bubble {
-        max-width: 100%; */
+@media (max-width: 576px) {
+    .chat-bubble{
+        max-width: 100%;}
+}
 
 
 header {
@@ -41,6 +42,14 @@ header {
 #nav2 {
     display: flex;
     justify-content: center;
+}
+
+/*최소 크기 : 줄여도 글자가 재졍렬 되지 않을 크기*/
+#nav2{
+    min-width: 260px;   
+}
+#nav1{
+    min-width:500px;
 }
 
 #nav1 ul,
@@ -83,7 +92,7 @@ header {
 
 #nav1 li a:hover,
 #nav2 li a:hover {
-    color: #555;
+    color: darkkhaki;
 }
 
 /* 채팅 컨테이너 스타일링 */
@@ -122,10 +131,15 @@ header {
 .chat-message {
     display: flex;
     /* flexbox 레이아웃 사용 */
-    align-items: flex-end;
+    align-items: flex-start;
     /* 요소들을 밑부분에 맞춤 */
     margin-bottom: 10px;
     /* 아래쪽 여백 설정 */
+}
+
+/* sender+bubble을 같이 묶어준거야 */
+.message-name{
+    max-width: 50%;   /* 옆 채팅창 침범하지 않게*/
 }
 
 /* 챗봇 메시지 */
@@ -142,16 +156,15 @@ header {
 
 /* 말풍선 디자인 */
 .chat-bubble {
-    max-width: 70%;
-    /* 최대 너비 설정 */
-    border-radius: 15px;
-    /* 둥근 모서리 */
-    padding: 10px;
-    /* 안쪽 여백 설정 */
-    margin: 0 10px;
-    /* 좌우 여백 설정 */
-    position: relative;
-    /* 상대적 위치 */
+    max-width: 60%;  /* 최대 너비 설정 */
+    border-radius: 15px;   /* 둥근 모서리 */
+    padding: 10px;   /* 안쪽 여백 설정 */
+    margin: 0 10px;  /* 좌우 여백 설정 */
+    position: relative;   /* 상대적 위치 */
+    word-wrap: break-word; /* 긴 단어가 경계를 넘어갈 경우 줄바꿈 */
+    overflow-wrap: break-word; /*긴 단어를 잘라서 말풍선 내부에 포함*/
+    max-width: 100%; /* 말풍선의 최대 너비 */
+    flex-grow: 1; /* 텍스트 박스가 가능한 많은 공간을 차지하도록 합니다 */
 }
 
 /* 챗봇 말풍선 배경색 */
@@ -162,19 +175,19 @@ header {
 
 /* 사용자 말풍선 배경색 및 텍스트 색상 */
 .user-message .chat-bubble {
-    background-color: rgb(196, 196, 164);
-    /* 파란색 배경 */
-    color: black;
-    /* 텍스트 색상 */
+    background-color: rgb(236, 236, 163);
+    color: black;  /* 텍스트 색상 */
 }
 
 /* 발신자 이름 스타일 */
 .sender-name {
     font-weight: bold;
-    /* 굵은 글씨 */
+    font-size: 0.9em;
     margin: 0 5px;
+    padding: 0px 10px;
     /* 좌우 여백 */
 }
+
 
 /* 시간 표시 스타일 */
 .timestamp {
@@ -213,6 +226,8 @@ header {
     /* 하단으로 정렬 */
     order: 3;
     /* timestamp를 마지막으로 정렬 */
+    color: gray;
+    font-size: 13px;
 }
 
 /* 사용자 메시지 스타일링 */
@@ -224,6 +239,7 @@ header {
 .user-message .sender-name {
     order: 1;
     /* 이름을 이미지 오른쪽으로 정렬 */
+    text-align: right;
 }
 
 .user-message .chat-bubble {
@@ -259,8 +275,8 @@ header {
 
 /* 스피너 위치 조정 */
 /* .spinner-container {
-    display: none;
-    /* 기본적으로 숨김 처리 */
+            display: none;
+            /* 기본적으로 숨김 처리 */
 /* justify-content: center; */
 /* 중앙 정렬 */
 /* align-items: center; */

@@ -15,22 +15,14 @@ document.getElementById('chat-input').addEventListener('keypress', function(e) {
 // 이미지를 생성하고 설정하는 함수
 function addImage(imgPath, altText) {
     var img = document.createElement('img'); // 새 이미지 요소 생성
-    img.src = "/images/chatbot.png"; // 이미지 경로 설정
-    img.alt = "Bot Avatar"; // 대체 텍스트 설정
+    img.src = imgPath; // 이미지 경로 설정
+    img.alt = altText; // 대체 텍스트 설정
     img.classList.add('avatar'); // CSS 클래스 추가
   
     return img; // 생성된 이미지 요소 반환
   }
 
-  // 이미지를 생성하고 설정하는 함수
-function addImage(imgPath, altText) {
-    var img = document.createElement('img'); // 새 이미지 요소 생성
-    img.src = "/images/user.png";
-    img.alt = "User Avatar";
-    img.classList.add('avatar'); // CSS 클래스 추가
-  
-    return img; // 생성된 이미지 요소 반환
-  }
+
 // 스피너 토글 함수입니다.
 function toggleSpinner(show) {
     var spinner = document.querySelector('.spinner-container');
@@ -62,7 +54,7 @@ function sendUserMessage() {
         setTimeout(function() {
             addChatMessage("Bot", "챗봇의 응답입니다.", getTime());
             toggleSpinner(false); // 답변 후 스피너 비활성화
-        }, 2000); // 2초 후 챗봇의 답변이 표시됩니다.
+        }, 500); // 2초 후 챗봇의 답변이 표시됩니다.
     }
 }
 
@@ -70,17 +62,29 @@ function sendUserMessage() {
 // 채팅창에 메시지 요소를 추가하는 함수입니다.
 function addChatMessage(sender, text, time) {
     var chatBox = document.getElementById('chat-box');
-    var messageWrapper = document.createElement('div');
+    var messageWrapper = document.createElement('div');   // 감싸줘~
     messageWrapper.classList.add('chat-message', sender.toLowerCase() + '-message');
     
     // var avatarImg = document.createElement('img');
     // avatarImg.classList.add('avatar');
     // avatarImg.src = sender === "Bot" ? "chatbot.png" : "user.png";
+    // // 발신자가 'User'인 경우와 'Bot'인 경우에 따라 이미지 경로를 설정합니다.
+    // if (sender === "User") {
+    //     avatarImg.src = "C:\Users\gjaischool\Desktop\FE\images\user.png"; // 사용자 아바타 이미지 경로
+    // } else if (sender === "Bot") {
+    //     avatarImg.src = "C:\Users\gjaischool\Desktop\FE\images\chatbot.png"; // 챗봇 아바타 이미지 경로
+    // }
+    // avatarImg.alt = sender + " Avatar"; // 대체 텍스트 설정
 
-    var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출
+    
     var imgPath = sender === "Bot" ? "/images/chatbot.png" : "/images/user.png";      // 이미지 파일 경로와 대체 텍스트
     var altText = sender === "Bot" ? "Bot Avatar" : "User Avatar";
     
+    var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출
+
+    var messageName = document.createElement("div");
+    messageName.classList.add("message-name");
+
     var senderName = document.createElement('div');
     senderName.classList.add('sender-name');
     senderName.textContent = sender;
@@ -93,15 +97,19 @@ function addChatMessage(sender, text, time) {
     timestamp.classList.add('timestamp');
     timestamp.textContent = time;
     
+    messageName.appendChild(senderName);
+    messageName.appendChild(chatBubble);
     if (sender === "User") {
         messageWrapper.appendChild(timestamp);
-        messageWrapper.appendChild(chatBubble);
-        messageWrapper.appendChild(senderName);
+        messageWrapper.appendChild(messageName);
+        // messageWrapper.appendChild(chatBubble);
+        // messageWrapper.appendChild(senderName);
         messageWrapper.appendChild(avatarImg);
     } else {
         messageWrapper.appendChild(avatarImg);
-        messageWrapper.appendChild(senderName);
-        messageWrapper.appendChild(chatBubble);
+        messageWrapper.appendChild(messageName);
+        // messageWrapper.appendChild(senderName);
+        // messageWrapper.appendChild(chatBubble);
         messageWrapper.appendChild(timestamp);
     }
     
