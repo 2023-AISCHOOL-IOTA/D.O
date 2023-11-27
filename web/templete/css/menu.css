@@ -36,6 +36,14 @@ header {
     justify-content: center;
 }
 
+/*최소 크기 : 줄여도 글자가 재졍렬 되지 않을 크기*/
+#nav2{
+    min-width: 260px;   
+}
+#nav1{
+    min-width:500px;
+}
+
 #nav1 ul,
 #nav2 ul {
     padding: 0;
@@ -56,8 +64,26 @@ header {
 }
 
 
+/* 현재 페이지에 대한 메뉴 표시 */
+#nav1 li a[aria-current="page"] {
+    text-decoration: none;  /*클릭시 밑줄 없애기*/
+    color: darkkhaki;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+}
 
-#nav1 li a {
+/* #nav1 li a[aria-current="page"]:after{
+    position:absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 0px;
+    content:"";
+    height: 3px;
+    background-color:darkkhaki
+} */
+
+#nav1 li a{
     text-decoration: none;
     color: black;
     transition: color 0.3s;
