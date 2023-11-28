@@ -104,8 +104,15 @@ header {
     height: 550px;
 } */
 
+/* 화면이 줄어들어도 최소 공간을 차지하기 위한 스타일 */
+@media(min-width:600px){
+    .cont_mainl{
+        width: 600px;
+        height: 700px;
+    }
+}
+
 main {
-    margin-top: 0px;
     padding: 20px;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -113,6 +120,7 @@ main {
     justify-items: center;
     align-items: center;
     display: grid;
+   
 
 }
 
@@ -126,14 +134,16 @@ main {
     color: black;
     text-align: center;
     text-decoration: none;
+    min-width:600px;
 }
 
 footer {
-    position:fixed;
+    /* position:fixed; */
     bottom: 0;
     width: 100%;
     background-color:lightgray;
     color: black;
     text-align: center;
     padding: 10px;
+    min-width:600px;
 }
