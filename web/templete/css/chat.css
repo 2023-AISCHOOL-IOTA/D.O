@@ -109,7 +109,7 @@ header {
     justify-content: center;
     align-items: center;
     display: grid;
-    /* min-height: 100%; */
+    min-height: 100%;
 	margin: 0 auto;
     /* height: auto; */
 	width: 100%;

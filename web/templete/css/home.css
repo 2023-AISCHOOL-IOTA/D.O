@@ -106,7 +106,7 @@ header {
 
 /* 화면이 줄어들어도 최소 공간을 차지하기 위한 스타일 */
 @media(min-width:600px){
-    .cont_main{
+    .cont_mainl{
         width: 600px;
         height: 700px;
     }
