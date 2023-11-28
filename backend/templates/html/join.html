@@ -14,9 +14,33 @@
 </head>
 
 <body>
-    <header id="logo">
-        <div class="head-container">
-            <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo.png')}}" height="100px"></a>
+    <header id="head" class="header_nav">
+        <div class="inner_header">
+            <div class="col order-first" id="list">
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src="/images/list_icon.png" width="40px;"></button>
+                </h2>
+                <!-- 로고 -->
+                <h1 clss="logo">
+                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a>
+                </h1>
+            </div>
+    
+            <!-- 슬라이드바 -->
+            <div class="offcanvas offcanvas-start" id="demo">
+                <div class="offcanvas-header">
+                    <h1 class="offcanvas-title">로그인을 해주세요</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>Some text lorem ipsum.</p>
+                    <p>Some text lorem ipsum.</p>
+                    <p>Some text lorem ipsum.</p>
+                    <button class="btn btn-secondary" type="button"></button>
+                </div>
+            </div>
         </div>
     </header>
 

@@ -1,8 +1,8 @@
-$("#login-form-submit").click(function () {
+$("#login-btn").click(function () {
   // 입력된 데이터 가져오기
 
   let inputData = $("#username-field").val(); // message-input의 값만 가져오기
-  let inputpassword= $("#password-field").val();
+  let inputpassword = $("#password-field").val();
   if (inputData !== "" && inputpassword !== "") {
     $.ajax({
       type: "post", // 어떤 방식으로 보낼지

@@ -14,15 +14,37 @@
 </head>
 
 <body>
-    <header id="logo">
-        <div class="head-container">
-            <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo.png')}}" height="100px"></a>
-        </div>
-    </header>
+    <header id="head" class="header_nav">
+        <div class="inner_header">
+            <div class="col order-first" id="list">
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src=" {{ url_for('static', path= 'images/list_icon.png')}}" width="40px;"></button>
+                </h2>
+                <h1 class = "logo">
+                    <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo.png')}}" height="100px"></a>
+                    </h1>
+                </div>
+                <div class="offcanvas offcanvas-start" id="demo">
+                    <div class="offcanvas-header">
+                        <h1 class="offcanvas-title">로그인을 해주세요</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <p>Some text lorem ipsum.</p>
+                        <p>Some text lorem ipsum.</p>
+                        <p>Some text lorem ipsum.</p>
+                        <button class="btn btn-secondary" type="button"></button>
+                    </div>
+                </div>
+                </div>
+                </header>
+    
 
     <main>
         <div id="login-container">
-            <h2 id="login-header">Login</h2>
+            <h2 id="login-header">로그인</h2>
 
             <!-- 만약 사용할 수 없는 아이디나 비밀번호이면... -->
             <!-- 경고 상자 placeholder -->
@@ -45,18 +67,14 @@
 
 
             <div class="btn-container">
-                <div class="row">
-                    <div class="col">
-                        <!-- 기존의 Login 버튼은 유지 -->
-                        <button type="submit" value="Login" id="login-form-submit">login</button><br><br>
-                        <div class="bottom">
-                            <span id="signup-text">아직 회원이 아니신가요?</span>
-                            <a href="join"><input type="submit" value="Signup" id="sign-form-submit"></a>
-                        </div>
-                    </div>
-                </div>
+                    <!-- 버튼을 삽입해 자바스크립트 실행하기 -->
+                    <input type="submit" value="로그인" id="login-btn" >
+                    <small>아직 회원이 아니신가요?</small>
+                    <input type="submit" value="회원가입" id="signup-btn">
             </div>
+        </div>
     </main>
+
 
     <footer>
         <!-- Your footer content goes here -->

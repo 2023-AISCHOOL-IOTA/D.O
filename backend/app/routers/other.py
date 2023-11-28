@@ -28,7 +28,7 @@ def read_home(request: Request, response: Response):
     if not token:
         message = "로그인을 해주세요"
         log = "login"
-        #return templates.TemplateResponse("home.html", {"request": request, "message": message})
+        return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log})
     else:
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
@@ -43,37 +43,29 @@ def read_home(request: Request, response: Response):
             log  = "logout"
         except jwt.ExpiredSignatureError:
              message = "로그인을 해주세요"
-             response.delete_cookie("access_token")  # 만료된 토큰을 삭제합니다
+             response.set_cookie(key="access_token", value=token, httponly=False, secure=False, expires =0 )  # 만료된 토큰을 삭제합니다.
              log = "login"
     
     return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log})
     
 
-@router.get("/dobot")
+@router.get("/chat")
 def read_dobot(request: Request, response: Response):
     token = request.cookies.get("access_token")
     if not token:
         message = "로그인을 해주세요"
         log = "login"
-        #return templates.TemplateResponse("home.html", {"request": request, "message": message})
+        return templates.TemplateResponse("login.html", {"request": request, "message": message, "log": log})
     else:
-        try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            user_id = payload.get("ID")
-            users = collection_user.find_one({"id": user_id})
-            if users:
-                user_name = users.get("nickname")
-                if user_name:
-                    message = user_name + "님 안녕하세요!"
-                else:
-                    message = "사용자 이름이 없습니다."
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id = payload.get("ID")
+        users = collection_user.find_one({"id": user_id})
+        log  = "logout"
+        if users:
+            user_name = users.get("nickname")
+            message = user_name + "님 안녕하세요!"
             log  = "logout"
-        except jwt.ExpiredSignatureError:
-             message = "로그인을 해주세요"
-             response.delete_cookie("access_token")  # 만료된 토큰을 삭제합니다.
-             log = "login"
-
-
+              
     return templates.TemplateResponse("dobot.html", {"request": request, "message": message, "log": log})
 
 
@@ -83,23 +75,23 @@ def map(request:Request, response: Response):
     token = request.cookies.get("access_token")
     if not token:
         message = "로그인을 해주세요"
-        #return templates.TemplateResponse("home.html", {"request": request, "message": message})
+        log = "login"
+        
     else:
-        try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            user_id = payload.get("ID")
-            users = collection_user.find_one({"id": user_id})
-            if users:
-                user_name = users.get("nickname")
-                if user_name:
-                    message = user_name + "님 안녕하세요!"
-                else:
-                    message = "사용자 이름이 없습니다."
-        except jwt.ExpiredSignatureError:
-             message = "로그인을 해주세요"
-             response.delete_cookie("access_token")  # 만료된 토큰을 삭제합니다.
+        
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id = payload.get("ID")
+        users = collection_user.find_one({"id": user_id})
+        if users:
+            user_name = users.get("nickname")
+            if user_name:
+                message = user_name + "님 안녕하세요!"
+            else:
+                message = "사용자 이름이 없습니다."
+            log  = "logout"
+        
 
-    return templates.TemplateResponse("map.html", {"request": request, "message": message})
+    return templates.TemplateResponse("map.html", {"request": request, "message": message, "log":log})
 
 
 
@@ -109,23 +101,22 @@ def map(request:Request, response: Response):
     token = request.cookies.get("access_token")
     if not token:
         message = "로그인을 해주세요"
-        #return templates.TemplateResponse("home.html", {"request": request, "message": message})
+        log = "login"
+        
     else:
-        try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            user_id = payload.get("ID")
-            users = collection_user.find_one({"id": user_id})
-            if users:
-                user_name = users.get("nickname")
-                if user_name:
-                    message = user_name + "님 안녕하세요!"
-                else:
-                    message = "사용자 이름이 없습니다."
-        except jwt.ExpiredSignatureError:
-             message = "로그인을 해주세요"
-             response.delete_cookie("access_token")  # 만료된 토큰을 삭제합니다.
+        
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id = payload.get("ID")
+        users = collection_user.find_one({"id": user_id})
+        if users:
+            user_name = users.get("nickname")
+            if user_name:
+                message = user_name + "님 안녕하세요!"
+            else:
+                message = "사용자 이름이 없습니다."
+            log  = "logout"
 
-    return templates.TemplateResponse("menu.html", {"request": request, "message": message})
+    return templates.TemplateResponse("menu.html", {"request": request, "message": message, "log":log})
 
 
 @router.get("/game")
@@ -133,15 +124,18 @@ def map(request:Request):
     token = request.cookies.get("access_token")
     if not token:
         message = "로그인을 해주세요"
-        return templates.TemplateResponse("game.html", {"request": request, "message": message})
-    
-    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-    user_id = payload.get("ID")
-    users = collection_user.find_one({"id":user_id})
-    if users:
+        log = "login"
+        
+    else:
+        
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id = payload.get("ID")
+        users = collection_user.find_one({"id": user_id})
+        if users:
             user_name = users.get("nickname")
             if user_name:
                 message = user_name + "님 안녕하세요!"
             else:
                 message = "사용자 이름이 없습니다."
-    return templates.TemplateResponse("game.html", {"request": request, "message": message})
+            log  = "logout"
+    return templates.TemplateResponse("game.html",  {"request": request, "message": message, "log":log})

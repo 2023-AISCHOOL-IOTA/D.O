@@ -8,9 +8,14 @@ import hashlib #해싱 함수 -> 주어진 입력값이 고정된 출력값으�
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from utils.middleware import create_jwt_token 
-from starlette.responses import RedirectResponse
-
+from fastapi.responses import RedirectResponse 
+from fastapi import Cookie, HTTPException
+from datetime import datetime,timedelta
+import requests
 import secrets
+
+session = requests.Session()
+
 
 
 #주석 참조
@@ -43,21 +48,31 @@ collection_Dialog = db['Dialog']
 
 #여기서 로그인 버튼을 누르면 가는건데 로그인이 되어 있으면 log를 로그아웃으로 보낼꺼고 토큰이 있으면 토큰 삭제하고 홈으로
 @router.get('/login')
-def gologin(request: Request, response: Response):  
+def gologin(request: Request, response:Response):  
     # 로그인
      token = request.cookies.get("access_token")
-     if not token:    
-        return templates.TemplateResponse("login.html", {"request": request})
-     response.delete_cookie(key = "access_token") 
-     log = "login"
-     message = "로그인을 해주세요"
+     if not token:
+        message = "로그인을 해주세요"
+        log = "login"
+        return templates.TemplateResponse("login.html", {"request": request, "message": message, "log":log})
+     if token:
+        message = "로그인을 해주세요"
+        log = "login"
+    
+        response = RedirectResponse(url="/") 
+        response.delete_cookie(key="access_token")
+        message = "로그인을 해주세요"
+        log = "login"
+        #return RedirectResponse(url="/")
+        return response
      
-     return RedirectResponse(url='/', status_code=307)
-         
+        
+            
 
-
+     
 @router.post('/login')
-def login(user: login, response: Response):  
+def login(user: login, response: Response):
+    expires = datetime.utcnow() + timedelta(hours=1)  
     user_in_db = collection_user.find_one({"id": user.id}) #로그인시 들어온 user라는 값에 있는 id를 가지고 일치하는게 있는지 검색
     password = user.password #비밀번호는 어차피 해싱 해야 되서 그냥 그대로 
 
@@ -70,7 +85,7 @@ def login(user: login, response: Response):
         raise HTTPException(status_code=400, detail="Incorrect username or password")# 오류
     
     token = create_jwt_token(user.id) #미들웨어py에 정의한 토큰 만드는 함수 사용해 id를 가지고 토큰을 만듬
-    response.set_cookie(key="access_token", value=token, httponly=True, secure=True) 
+    response.set_cookie(key="access_token", value=token, httponly=False, secure=False, expires =expires.timestamp() ) 
 #   #쿠키에 저장 이름: access_token, 형식: tolen,httponly: 자바스크립트에서 쿠키 접근X 보안 강화를 위해  
 #   #secure: 쿠키가 https에서만 전송 될 수 있게 이게 false면 그냥 http도 됨 
    

@@ -45,7 +45,7 @@
 </style>
      
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width: 150%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
@@ -68,23 +68,12 @@
 <script>
     // 마커를 담을 배열입니다
     var markers = [];
-    navigator.geolocation.getCurrentPosition(geoSuccess, getError);
-    function accessToGeo(position) {
-            const positionObj = {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            }
-            return positionObj;
-        }
-        // 함수 호출 후 반환된 객체 사용 예시
-            const geoPosition = accessToGeo(somePosition);
-
+   
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
-            center: new kakao.maps.LatLng(geoPosition.latitude, geoPosition.longitude), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(35.1468202, 126.84052097), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
-
     // 지도를 생성합니다    
     var map = new kakao.maps.Map(mapContainer, mapOption);
 

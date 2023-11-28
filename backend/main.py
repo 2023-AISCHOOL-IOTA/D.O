@@ -66,8 +66,8 @@ collection_dialog = db["Dialog"] #Dialog이라는 이름의 컬렉션 생성 or 
 @app.post("/dobot")
 def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식을 정의
     token = request.cookies.get("access_token") #request는 http요청 정보 가지고 있음  -> 이걸 받은 이유 : 이안에 토큰이 있는 쿠키가 있다
-    if not token:  #토큰이 없다  -> 아예 로그인시 발급받는 토큰이 없다-> 로그인 이 안됐다
-        return templates.TemplateResponse("login.html", {"request": request}) #로그인 페이지로 보냄
+    #토큰이 없다  -> 아예 로그인시 발급받는 토큰이 없다-> 로그인 이 안됐다
+        #로그인 페이지로 보
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     user_id = payload.get("ID")
 
