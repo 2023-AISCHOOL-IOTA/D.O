@@ -52,12 +52,12 @@ html, body{
 }
 .landing{
     width: 100%;
-    height: 100%;
+    height: 50%;
     background-color: #fff;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 1000;
     -webkit-transition: opacity .3s ease-in-out;
     -moz-transition: opacity .3s ease-in-out;
     -o-transition: opacity .3s ease-in-out;
@@ -133,7 +133,7 @@ html, body{
 .start-form{
     width:300px;
     height: 400px;
-    background-image: url("/web/images/ladder.game.png") ;
+    background-image: url("/images/chatbot.png") ;
     background-repeat: no-repeat;
     background-position: 50% 30%;
     margin: 0 auto;
@@ -165,7 +165,7 @@ html, body{
     left: 0;
 }
 
-/* header 메뉴
+/* header 메뉴 */
 header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -223,6 +223,14 @@ header {
     list-style: none;
 }
 
+/*최소 크기 : 줄여도 글자가 재졍렬 되지 않을 크기*/
+#nav2{
+    min-width: 260px;   
+}
+#nav1{
+    min-width:500px;
+}
+
 
 
 #nav1 li a {
@@ -231,6 +239,16 @@ header {
     transition: color 0.3s;
     display: block;
     padding: 5px 10px;
+}
+
+#nav1 li a[aria-current="page"] {
+    text-decoration: none;  /*클릭시 밑줄 없애기*/
+    color: darkkhaki;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+
+
 }
 
 #nav2 li a {
@@ -245,7 +263,18 @@ header {
 #nav1 li a:hover,
 #nav2 li a:hover {
     color: #555;
-} */
+}
+
+main{
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    /* min-height: 100%; */
+	margin: 0 auto;
+    height: 80%;
+	width: 100%;
+
+}
 
 /* Button */
 .button {
@@ -391,11 +420,12 @@ to    { width:0; background:transparent; }
 }
 
 footer {
-    position:fixed;
+    /* position:fixed; */
     bottom: 0;
     width: 100%;
     background-color: lightgray;
     color: black;
     text-align: center;
     padding: 10px;
+    min-width:600px;
 }
