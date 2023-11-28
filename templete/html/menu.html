@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,93 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/templete/css/menu.css">
-    <style>
-        *{
-            font-family: 'Noto Sans KR', sans-serif;
-            box-sizing: border-box;
-        }
-
-        html,body{
-            margin: 0;
-            padding: 0;
-        }
-
-        #app{
-            text-align: center;
-        }
-
-        .roulette-outer{
-            position: relative;
-
-            overflow: hidden;
-
-            width: 700px;
-            height: 700px;
-
-            font-size: 30px;
-
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 50%;
-            background: #ADE1E1;
-           
-        }
-
-        .roulette-outer > .roulette{
-            position:absolute;
-            top:5%;
-            left:5%;
-            right:5%;
-            bottom:5%;
-
-            border-radius: 50%;
-    
-            border: 2px solid black;
-        }
-
-        .roulette-outer > .roulette-pin{
-            position: absolute;
-            top: 3%;
-            left: 50%;
-
-            width: 0px;
-            height: 0px;
-            border-style: solid;
-            border-width: 60px 10px 0 10px;
-            border-color: #59A3A2 transparent transparent transparent;
-
-        }
-
-        .roulette-outer > .roulette > .item-wrapper > .item{
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            
-            padding-top: 7%;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .roulette-outer > .roulette > .line-wrapper > .line{
-            position: absolute;
-            top: 0;
-            bottom: 50%;
-            left: 50%;
-            width: 2px;
-            margin-left: -1px;
-            background: black;
-
-            transform-origin: bottom;
-        }
-
-        .roulette-outer > .roulette{
-            transition:transform 5s ease-in-out;
-        }
-    </style>
 </head>
+
 <body>
     <header id="head" class="header_nav">
         <div class="inner_header">
@@ -111,7 +27,7 @@
 
                 <!-- 로고 -->
                 <h1 clss="logo">
-                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a> 
+                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a>
                 </h1>
             </div>
 
@@ -157,105 +73,45 @@
 
     <div id="app">
         <h1>오늘은 뭐 먹을까?</h1>
-
+        <div class="input-item">
+            <input type="number" v-model="numberOfItems" placeholder="항목 수 입력" class="input">
+            <button @click="initializeItems" id = "count-btn">갯수설정</button>
+            <input type="text" v-model="userInput" placeholder="메뉴 입력" class="input">
+            <button @click="updateItem" id="plus-btn">추가하기</button>
+        </div>
+        
         <div class="roulette-outer">
             <div class="roulette-pin"></div>
             <div class="roulette" v-bind:style="rouletteStyle">
 
                 <!-- 값 영역 -->
                 <div class="item-wrapper">
-                   <div class="item" v-for="(item,index) in items"
-                              v-bind:style="itemStyles[index]">{{item.value}}</div>
+                    <div class="item" v-for="(item,index) in items" v-bind:style="itemStyles[index]">
+                        {{item.value}}
+                    </div>
                 </div>
 
                 <!-- 선 영역 -->
                 <div class="line-wrapper">
-                    <div class="line" v-for="(item,index) in items"
-                             v-bind:style="lineStyles[index]"></div>
+                    <div class="line" v-for="(item,index) in items" v-bind:style="lineStyles[index]"></div>
                 </div>
 
             </div>
-            <button class="play-btn" v-on:click="play" style="
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            width: 120px; 
-            height: 120px; 
-            text-align: center; 
-            line-height: 80px;
-            font-size: 30px;
-            cursor: pointer;">Play!</button>
+            <button class="play-btn" v-on:click="play">Play!</button>
         </div>
     </div>
 
+    <footer>
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
+        </div>
+    </footer>
+
     <script src="https://unpkg.com/vue@next"></script>
-    <script>
-        Vue.createApp({
-            data(){
-                return{
-                    count: 0,
-                    items:[
-                        {value:"한식"},
-                        {value:"중식"},
-                        {value:"양식"},
-                        {value:"일식"},
-                        {value:"지중해식"},
-                        {value:"인도식"},
-                        {value:"남미식"},
-                        {value:"멕시코식"},
-                        {value:"프랑스식"},
-                        {value:"이탈리안식"},
-                    ],
-                    itemStyles:[],
-                    lineStyles:[],
-                    current:0,// 실제 가리키는 데이터 위치
-                };
-            },
-            computed:{
-                segment(){
-                    return 360 / this.items.length;
-                },
-                offset(){
-                    return this.segment/2;
-                },
-                angle(){
-                    let temp = -this.current * this.segment;
-                    let randomOffset = Math.floor(Math.random()* this.segment);
-                    let cycle = this.count * 360 * 5;
-                    return - (temp + randomOffset +cycle);
-                },
-                rouletteStyle(){
-                    return{
-                        "transform":"rotate("+this.angle+"deg)"
-                    };
-                },
-                currentItem(){
-                    return this.items[this.current];
-                }
-            },
-            methods:{
-                play(){
-                    this.count++;
-                    this.current = Math.floor(Math.random()*this.items.length);
-                },
-            },
-            mounted(){
-                //itemStyles 정의
-                this.items.forEach((el,idx)=>{
-                    this.itemStyles.push({
-                        "transform":"rotate(" + (this.segment * idx) + "deg)",
-                    });
-                    // lineStyles 정의
-                    this.lineStyles.push({
-                        "transform":"rotate(" + (this.segment * idx + this.offset) +"deg)",
-                    });
-                });
-            },
-        }).mount("#app");
-    </script>
+    <script src="/templete/js/menu.js"></script>
+
 </body>
+
 </html>
-
-
