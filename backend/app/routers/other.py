@@ -10,7 +10,10 @@ SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 #그외 모아둔 라우터
 router = APIRouter()  # apirouter이라는 인스턴스 생성
 #메인 파일 주석 참조
-client = MongoClient("mongodb://localhost:27017/")
+url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]
 collection_user = db["User"]
 collection_login = db["login"]
@@ -25,26 +28,24 @@ templates = Jinja2Templates(directory="templates/html")
 @router.get("/" )
 def read_home(request: Request, response: Response):
     token = request.cookies.get("access_token")
+    message = ""
     if not token:
         message = "로그인을 해주세요"
         log = "login"
-        return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log})
+        return templates.TemplateResponse("home.html", {"request": request, "message": message, "log": log})
     else:
-        try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            user_id = payload.get("ID")
-            users = collection_user.find_one({"id": user_id})
-            if users:
-                user_name = users.get("nickname")
-                if user_name:
-                    message = user_name + "님 안녕하세요!"
-                else:
-                    message = "사용자 이름이 없습니다."
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id = payload.get("ID")
+        
+        users = collection_user.find_one({"id": user_id})
+        print(users)
+        log  = "logout"
+        
+        if users:
+            user_name = users.get("nickname")
+            message = user_name + "님 환영합니다!"
             log  = "logout"
-        except jwt.ExpiredSignatureError:
-             message = "로그인을 해주세요"
-             response.set_cookie(key="access_token", value=token, httponly=False, secure=False, expires =0 )  # 만료된 토큰을 삭제합니다.
-             log = "login"
+              
     
     return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log})
     
@@ -66,7 +67,7 @@ def read_dobot(request: Request, response: Response):
             message = user_name + "님 안녕하세요!"
             log  = "logout"
               
-    return templates.TemplateResponse("dobot.html", {"request": request, "message": message, "log": log})
+    return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log})
 
 
 

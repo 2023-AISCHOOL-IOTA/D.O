@@ -12,6 +12,8 @@ from transformers import GPT2LMHeadModel, PreTrainedTokenizerFast #트랜스포�
 from datetime import datetime #날짜 가져오기
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from utils.middleware import create_jwt_token #미들웨어에 있는 토큰 발급 함 수 쓰기 위해
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 """미들웨어란? ->  middleware란 모든 리퀘스트에 대해 path operation이 수행되기전 실행되는 함수를 말한다.
 프론트 엔드와 백엔드 사이?
 만들고 @app.middleware("http")이렇게 해야 하는데 코드 짜면서 계속 순환 오류 나서

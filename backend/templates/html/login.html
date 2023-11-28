@@ -17,30 +17,26 @@
     <header id="head" class="header_nav">
         <div class="inner_header">
             <div class="col order-first" id="list">
-                <!-- 슬라이드 목록버튼 -->
-                <h2 class="list_btn">
-                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                        <img src=" {{ url_for('static', path= 'images/list_icon.png')}}" width="40px;"></button>
-                </h2>
-                <h1 class = "logo">
-                    <a href="/" alt="home"><img src=" {{ url_for('static', path= 'images/logo.png')}}" height="100px"></a>
-                    </h1>
-                </div>
                 <div class="offcanvas offcanvas-start" id="demo">
                     <div class="offcanvas-header">
-                        <h1 class="offcanvas-title">로그인을 해주세요</h1>
+                        <h1 class="offcanvas-title">{{message}}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <p>Some text lorem ipsum.</p>
-                        <p>Some text lorem ipsum.</p>
-                        <p>Some text lorem ipsum.</p>
-                        <button class="btn btn-secondary" type="button"></button>
+                        <h4>마이페이지</h4>
+                        <p>❤️</p>
+                        <p>개인정보</p>
+                        <p></p>
+                
+                        <h4>결제내역</h4>
+                        <p>주문내역</p>
+                        <p>장바구니</p>
+                        <p>결제방법</p>
+                        <!-- <button class="btn btn-secondary" type="button">A Button</button> -->
                     </div>
                 </div>
                 </div>
                 </header>
-    
 
     <main>
         <div id="login-container">

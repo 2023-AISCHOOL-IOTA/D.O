@@ -13,6 +13,8 @@ from fastapi import Cookie, HTTPException
 from datetime import datetime,timedelta
 import requests
 import secrets
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 
 session = requests.Session()
 
@@ -38,8 +40,9 @@ class only(BaseModel):
     id: str
 SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 
+url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]
 collection_user = db["User"]
 
@@ -96,7 +99,7 @@ def login(user: login, response: Response):
 @router.get('/join')
 def gojoin(request: Request):
     # 회원가입
-    return templates.TemplateResponse("join.html", {"request": request})
+    return templates.TemplateResponse("sign.html", {"request": request})
 
 @router.post('/join')
 def join(user: User):
@@ -179,3 +182,4 @@ def get_user_info(request: Request):
             }
             user_info_list.append(user_info)
     return templates.TemplateResponse("user_info.html", {"request": request, "user_info": user_info})
+

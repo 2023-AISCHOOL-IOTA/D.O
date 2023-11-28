@@ -118,7 +118,7 @@ main {
 
 }
 
-@media(max-width:900px){
+@media(min-width:900px){
     #sign-container{
         width: 650px;
     }
@@ -241,11 +241,12 @@ main {
 
 /* footer */
 footer {
-    /* position: fixed; */
+    /* position:fixed; */
     bottom: 0;
     width: 100%;
     background-color: lightgray;
     color: black;
     text-align: center;
     padding: 10px;
+    min-width:600px;
 }
