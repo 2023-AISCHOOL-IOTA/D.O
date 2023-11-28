@@ -75,11 +75,11 @@
         <h1>오늘은 뭐 먹을까?</h1>
         <div class="input-item">
             <input type="number" v-model="numberOfItems" placeholder="항목 수 입력" class="input">
-            <button @click="initializeItems" id = "count-btn">갯수설정</button>
+            <button @click="initializeItems" id="count-btn">갯수설정</button>
             <input type="text" v-model="userInput" placeholder="메뉴 입력" class="input">
             <button @click="updateItem" id="plus-btn">추가하기</button>
         </div>
-        
+
         <div class="roulette-outer">
             <div class="roulette-pin"></div>
             <div class="roulette" v-bind:style="rouletteStyle">
@@ -87,7 +87,7 @@
                 <!-- 값 영역 -->
                 <div class="item-wrapper">
                     <div class="item" v-for="(item,index) in items" v-bind:style="itemStyles[index]">
-                        [[item.value]]
+                        {{item.value}}
                     </div>
                 </div>
 
