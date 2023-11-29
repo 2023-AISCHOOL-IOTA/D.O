@@ -1,73 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- chat.html -->
+{% extends "header.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Chat</title>
-    <link rel="stylesheet" href="{{ url_for('static', path= 'css/chat.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+{% block title %}
+Chat
+{% endblock %}
 
-<body>
-    <header id="head" class="header_nav">
-        <div class="inner_header">
-            <div class="col order-first" id="list">
-                <!-- 슬라이드 목록버튼 -->
-                <h2 class="list_btn">
-                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                        <img src="{{ url_for('static', path= 'images/list_icon.png')}}" width="40px;"></button>
-                </h2>
-
-
-                <!-- 로고 -->
-                <h1 clss="logo">
-                    <a href="/"><img src="{{ url_for('static', path= 'images/logo2.png')}}" width="110px;"></a>
-                </h1>
-            </div>
-
-
-            <!--nav1 -->
-            <div class="col-md-6 justify-content-center">
-                <nav id="nav1" class="nav1">
-                    <ul class="nav1_list">
-                        <li><a href="menu">메뉴 추천</a></li>
-                        <li><a href="map">지도</a></li>
-                        <li><a href="game">게임</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <!--nav2-->
-            <div class="col order-last justify-content-end">
-                <nav id="nav2" class="nav2">
-                    <ul class="nav2_list">
-                        <li><a href="login" id=log_check>{{log}}</a></li>
-                        <li><a href="chatend">채팅끝내기</a></li>
-                        <!-- <li><a href="home.html">home</a></li> -->
-                    </ul>
-                </nav>
-            </div>
-
-        </div>
-        <!-- 슬라이드바 -->
-        <div class="offcanvas offcanvas-start" id="demo">
-            <div class="offcanvas-header">
-                <h1 class="offcanvas-title">{{message}}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-            </div>
-            <div class="offcanvas-body">
-                <p>Some text lorem ipsum.</p>
-                <p>Some text lorem ipsum.</p>
-                <p>Some text lorem ipsum.</p>
-                <button class="btn btn-secondary" type="button"></button>
-            </div>
-        </div>
-        </div>
-    </header>
-
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', path= 'css/chat.css')}}">
+<script src="{{ url_for('static', path= 'js/chat.js')}}"></script>
+{% endblock %}
+{% block content %}
     <main>
         <div id="chat-container">
             <!-- 채팅창 -->
@@ -98,16 +41,7 @@
 
         </div>
     </main>
-
-    <footer>
-        <!-- Your footer content goes here -->
-        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
-            <span>DOBOT can make mistakes. Consider checking important information.</span>
-            <p>&copy; made by DO(DONGWOOK WITH ONEPIECE)</p>
-        </div>
-    </footer>
-
-    <script src="{{ url_for('static', path= 'js/chat.js')}}"></script>
-</body>
-
-</html>
+{% endblock %}
+{% block footer%}
+    {{ super() }}
+{% endblock %}

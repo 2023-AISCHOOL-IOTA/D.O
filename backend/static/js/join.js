@@ -12,10 +12,10 @@ $("#id_check-form-submit").click(function () {
       contentType: "application/json", // 서버에 JSON 형식임을 알려줌
       data: JSON.stringify({ id: id }), // 데이터를 JSON 문자열로 변환
       success: function (response) {
-        $("#id_check").text("사용 가능 한 아이디 입니다").css("color", "green");
+        $("#id_check").text("사용 가능한 아이디입니다").css("color", "green");
       },
       error: function () {
-        $("#id_check").text("중복된 아이디 입니다").css("color", "red");
+        $("#id_check").text("중복된 아이디입니다").css("color", "red");
         $("#username-field").val("");
       },
     });

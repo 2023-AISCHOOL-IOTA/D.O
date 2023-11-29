@@ -12,46 +12,55 @@
     <link rel="icon" href="{{ url_for('static', path='/images/logo.png') }}" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
     <header id="head" class="header_nav">
         <div class="inner_header">
             <div class="col order-first" id="list">
-                <div class="offcanvas offcanvas-start" id="demo">
-                    <div class="offcanvas-header">
-                        <h1 class="offcanvas-title">{{message}}</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <h4>마이페이지</h4>
-                        <p>❤️</p>
-                        <p>개인정보</p>
-                        <p></p>
-                
-                        <h4>결제내역</h4>
-                        <p>주문내역</p>
-                        <p>장바구니</p>
-                        <p>결제방법</p>
-                        <!-- <button class="btn btn-secondary" type="button">A Button</button> -->
-                    </div>
-                </div>
-                </div>
-                </header>
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src=" {{ url_for('static', path= 'images/list_icon.png')}}" width="40px;"></button>
+                </h2>
+                <!-- 로고 -->
+                <h1 clss="logo">
+                    <a href="/"><img src=" {{ url_for('static', path= 'images/logo2.png')}}" width="110px;"></a>
+                </h1>
+            </div>
 
+            <div class="offcanvas offcanvas-start" id="demo">
+                <div class="offcanvas-header">
+                    <h1 class="offcanvas-title">{{message}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <h4>마이페이지</h4>
+                    <p>❤️</p>
+                    <p>개인정보</p>
+                    <p></p>
+
+                    <h4>결제내역</h4>
+                    <p>주문내역</p>
+                    <p>장바구니</p>
+                    <p>결제방법</p>
+                    <!-- <button class="btn btn-secondary" type="button">A Button</button> -->
+                </div>
+            </div>
+        </div>
+    </header>
     <main>
         <div id="login-container">
             <h2 id="login-header">로그인</h2>
 
             <!-- 만약 사용할 수 없는 아이디나 비밀번호이면... -->
             <!-- 경고 상자 placeholder -->
-            <div class="alert-placeholder"></div>
-
-            <!-- 기존의 경고 상자 -->
-            <div class="alert alert-danger" role="alert" style="display: none;">
-                <p id="login-error-msg">사용할 수 없는 아이디나 비밀번호입니다<span> 다시 한번 확인해주세요</span></p>
+            <div class="alert-placeholder" id = dd>
+                <!-- 기존의 경고 상자 -->
+                <div class="alert alert-danger" role="alert" style="visibility:hidden;">
+                    <p id="login-error-msg">사용할 수 없는 아이디나 비밀번호입니다<span> 다시 한번 확인해주세요</span></p>
+                </div>
             </div>
 
-
+        
             <!-- 로그인 입력창 -->
             <div class="login-input container">
                 <div id="login-form">
@@ -66,7 +75,7 @@
                     <!-- 버튼을 삽입해 자바스크립트 실행하기 -->
                     <input type="submit" value="로그인" id="login-btn" >
                     <small>아직 회원이 아니신가요?</small>
-                    <input type="submit" value="회원가입" id="signup-btn">
+                    <a href="join"><input type="submit" value="회원가입" id="signup-btn"></a>
             </div>
         </div>
     </main>

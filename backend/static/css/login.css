@@ -161,7 +161,7 @@ main {
     /* 경고 상자와 동일한 높이 */
     width: 330px;
     /* 경고 상자와 동일한 너비 */
-    margin-top: 40px;
+    margin: 0 auto;
     visibility: hidden;
     /* 보이지 않도록 설정 */
 }
@@ -170,7 +170,7 @@ main {
 .alert-danger {
     height: 120px;
     width: 330px;
-    margin-top: 40px;
+    margin: 0 auto;
     /* 기타 스타일... */
 }
 

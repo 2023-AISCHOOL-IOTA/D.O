@@ -161,3 +161,6 @@ cython_debug/
 backend/saved_model/config.json
 *.json
 backend/saved_model/model.safetensors
+backend/saved_model2/label_encoder.pkl
+backend/saved_model2/model.safetensors
+backend/saved_model2/spiece.model

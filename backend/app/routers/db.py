@@ -1,9 +1,12 @@
-from fastapi import FastAPI, Request, Form, APIRouter, HTTPException, Depends, Response #Depends이건 의존성 처리 위해 앤드포인트의 매개변수로 사용 먼저 실행됨
+from fastapi import FastAPI, Request, Form, APIRouter, HTTPException,status, Depends, Response #Depends이건 의존성 처리 위해 앤드포인트의 매개변수로 사용 먼저 실행됨
 #response응답 생성
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+import random
+from fastapi import Request
+from fastapi import Body
 from fastapi.templating import Jinja2Templates
 from pymongo import MongoClient
 from pydantic import BaseModel 
-from pymongo import MongoClient
 import hashlib #해싱 함수 -> 주어진 입력값이 고정된 출력값으로 변환, 일방향성
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
@@ -15,8 +18,6 @@ import requests
 import secrets
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
-session = requests.Session()
 
 
 
@@ -45,8 +46,7 @@ url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=
 client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]
 collection_user = db["User"]
-
-collection_Dialog = db['Dialog']
+collection_dialog = db["Dialog"]
 
 
 #여기서 로그인 버튼을 누르면 가는건데 로그인이 되어 있으면 log를 로그아웃으로 보낼꺼고 토큰이 있으면 토큰 삭제하고 홈으로
@@ -134,7 +134,7 @@ def review_get(request: Request):
     user_info_list = []
     
 
-    dialog_documents = collection_Dialog.find({"id": user_id}) #아이디로 찾아 일치하는 도큐먼트(컬렉션 안의 데이터) 찾아냄
+    dialog_documents = collection_dialog.find({"id": user_id}) #아이디로 찾아 일치하는 도큐먼트(컬렉션 안의 데이터) 찾아냄
     if dialog_documents:
         for dialog_document in dialog_documents:
             user_info = {

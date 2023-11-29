@@ -209,3 +209,4 @@ function addChatMessage(sender, text, time) {
         }
       }
     });
+

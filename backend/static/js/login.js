@@ -10,14 +10,17 @@ $("#login-btn").click(function () {
       contentType: "application/json", // 서버에 JSON 형식임을 알려줌
       data: JSON.stringify({ id: inputData, password: inputpassword }), // 데이터를 JSON 문자열로 변환
       success: function (response) {
-        alert(response.message);
+        //alert(response.message);
         window.location.href = "/";
       },
       error: function () {
-        $(".alert-danger").val("아이디 나 비밀번호가 틀립니다");
+        $(".alert").css("visibility", "visible");
         $("#username-field").val("");
         $("#password-field").val("");
       },
     });
   }
 });
+
+
+

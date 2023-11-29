@@ -4,19 +4,22 @@ from fastapi.staticfiles import StaticFiles#메인 파일 주석 참조
 from fastapi.security import APIKeyCookie, APIKeyHeader
 from pymongo import MongoClient#메인 파일 주석 참조
 from utils.middleware import create_jwt_token #메인 파일 주석 참조
-from jose import JWTError, jwt#메인 파일 주석 참조
+from jose import JWTError, jwt
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi#메인 파일 주석 참조
 
 SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 #그외 모아둔 라우터
 router = APIRouter()  # apirouter이라는 인스턴스 생성
 #메인 파일 주석 참조
+
+
+
 url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]
 collection_user = db["User"]
-collection_login = db["login"]
+
 
 
 # 템플릿 디렉토리 설정
@@ -38,7 +41,7 @@ def read_home(request: Request, response: Response):
         user_id = payload.get("ID")
         
         users = collection_user.find_one({"id": user_id})
-        print(users)
+        
         log  = "logout"
         
         if users:
@@ -48,7 +51,7 @@ def read_home(request: Request, response: Response):
               
     
     return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log})
-    
+
 
 @router.get("/chat")
 def read_dobot(request: Request, response: Response):
@@ -67,7 +70,7 @@ def read_dobot(request: Request, response: Response):
             message = user_name + "님 안녕하세요!"
             log  = "logout"
               
-    return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log})
+    return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log, "chat_end": True})
 
 
 

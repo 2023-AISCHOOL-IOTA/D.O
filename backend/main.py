@@ -14,6 +14,9 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from utils.middleware import create_jwt_token #미들웨어에 있는 토큰 발급 함 수 쓰기 위해
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from tokenizers import Tokenizer, SentencePieceBPETokenizer
+import sentencepiece
+from fastapi.responses import RedirectResponse 
 """미들웨어란? ->  middleware란 모든 리퀘스트에 대해 path operation이 수행되기전 실행되는 함수를 말한다.
 프론트 엔드와 백엔드 사이?
 만들고 @app.middleware("http")이렇게 해야 하는데 코드 짜면서 계속 순환 오류 나서
@@ -44,6 +47,10 @@ app.include_router(other.router) #이 other이라는 파일에서 정의된 라�
 
 SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492" #암호화시 사용하는 시크릿키 보통 32바이트의 길이 나 그 이상 
 
+
+
+
+
 #몽고디비에서 AI(자동증가 기능 구현)
 def get_next_sequence_value(sequence_name):
     sequence_doc = db.sequences.find_one_and_update(
@@ -58,12 +65,15 @@ def get_next_sequence_value(sequence_name):
 class DataInput(BaseModel):  # DataInput이라는 이름으로 받을 데이터 정의함
     data: list
 
-client = MongoClient("mongodb://localhost:27017/") #pymongo사용해 DB에 연결 서버주소
+url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
+
+client = MongoClient(url, server_api=ServerApi('1')) #pymongo사용해 DB에 연결 서버주소
 db = client["chat"] #chat이라는 이름의 데에터베이스 선택
 collection_user = db["User"] #user이라는 이름의 컬렉션 생성or선택 (이렇게 쓴다고 만 해도 없으면 몽고디비가 알아서 생성해줌)
 collection_dialog = db["Dialog"] #Dialog이라는 이름의 컬렉션 생성 or 선택
 
-
+users = "" #user_input 모으는 장소
+bot = "" #bot모으는 장소
 #post방식으로 요청이 들어오면 이 아래 정의 된 함수들을 실행 하겠다 
 @app.post("/dobot")
 def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식을 정의
@@ -85,7 +95,9 @@ def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식�
 
     model.eval()  #평가 모드로 설정 하겠다
     user_input = data_input.data[0] # 사용자의 메세지
-    
+    global users
+    global bot
+    users+=user_input+"\n"
     input_ids = tokenizer.encode(user_input + tokenizer.eos_token, add_special_tokens=True, return_tensors="pt").to(device)
     
     # 모델이 응답 생성
@@ -98,12 +110,32 @@ def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식�
 
     chat_id = get_next_sequence_value("chat_id")
     today_date = datetime.now().strftime("%Y-%m-%d")
-    
+    bot+=reply+"\n"
     #chat_id = get_next_sequence_value("chat_id") #위에 만든 몽고디비에서 AI구현 코드 호출 만든 값을 chat _id라는 변수에 넣기 
     today_date = datetime.now().strftime("%Y-%m-%d") #날짜위해 년-월-일 형식으로 시간 
-    conversation = {"chat_ID": chat_id,"message": user_input, "answer": reply, "date":today_date, "id":user_id}
-    inserted_data = collection_dialog.insert_one(conversation)
-    
-    #user_input, 모델에서 나온 값, 날짜, 유저 아이디를 제이슨 타입으로 묶기 
-	# collection_dialog에 제이슨 형식으로 넣기(원래 몽고디비 넣을때 제이슨 형식  처럼 key value형식으로 넣어야 함
     return  {"processed_data": reply} #processed_data라는 값으로 return
+
+@app.get("/chatend")
+def chatend(request: Request):
+    token = request.cookies.get("access_token") #request는 http요청 정보 가지고 있음  -> 이걸 받은 이유 : 이안에 토큰이 있는 쿠키가 있다
+    #토큰이 없다  -> 아예 로그인시 발급받는 토큰이 없다-> 로그인 이 안됐다
+        #로그인 페이지로 보
+    payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    user_id = payload.get("ID")
+    global users
+    global bot
+
+    chat_id = get_next_sequence_value("chat_id")
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    if bot and users != None:
+        conversation = {
+            "chat_ID": chat_id,
+            "message": users, 
+            "answer": bot,
+            "date":today_date,
+            "id":user_id}
+    collection_dialog.insert_one(conversation)
+    bot =""
+    users =""
+    return RedirectResponse("/chat")
+

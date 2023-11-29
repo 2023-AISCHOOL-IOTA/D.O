@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>{% block title %}home{% endblock %}</title>
-    {% block css %}{% endblock %}
+    
     {% endblock %}
 </head>
 
@@ -39,7 +39,7 @@
                 <nav id="nav1" class="nav1">
                     <ul class="nav1_list">
                         <li><a href="menu">메뉴 추천</a></li>
-                        <li><a href="map">지도</a></li>
+                        <li><a href="map" aria-current="page">지도</a></li>
                         <li><a href="game">게임</a></li>
                     </ul>
                 </nav>
@@ -49,8 +49,12 @@
             <div class="col order-last justify-content-end">
                 <nav id="nav2" class="nav2">
                     <ul class="nav2_list">
-                        <li><a href="login" id = log_check>{{log}}</a></li>  
+                        <li><a href="login" id = log_check>{{log}}</a></li>
+                        {% if chat_end %}
+                        <li><a href="chatend">채팅끝내기</a></li>
+                        {% else %}
                         <li><a href="join">signup</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -59,19 +63,19 @@
         <!-- 슬라이드바 -->
         <div class="offcanvas offcanvas-start" id="demo">
             <div class="offcanvas-header">
-                <h1 class="offcanvas-title">{{message}}</h1>
+                <h3 class="offcanvas-title">{{message}}</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
             </div>
+            <div>------------------------------------------------------------</div>
             <div class="offcanvas-body">
                 <h4>마이페이지</h4>
-                <p>❤️</p>
-                <p>개인정보</p>
-                <p></p>
-                
+                <li>단골가게</li>
+                <li>개인정보</li>
+                <br><br><br>
                 <h4>결제내역</h4>
-                <p>주문내역</p>
-                <p>장바구니</p>
-                <p>결제방법</p>
+                <li>주문내역</li>
+                <li>장바구니</li>
+                <li>결제방법</li>
                 <!-- <button class="btn btn-secondary" type="button">A Button</button> -->
             </div>
         </div>
