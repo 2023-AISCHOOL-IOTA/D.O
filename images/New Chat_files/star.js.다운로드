@@ -1,0 +1,38 @@
+// ratingStars에 이름의 배열에 모든 별 요소를 넣는다
+const ratingStars = [...document.getElementsByClassName("rating__star")];
+const ratingResult = document.querySelector(".rating__result");
+
+printRatingResult(ratingResult);
+
+// 그런 다음 별 요소를 매개변수로 받는 executeRating() 함수를 선언합니다. 
+// 선택된 별과 선택되지 않은 별을 표시하기위해 각각의 클래스 이름을 가지고 있는 starClassActive와 starClassInactive 변수도 선언합니다. 
+// 그리고 다음 코드에서 설명할 루프를 위해 starLength와 i를 변수로 지정했습니다. 
+// starLength는 별 요소를 담고 있는 배열의 길이를 매번 확인하지 않도록 미리 길이를 읽어오기 위함이고 i는 루프를 위해 선언했습니다.
+
+function executeRating(stars, result) {
+   const starClassActive = "rating__star fas fa-star";
+   const starClassUnactive = "rating__star far fa-star";
+   const starsLength = stars.length;
+   let i;
+   stars.map((star) => {
+      star.onclick = () => {
+         i = stars.indexOf(star);
+
+         if (star.className.indexOf(starClassUnactive) !== -1) {
+            printRatingResult(result, i + 1);
+            for (i; i >= 0; --i) stars[i].className = starClassActive;
+         } else {
+            printRatingResult(result, i);
+            for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+         }
+      };
+   });
+}
+
+function printRatingResult(result, num = 0) {
+   result.textContent = `${num}/5`;
+}
+
+executeRating(ratingStars, ratingResult);
+
+

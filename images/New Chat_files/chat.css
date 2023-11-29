@@ -115,20 +115,15 @@ header {
     }
 }
 
- main{
+main{
     justify-content: center;
     align-items: center;
     display: grid;
-    min-height: 80%;
+    /* min-height: 100%; */
 	margin: 0 auto;
     /* height: auto; */
 	width: 100%;
 
-}
-.card{
-    width:400px;
-    height:200px;
-    float: right;
 }
 
 /* 홈화면main */
@@ -447,10 +442,14 @@ header {
     cursor: pointer; /* 마우스를 올렸을 때 커서 모양을 변경합니다 */
   }
   
+.card{
+    width:100%;
+    margin-right: 0px;
 
+}
 
 footer {
-    /* position:fixed; */
+    position:fixed;
     bottom: 0;
     width: 100%;
     background-color: lightgray;

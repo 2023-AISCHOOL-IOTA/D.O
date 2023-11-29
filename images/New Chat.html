@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://127.0.0.1:5501/templete/html/chat.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    
+    <script src="./New Chat_files/bootstrap.bundle.min.js.다운로드"></script>
+    <script src="./New Chat_files/jquery.min.js.다운로드"></script>
+    
+    
+    <title>New Chat</title>
+<link rel="stylesheet" href="./New Chat_files/chat.css"><link rel="stylesheet" href="./New Chat_files/star.css"><link href="./New Chat_files/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="./New Chat_files/all.min.css"><link href="./New Chat_files/bootstrap(1).min.css" rel="stylesheet"></head>
+
+<body>
+    <header id="head" class="header_nav">
+        <div class="inner_header">
+            <div class="col order-first" id="list">
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src="./New Chat_files/list_icon.png" width="40px;"></button>
+                </h2>
+
+
+                <!-- 로고 -->
+                <h1 clss="logo">
+                    <a href="http://127.0.0.1:5501/templete/html/home.html"><img src="./New Chat_files/logo2.png" width="110px;"></a>
+                </h1>
+            </div>
+
+
+            <!--nav1 -->
+            <div class="col-md-6 justify-content-center">
+                <nav id="nav1" class="nav1">
+                    <ul class="nav1_list">
+                        <li><a href="http://127.0.0.1:5501/templete/html/menu.html">메뉴 추천</a></li>
+                        <li><a href="http://127.0.0.1:5501/templete/html/map.html">지도</a></li>
+                        <li><a href="http://127.0.0.1:5501/templete/html/game.html">게임</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!--nav2-->
+            <div class="col order-last justify-content-end">
+                <nav id="nav2" class="nav2">
+                    <ul class="nav2_list">
+                        <li><a href="http://127.0.0.1:5501/templete/html/login.html">login</a></li>
+                        <li><a href="http://127.0.0.1:5501/templete/html/home.html" aria-current="page">채팅끝내기</a></li>
+                        <!-- <li><a href="home.html">home</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- 슬라이드바 -->
+        <div class="offcanvas offcanvas-start" id="demo">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title">DO님 안녕하세요</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>Some text lorem ipsum.</p>
+                <p>Some text lorem ipsum.</p>
+                <p>Some text lorem ipsum.</p>
+                <button class="btn btn-secondary" type="button"></button>
+            </div>
+        </div>
+        
+    </header>
+
+   
+    
+
+    <main>
+        <div id="chat-container">
+            <!-- 채팅창 -->
+            <div id="chat-box">
+                <!-- 채팅 메시지가 표시 -->
+
+                <!-- spinner -->
+                <div class="spinner-container" style="display: none;">
+                    <div class="spinner">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
+            <div class="chat-message bot-message"><img src="./New Chat_files/chatbot.png" alt="Bot Avatar" class="avatar"><div class="message-name"><div class="sender-name">Bot</div><div class="chat-bubble">무엇을 도와드릴까요?</div></div><div class="timestamp">14:29</div></div></div>
+            <!-- 입력창 -->
+            <div class="chat-input-container">
+                <textarea id="chat-input" placeholder="메시지를 입력하세요..."></textarea>
+                <button id="send-btn">
+                    <img src="./New Chat_files/send.png" alt="send" width="30" height="30">
+                </button>
+            </div>
+        </div>
+        <aside>
+            <div class="card">
+                <div class="container">
+                    <div class="rating">
+                        <span class="rating__result">0/5</span> 
+                        <i class="rating__star far fa-star"></i>
+                        <i class="rating__star far fa-star"></i>
+                        <i class="rating__star far fa-star"></i>
+                        <i class="rating__star far fa-star"></i>
+                        <i class="rating__star far fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <textarea id="review" placeholder="리뷰를 남겨주세요"></textarea>
+                </div>
+                <div class="container">
+                    <input type="submit" value="평가보내기" id="review-btn">
+                </div>
+                
+            </div>
+        </aside>
+
+        
+    </main>
+   
+
+    <footer>
+        <!-- Your footer content goes here -->
+        <div class="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
+            <span>DOBOT can make mistakes. Consider checking important information.</span>
+            <p>© made by DO(DONGWOOK WITH ONEPIECE)</p>
+        </div>
+    </footer>
+
+    <script src="./New Chat_files/chat.js.다운로드"></script>
+    <script src="./New Chat_files/star.js.다운로드"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
