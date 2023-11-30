@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{{ url_for('static', path= 'css/home.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--아이콘 넣기 위한 링크-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <title>{% block title %}home{% endblock %}</title>
     
     {% endblock %}
@@ -39,7 +44,11 @@
                 <nav id="nav1" class="nav1">
                     <ul class="nav1_list">
                         <li><a href="menu">메뉴 추천</a></li>
+                        {% if map %}
                         <li><a href="map" aria-current="page">지도</a></li>
+                        {% else %}
+                        <li><a href="map">지도</a></li>
+                        {% endif %}
                         <li><a href="game">게임</a></li>
                     </ul>
                 </nav>
@@ -51,10 +60,14 @@
                     <ul class="nav2_list">
                         <li><a href="login" id = log_check>{{log}}</a></li>
                         {% if chat_end %}
-                        <li><a href="chatend">채팅끝내기</a></li>
+                        <li><a href="chatend" aria-current="page">채팅끝내기</a></li>
+                        <li><i class="bi bi-calendar-check"></i></li>
+                        {% elif login %}
+                        <li><a>{{name}}</a></li>
                         {% else %}
                         <li><a href="join">signup</a></li>
                         {% endif %}
+                        
                     </ul>
                 </nav>
             </div>

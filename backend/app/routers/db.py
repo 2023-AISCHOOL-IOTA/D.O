@@ -61,6 +61,7 @@ def gologin(request: Request, response:Response):
      if token:
         message = "로그인을 해주세요"
         log = "login"
+        
     
         response = RedirectResponse(url="/") 
         response.delete_cookie(key="access_token")
@@ -79,7 +80,7 @@ def login(user: login, response: Response):
     user_in_db = collection_user.find_one({"id": user.id}) #로그인시 들어온 user라는 값에 있는 id를 가지고 일치하는게 있는지 검색
     password = user.password #비밀번호는 어차피 해싱 해야 되서 그냥 그대로 
 
-# 비밀번호를 sha256으로 해싱 -> 해싱 시 16진수의 해시값이 됨ㅈ
+# 비밀번호를 sha256으로 해싱 -> 해싱 시 16진수의 해시값이 됨
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     if user_in_db is None: #-> db #일치하는 값이 없다면(맞는 아이디조차 없다면)
         raise HTTPException(status_code=400, detail="Incorrect username or password")
@@ -99,7 +100,8 @@ def login(user: login, response: Response):
 @router.get('/join')
 def gojoin(request: Request):
     # 회원가입
-    return templates.TemplateResponse("sign.html", {"request": request})
+    message = "로그인을해주세요"
+    return templates.TemplateResponse("sign.html", {"request": request, "message":message})
 
 @router.post('/join')
 def join(user: User):
@@ -124,12 +126,13 @@ def join(user: User):
 def review_get(request: Request):
     token = request.cookies.get("access_token")
     if not token:
-        return templates.TemplateResponse("login.html", {"request": request}) # 토큰이 없는 경우 로그인 페이지로 리디렉션
+        response = RedirectResponse(url="/login") 
+        return response# 토큰이 없는 경우 로그인 페이지로 리디렉션
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     user_id = payload.get("ID")
     users = collection_user.find_one({"id":user_id})
     user_name = users.get("nickname")
-    message = user_name +"님 안녕하세요!"
+    message = user_name +"님 환영합니다!"
 
     user_info_list = []
     
@@ -163,7 +166,8 @@ def check_id(only: only, request: Request):
 def get_user_info(request: Request):
     token = request.cookies.get("access_token")
     if not token:
-        return templates.TemplateResponse("login.html", {"request": request}) # 토큰이 없는 경우 로그인 페이지로 리디렉션
+       response = RedirectResponse(url="/login")
+       return response  # 토큰이 없는 경우 로그인 페이지로 리디렉션
     
     user_info_list = []
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])

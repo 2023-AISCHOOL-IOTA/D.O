@@ -4,14 +4,14 @@
     font-family: Kakao, 맑은 고딕, Malgun Gothic, Apple SD Gothic Neo, 돋움, dotum, sans-serif;
     -webkit-text-size-adjust: none;
 } */
-body{
+*{
     font-family: 'Noto Sans KR', sans-serif;
 }
 
 
 header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position:sticky;
+    /* position:sticky; */
 }
 
 .inner_header {
@@ -103,17 +103,17 @@ header {
     padding-bottom: 60px;  
     height: 550px;
 } */
-/* 현재 페이지에 대한 메뉴 표시
+현재 페이지에 대한 메뉴 표시
  #nav1 li a[aria-current="page"] {
-    text-decoration: none; */
+    text-decoration: none; 
     /*클릭시 밑줄 없애기*/
-    /* color: darkkhaki;
+    color: darkkhaki;
     transition: color 0.3s;
     display: block;
     padding: 5px 10px;
 
 
-} */
+}
 
 /* 화면이 줄어들어도 최소 공간을 차지하기 위한 스타일 */
 @media(min-width:600px){
@@ -132,11 +132,21 @@ main {
     align-items: center;
     display: grid;
     margin: 0 auto;
+        /* 오프캔버스에 높은 z-index 값을 주어 화면의 다른 요소들 위에 오도록 합니다. */
+    .offcanvas {
+        z-index: 1040; /* Bootstrap의 모달 z-index보다 약간 낮은 값 */
+    }
+    
+    /* 캐러셀 이미지가 오프캔버스 메뉴 뒤로 가도록 z-index를 설정합니다. */
+    .carousel {
+        z-index: 1030; /* 오프캔버스 메뉴보다 낮은 값 */
+    }
 
 }
 
 .carousel-container{
     width: 100%;
+    z-index: 0;
 }
 
 #newChatBtn {

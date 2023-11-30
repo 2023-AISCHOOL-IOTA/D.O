@@ -71,7 +71,7 @@ function addChatMessage(sender, text, time) {
 
     
     var imgPath =
-      sender === "Bot" ? "/static/images/chatbot.png" : "/static/images/user.png";      // 이미지 파일 경로와 대체 텍스트
+      sender === "Bot" ? "/static/images/chatbot.png" : "/static/images/user.jpg";      // 이미지 파일 경로와 대체 텍스트
     var altText = sender === "Bot" ? "Bot Avatar" : "User Avatar";
     
     var avatarImg = addImage(imgPath, altText); // 이미지 요소를 생성하는 함수 호출

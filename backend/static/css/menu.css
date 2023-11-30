@@ -16,6 +16,17 @@ header {
     z-index: 1000;
 }
 
+main{
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    min-height: 80%;
+   margin: 0 auto;
+    height: 800px;
+   width: 100%;
+
+}
+
 #list {
     display: flex;
 }
@@ -106,7 +117,7 @@ header {
 }
 
 * {
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
     box-sizing: border-box;
 }
 
@@ -118,6 +129,7 @@ body {
 
 #app {
     text-align: center;
+    margin:auto;
 }
 
 #count-btn, #plus-btn{
@@ -125,6 +137,8 @@ body {
     margin: 10px;
 
 }
+
+
 
 .input{
     border: none;  /*밑에만 나오게한다*/
@@ -141,15 +155,16 @@ body {
 
     overflow: hidden;
 
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
 
     font-size: 30px;
 
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
-    background: #ADE1E1;
+    background: rgb(255, 255, 255);
+
 
 }
 
@@ -161,7 +176,7 @@ body {
     bottom: 5%;
 
     border-radius: 50%;
-
+   
     border: 2px solid black;
 }
 
@@ -174,7 +189,7 @@ body {
     height: 0px;
     border-style: solid;
     border-width: 60px 10px 0 10px;
-    border-color: #59A3A2 transparent transparent transparent;
+    border-color: rgb(0, 122, 128) transparent transparent transparent;
 
 }
 
@@ -199,12 +214,13 @@ body {
     width: 2px;
     margin-left: -1px;
     background: black;
-
+    
     transform-origin: bottom;
 }
 
 .roulette-outer>.roulette {
     transition: transform 5s ease-in-out;
+    
 }
 
 .play-btn{
@@ -219,10 +235,11 @@ body {
             line-height: 80px;
             font-size: 30px;
             cursor: pointer;
+            background: darkgray(142, 163, 163);
 }
 
 footer {
-    /* position:fixed; */
+    position:fixed;
     bottom: 0;
     width: 100%;
     background-color: lightgray;

@@ -5,9 +5,11 @@
         max-width: 100%;}
 } */
 
-html, body{
-    height:100%;
+html,
+body {
+    height: 100%;
 }
+
 header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -47,11 +49,12 @@ header {
 }
 
 /*최소 크기 : 줄여도 글자가 재졍렬 되지 않을 크기*/
-#nav2{
-    min-width: 260px;   
+#nav2 {
+    min-width: 260px;
 }
-#nav1{
-    min-width:500px;
+
+#nav1 {
+    min-width: 500px;
 }
 
 #nav1 ul,
@@ -92,8 +95,18 @@ header {
     margin-right: 20px;
 }
 
+#nav2 li i{
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+    margin-right: 20px;
+}
+
 #nav2 li a[aria-current="page"] {
-    text-decoration: none;  /*클릭시 밑줄 없애기*/
+    text-decoration: none;
+    /*클릭시 밑줄 없애기*/
     color: darkkhaki;
     transition: color 0.3s;
     display: block;
@@ -108,22 +121,28 @@ header {
     color: darkkhaki;
 }
 
-@media(min-width:800px){
-    #chat-container{
+@media(min-width:800px) {
+    #chat-container {
         width: 800px;
         height: 800px;
     }
 }
 
- main{
+main {
     justify-content: center;
     align-items: center;
     display: grid;
-    /* min-height: 100%; */
-	margin: 0 auto;
+    min-height: 80%;
+    margin: 0 auto;
     /* height: auto; */
-	width: 100%;
+    width: 100%;
 
+}
+
+.card {
+    width: 400px;
+    height: 200px;
+    float: right;
 }
 
 /* 홈화면main */
@@ -141,15 +160,22 @@ header {
 
 /* 채팅 컨테이너 스타일링 */
 #chat-container {
-    width: 800px;  /* 너비 설정 */
-    height:auto;
-    /* margin: auto; */   /* 중앙 정렬 */
-    background-color: #f9f9f9;   /* 배경색 설정 */
-    border: 1px solid #ddd;   /* 테두리 설정 */
-    border-radius: 5px;   /* 테두리 둥글게 설정 */
-    padding: 10px;   /* 안쪽 여백 설정 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
-    margin-top: 15px;  
+    width: 800px;
+    /* 너비 설정 */
+    height: auto;
+    /* margin: auto; */
+    /* 중앙 정렬 */
+    background-color: #f9f9f9;
+    /* 배경색 설정 */
+    border: 1px solid #ddd;
+    /* 테두리 설정 */
+    border-radius: 5px;
+    /* 테두리 둥글게 설정 */
+    padding: 10px;
+    /* 안쪽 여백 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* 그림자 효과 */
+    margin-top: 15px;
     margin-bottom: 15px;
 
 }
@@ -164,7 +190,7 @@ header {
     /* 안쪽 여백 설정 */
     margin-bottom: 10px;
     /* 아래쪽 여백 설정 */
-    
+
 
 }
 
@@ -181,8 +207,9 @@ header {
 }
 
 /* sender+bubble을 같이 묶어준거야 */
-.message-name{
-    max-width: 50%;   /* 옆 채팅창 침범하지 않게*/
+.message-name {
+    max-width: 50%;
+    /* 옆 채팅창 침범하지 않게*/
 }
 
 /* 챗봇 메시지 */
@@ -199,15 +226,24 @@ header {
 
 /* 말풍선 디자인 */
 .chat-bubble {
-    max-width: 60%;  /* 최대 너비 설정 */
-    border-radius: 15px;   /* 둥근 모서리 */
-    padding: 10px;   /* 안쪽 여백 설정 */
-    margin: 0 10px;  /* 좌우 여백 설정 */
-    position: relative;   /* 상대적 위치 */
-    word-wrap: break-word; /* 긴 단어가 경계를 넘어갈 경우 줄바꿈 */
-    overflow-wrap: break-word; /*긴 단어를 잘라서 말풍선 내부에 포함*/
-    max-width: 100%; /* 말풍선의 최대 너비 */
-    flex-grow: 1; /* 텍스트 박스가 가능한 많은 공간을 차지하도록 합니다 */
+    max-width: 60%;
+    /* 최대 너비 설정 */
+    border-radius: 15px;
+    /* 둥근 모서리 */
+    padding: 10px;
+    /* 안쪽 여백 설정 */
+    margin: 0 10px;
+    /* 좌우 여백 설정 */
+    position: relative;
+    /* 상대적 위치 */
+    word-wrap: break-word;
+    /* 긴 단어가 경계를 넘어갈 경우 줄바꿈 */
+    overflow-wrap: break-word;
+    /*긴 단어를 잘라서 말풍선 내부에 포함*/
+    max-width: 100%;
+    /* 말풍선의 최대 너비 */
+    flex-grow: 1;
+    /* 텍스트 박스가 가능한 많은 공간을 차지하도록 합니다 */
 }
 
 /* 챗봇 말풍선 배경색 */
@@ -219,7 +255,8 @@ header {
 /* 사용자 말풍선 배경색 및 텍스트 색상 */
 .user-message .chat-bubble {
     background-color: rgb(236, 236, 163);
-    color: black;  /* 텍스트 색상 */
+    color: black;
+    /* 텍스트 색상 */
 }
 
 /* 발신자 이름 스타일 */
@@ -315,6 +352,7 @@ header {
     order: 3;
     /* 시간을 말풍선 오른쪽으로 정렬 */
 }
+
 /* 
 스피너 위치 조정
 .spinner-container {
@@ -329,26 +367,32 @@ header {
 } */
 
 #chat-box {
-    position: relative; /* spinner의 상대적 위치를 위해 필요 */
+    position: relative;
+    /* spinner의 상대적 위치를 위해 필요 */
     /* chat-box의 다른 스타일 설정 */
-  }
-  
-  .spinner-container {
-    position: fixed; /* 스피너를 뷰포트에 고정 */
-    bottom: 150px; /* 하단에서 얼마나 떨어져 있을지 설정 */
-    left: 50%; /* 가로 중앙에 위치 */
-    transform: translateX(-50%); /* 정확히 중앙에 오도록 조정 */
-    /* spinner-container의 다른 스타일 설정 */
-  }
+}
 
-/* 스피너 */ 
-  .spinner {
-      display: inline-block;
-      position: relative;
-      width: 80px;
-      height: 100px;
-      z-index: 1000;
-  }
+.spinner-container {
+    position: fixed;
+    /* 스피너를 뷰포트에 고정 */
+    bottom: 150px;
+    /* 하단에서 얼마나 떨어져 있을지 설정 */
+    left: 50%;
+    /* 가로 중앙에 위치 */
+    transform: translateX(-50%);
+    /* 정확히 중앙에 오도록 조정 */
+    /* spinner-container의 다른 스타일 설정 */
+}
+
+/* 스피너 */
+.spinner {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 100px;
+    z-index: 1000;
+}
+
 .spinner div {
     position: absolute;
     top: 33px;
@@ -412,45 +456,63 @@ header {
 }
 
 .chat-input-container {
-    display: flex; /* 컨테이너를 flex 박스로 만듭니다 */
-    align-items: stretch; /* 버튼과 입력창의 높이를 맞춥니다 */
-    position: relative; /* 후에 버튼을 절대 위치로 설정하기 위함입니다 */
-    padding-right: 30px; /* 버튼의 너비에 따라 조정해주세요 */
+    display: flex;
+    /* 컨테이너를 flex 박스로 만듭니다 */
+    align-items: stretch;
+    /* 버튼과 입력창의 높이를 맞춥니다 */
+    position: relative;
+    /* 후에 버튼을 절대 위치로 설정하기 위함입니다 */
+    padding-right: 30px;
+    /* 버튼의 너비에 따라 조정해주세요 */
     overflow: hidden;
-  }
-  
-  #chat-input {
-    flex-grow: 1; /* 사용 가능한 모든 공간을 채웁니다 */
-    border: 1px solid #ccc; /* 경계선 스타일링, 필요에 따라 수정하세요 */
-    padding: 10px; /* 내부 여백 */
-    padding-right: 100px;  /* 버튼 크기만큼 텍스트 상자의 오른쪽을 줄여준다*/
-    border-radius: 15px; /* 모서리를 둥글게 만듭니다 */
-    margin-right: -30px; /* 버튼 너비만큼 음수 마진을 적용합니다 */
-    resize: none; /* 사용자가 크기를 조절하지 못하게 합니다 */
-    outline: none; /* 선택됐을 때의 테두리를 제거합니다 */
-  }
-  
-  #send-btn {
-    position: absolute; /* 버튼을 입력창 내부 오른쪽에 위치시킵니다 */
-    top: 10px;
-    right: 10px; /* 오른쪽 경계로부터의 거리 */
-    height: 50px; /* 입력창과의 높이를 맞춥니다 */
-    width: 90px;
-    border: none; /* 버튼의 경계선을 제거합니다 */
-    background: rgb(136, 209, 222); /* 버튼의 배경색을 제거합니다 */
+}
+
+#chat-input {
+    flex-grow: 1;
+    /* 사용 가능한 모든 공간을 채웁니다 */
+    border: 1px solid #ccc;
+    /* 경계선 스타일링, 필요에 따라 수정하세요 */
+    padding: 10px;
+    /* 내부 여백 */
+    padding-right: 100px;
+    /* 버튼 크기만큼 텍스트 상자의 오른쪽을 줄여준다*/
     border-radius: 15px;
-    cursor: pointer; /* 마우스를 올렸을 때 커서 모양을 변경합니다 */
-  }
-  
+    /* 모서리를 둥글게 만듭니다 */
+    margin-right: -30px;
+    /* 버튼 너비만큼 음수 마진을 적용합니다 */
+    resize: none;
+    /* 사용자가 크기를 조절하지 못하게 합니다 */
+    outline: none;
+    /* 선택됐을 때의 테두리를 제거합니다 */
+}
+
+#send-btn {
+    position: absolute;
+    /* 버튼을 입력창 내부 오른쪽에 위치시킵니다 */
+    top: 10px;
+    right: 10px;
+    /* 오른쪽 경계로부터의 거리 */
+    height: 50px;
+    /* 입력창과의 높이를 맞춥니다 */
+    width: 90px;
+    border: none;
+    /* 버튼의 경계선을 제거합니다 */
+    background: rgb(136, 209, 222);
+    /* 버튼의 배경색을 제거합니다 */
+    border-radius: 15px;
+    cursor: pointer;
+    /* 마우스를 올렸을 때 커서 모양을 변경합니다 */
+}
+
 
 
 footer {
-    position:fixed;
+    /* position:fixed; */
     bottom: 0;
     width: 100%;
     background-color: lightgray;
     color: black;
     text-align: center;
     padding: 10px;
-    min-width:600px;
+    min-width: 600px;
 }

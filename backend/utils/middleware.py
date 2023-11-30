@@ -5,14 +5,14 @@ from datetime import datetime, timedelta
 
 
 # 토큰을 발급하는 함수
-def create_jwt_token(ID: str, ):
+def create_jwt_token(ID: str ):
     # 비밀 키 (secret key) - 토큰 서명에 사용됨
     SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 
     # 토큰에 추가할 페이로드 (Payload) - 토큰에 포함할 정보
     payload = {
         "ID": ID,
-        #"exp": datetime.utcnow() + timedelta(hours=1)  # 만료 시간 (1시간 후)
+        
     }
 
     # 토큰 생성

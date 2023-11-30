@@ -7,6 +7,7 @@ from utils.middleware import create_jwt_token #메인 파일 주석 참조
 from jose import JWTError, jwt
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi#메인 파일 주석 참조
+from fastapi.responses import RedirectResponse 
 
 SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 #그외 모아둔 라우터
@@ -50,7 +51,7 @@ def read_home(request: Request, response: Response):
             log  = "logout"
               
     
-    return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log})
+    return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log, "name":user_name+"님", "login" : True})
 
 
 @router.get("/chat")
@@ -59,7 +60,8 @@ def read_dobot(request: Request, response: Response):
     if not token:
         message = "로그인을 해주세요"
         log = "login"
-        return templates.TemplateResponse("login.html", {"request": request, "message": message, "log": log})
+        response = RedirectResponse(url="/login") 
+        return response
     else:
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         user_id = payload.get("ID")
@@ -67,10 +69,14 @@ def read_dobot(request: Request, response: Response):
         log  = "logout"
         if users:
             user_name = users.get("nickname")
-            message = user_name + "님 안녕하세요!"
+            message = user_name + "님 환영합니다!"
             log  = "logout"
-              
-    return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log, "chat_end": True})
+            return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log, "chat_end": True})
+        else :
+            message = "로그인을 해주세요"
+            log = "login"
+            response.delete_cookie(key="access_token")
+            response = RedirectResponse(url="/") 
 
 
 
@@ -80,6 +86,8 @@ def map(request:Request, response: Response):
     if not token:
         message = "로그인을 해주세요"
         log = "login"
+        response = RedirectResponse(url="/login") 
+        return response
         
     else:
         
@@ -89,14 +97,16 @@ def map(request:Request, response: Response):
         if users:
             user_name = users.get("nickname")
             if user_name:
-                message = user_name + "님 안녕하세요!"
+                message = user_name + "님 환영합니다!"
             else:
                 message = "사용자 이름이 없습니다."
             log  = "logout"
-        
-
-    return templates.TemplateResponse("map.html", {"request": request, "message": message, "log":log})
-
+            return templates.TemplateResponse("map.html", {"request": request, "message": message, "log":log, "name":user_name+"님", "login" : True, "map":True})
+        else :
+            message = "로그인을 해주세요"
+            log = "login"
+            response.delete_cookie(key="access_token")
+            response = RedirectResponse(url="/") 
 
 
     
@@ -106,6 +116,8 @@ def map(request:Request, response: Response):
     if not token:
         message = "로그인을 해주세요"
         log = "login"
+        response = RedirectResponse(url="/login") 
+        return response
         
     else:
         
@@ -115,20 +127,25 @@ def map(request:Request, response: Response):
         if users:
             user_name = users.get("nickname")
             if user_name:
-                message = user_name + "님 안녕하세요!"
-            else:
-                message = "사용자 이름이 없습니다."
-            log  = "logout"
-
-    return templates.TemplateResponse("menu.html", {"request": request, "message": message, "log":log})
+                message = user_name + "님 환영합니다!"
+                log  = "logout"
+                return templates.TemplateResponse("menu.html", {"request": request, "message": message, "log":log ,"name":user_name+"님", "login" : True})
+            else :
+                message = "로그인을 해주세요"
+                log = "login"
+                response.delete_cookie(key="access_token")
+                response = RedirectResponse(url="/") 
+        
 
 
 @router.get("/game")
-def map(request:Request):
+def map(request:Request, response: Response):
     token = request.cookies.get("access_token")
     if not token:
         message = "로그인을 해주세요"
         log = "login"
+        response = RedirectResponse(url="/login") 
+        return response
         
     else:
         
@@ -138,8 +155,11 @@ def map(request:Request):
         if users:
             user_name = users.get("nickname")
             if user_name:
-                message = user_name + "님 안녕하세요!"
-            else:
-                message = "사용자 이름이 없습니다."
-            log  = "logout"
-    return templates.TemplateResponse("game.html",  {"request": request, "message": message, "log":log})
+                message = user_name + "님 환영합니다!"
+                log = "logout"
+                return templates.TemplateResponse("game.html", {"request": request, "message": message, "log":log ,"name":user_name+"님", "login" : True})
+            else :
+                message = "로그인을 해주세요"
+                log = "login"
+                response.delete_cookie(key="access_token")
+                response = RedirectResponse(url="/") 

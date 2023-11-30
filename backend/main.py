@@ -15,7 +15,7 @@ from utils.middleware import create_jwt_token #미들웨어에 있는 토큰 발
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from tokenizers import Tokenizer, SentencePieceBPETokenizer
-import sentencepiece
+
 from fastapi.responses import RedirectResponse 
 """미들웨어란? ->  middleware란 모든 리퀘스트에 대해 path operation이 수행되기전 실행되는 함수를 말한다.
 프론트 엔드와 백엔드 사이?
@@ -72,9 +72,10 @@ db = client["chat"] #chat이라는 이름의 데에터베이스 선택
 collection_user = db["User"] #user이라는 이름의 컬렉션 생성or선택 (이렇게 쓴다고 만 해도 없으면 몽고디비가 알아서 생성해줌)
 collection_dialog = db["Dialog"] #Dialog이라는 이름의 컬렉션 생성 or 선택
 
-users = "" #user_input 모으는 장소
-bot = "" #bot모으는 장소
+users = "" # user_input 모으는 장소 -> 사용자의 메세지 
+bot = "" # bot모으는 장소 -> 챗봇의 대답
 #post방식으로 요청이 들어오면 이 아래 정의 된 함수들을 실행 하겠다 
+realtimes = ""    #시간을 다른 def에 넘길려면 먼저 위에 생성 해두고 대입
 @app.post("/dobot")
 def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식을 정의
     token = request.cookies.get("access_token") #request는 http요청 정보 가지고 있음  -> 이걸 받은 이유 : 이안에 토큰이 있는 쿠키가 있다
@@ -87,7 +88,8 @@ def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식�
 
     # 넘어오는 데이터인 DataInput를 data_input으로 지정
     # 모델 및 토크나이저 로딩
-    user_input = data_input.data[0] # 사용자의 메세지 넘어온 데이터(list)중 0번째에 있음
+    user_input = data_input.data[0]
+    realtime = data_input.data[1] # 사용자의 메세지 넘어온 데이터(list)중 0번째에 있음
     model = GPT2LMHeadModel.from_pretrained('C:\\Users\\gjaischool\\Documents\\GitHub\\D.O\\backend\\saved_model')
     tokenizer = PreTrainedTokenizerFast.from_pretrained('C:\\Users\\gjaischool\\Documents\\GitHub\\D.O\\backend\\saved_model')
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -97,9 +99,10 @@ def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식�
     user_input = data_input.data[0] # 사용자의 메세지
     global users
     global bot
-    users+=user_input+"\n"
+    users+=user_input
     input_ids = tokenizer.encode(user_input + tokenizer.eos_token, add_special_tokens=True, return_tensors="pt").to(device)
-    
+    global realtimes
+    realtimes = realtime
     # 모델이 응답 생성
     with torch.no_grad():
         output = model.generate(input_ids, max_length=100)
@@ -110,7 +113,7 @@ def chat(data_input: DataInput,request: Request):  #DataInput은 위에 형식�
 
     chat_id = get_next_sequence_value("chat_id")
     today_date = datetime.now().strftime("%Y-%m-%d")
-    bot+=reply+"\n"
+    users+=reply+"\n"
     #chat_id = get_next_sequence_value("chat_id") #위에 만든 몽고디비에서 AI구현 코드 호출 만든 값을 chat _id라는 변수에 넣기 
     today_date = datetime.now().strftime("%Y-%m-%d") #날짜위해 년-월-일 형식으로 시간 
     return  {"processed_data": reply} #processed_data라는 값으로 return
@@ -123,17 +126,17 @@ def chatend(request: Request):
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     user_id = payload.get("ID")
     global users
-    global bot
-
+    
+    global realtimes
     chat_id = get_next_sequence_value("chat_id")
     today_date = datetime.now().strftime("%Y-%m-%d")
-    if bot and users != None:
+    if users != None:
         conversation = {
             "chat_ID": chat_id,
             "message": users, 
-            "answer": bot,
             "date":today_date,
-            "id":user_id}
+            "id":user_id,
+            "time" : realtimes}
     collection_dialog.insert_one(conversation)
     bot =""
     users =""
