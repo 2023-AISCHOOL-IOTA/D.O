@@ -1,0 +1,153 @@
+/* body {
+    margin: 0;
+    padding: 0;
+    font-family: Kakao, 맑은 고딕, Malgun Gothic, Apple SD Gothic Neo, 돋움, dotum, sans-serif;
+    -webkit-text-size-adjust: none;
+} */
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position:sticky;
+}
+
+.inner_header {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    max-width: 1296px;
+    margin: 0 auto;
+    padding: 19px 0;
+    background: #fff;
+    position: relative;
+    z-index: 1000;
+    
+}
+
+#list{
+    display: flex;
+}
+
+
+.list_btn {
+    display: flex;
+    align-items: center;
+}
+
+.list_btn .btn {
+    padding: 0px 25px;
+}
+
+#nav1, #nav2 {
+    display: flex;
+    justify-content: center;
+   
+}
+#nav2{
+    min-width: 260px;
+}
+#nav1{
+    min-width:500px;
+}
+
+#nav1 ul, #nav2 ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#nav1 li{
+    list-style: none;
+    margin-right: 50px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#nav2 li {
+    list-style: none;
+}
+
+
+
+#nav1 li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+}
+
+#nav2 li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+    margin-right: 20px;
+}
+
+#nav1 li a:hover, #nav2 li a:hover {
+    color: darkkhaki;
+}
+/*기존 코드*/
+/* main {
+    margin-top: 100px;
+    padding: 20px;
+    padding-top: 60px; 
+    padding-bottom: 60px;  
+    height: 550px;
+} */
+
+/* 화면이 줄어들어도 최소 공간을 차지하기 위한 스타일 */
+@media(min-width:600px){
+    .cont_main{
+        width: 600px;
+        height: 750px;
+    }
+}
+
+main {
+    padding: 20px;
+    /* margin-top: 40px;
+    margin-bottom: 40px; */
+    /* height: auto; */
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    margin: 0 auto;
+
+}
+
+.carousel-container{
+    width: 100%;
+}
+
+#newChatBtn {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color:rgb(244, 244, 149);
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    min-width:500px;
+}
+
+footer {
+    /* position:fixed; */
+    bottom: 0;
+    width: 100%;
+    background-color:lightgray;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    min-width:600px;
+}

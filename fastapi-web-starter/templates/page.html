@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}FastAPI Starter{% endblock %}
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block page_content %}
+{% include 'include/sidebar.html' %}
+
+{% block customscripts %}
+<script src="{{ url_for('static', path='/js/index.js') }}"></script>
+{% endblock %}
+
+<main role="main" class="container">
+    <div id="chatbox" class="row">
+        <div class="col">
+            <button id="TestButton" type="button" class="btn btn-success custom_button">{{ now }}</button>
+        </div>
+    </div>
+<!--    <div id="chatbox2" class="row">-->
+<!--        <div class="col">-->
+<!--            <button id="TestButton2" type="button" class="btn btn-success custom_button">Success</button>-->
+<!--        </div>-->
+<!--    </div>-->
+</main><!-- /.container -->
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}

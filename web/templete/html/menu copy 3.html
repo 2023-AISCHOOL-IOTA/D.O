@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴추천</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/templete/css/menu.css">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            text-align: center;
+        }
+
+        .roulette-outer {
+            position: relative;
+
+            overflow: hidden;
+
+            width: 700px;
+            height: 700px;
+
+            font-size: 30px;
+
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 50%;
+            background: #ADE1E1;
+
+        }
+
+        .roulette-outer>.roulette {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 5%;
+
+            border-radius: 50%;
+
+            border: 2px solid black;
+        }
+
+        .roulette-outer>.roulette-pin {
+            position: absolute;
+            top: 3%;
+            left: 50%;
+
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 60px 10px 0 10px;
+            border-color: #59A3A2 transparent transparent transparent;
+
+        }
+
+        .roulette-outer>.roulette>.item-wrapper>.item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding-top: 7%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .roulette-outer>.roulette>.line-wrapper>.line {
+            position: absolute;
+            top: 0;
+            bottom: 50%;
+            left: 50%;
+            width: 2px;
+            margin-left: -1px;
+            background: black;
+
+            transform-origin: bottom;
+        }
+
+        .roulette-outer>.roulette {
+            transition: transform 3.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="head" class="header_nav">
+        <div class="inner_header">
+            <div class="col order-first" id="list">
+                <!-- 슬라이드 목록버튼 -->
+                <h2 class="list_btn">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                        <img src="/images/list_icon.png" width="40px;"></button>
+                </h2>
+
+
+                <!-- 로고 -->
+                <h1 clss="logo">
+                    <a href="/templete/html/home.html"><img src="/images/logo2.png" width="110px;"></a>
+                </h1>
+            </div>
+
+
+            <!--nav1 -->
+            <div class="col-md-6 justify-content-center">
+                <nav id="nav1" class="nav1">
+                    <ul class="nav1_list">
+                        <li><a href="menu.html" aria-current="page">메뉴 추천</a></li>
+                        <li><a href="map.html">지도</a></li>
+                        <li><a href="game.html">게임</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!--nav2-->
+            <div class="col order-last justify-content-end">
+                <nav id="nav2" class="nav2">
+                    <ul class="nav2_list">
+                        <li><a href="login.html">login</a></li>
+                        <li><a href="sign.html">signup</a></li>
+                        <!-- <li><a href="home.html">home</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+        <!-- 슬라이드바 -->
+        <div class="offcanvas offcanvas-start" id="demo">
+            <div class="offcanvas-header">
+                <h1 class="offcanvas-title">DO님 안녕하세요</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>Some text lorem ipsum.</p>
+                <p>Some text lorem ipsum.</p>
+                <p>Some text lorem ipsum.</p>
+                <button class="btn btn-secondary" type="button"></button>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <div id="app">
+        <h1>오늘은 뭐 먹을까?</h1>
+        <input type="number" v-model="numberOfItems" placeholder="항목 수 입력">
+        <button @click="initializeItems">갯수설정</button>
+        <div></div>
+        <input type="text" v-model="userInput" placeholder="메뉴 입력">
+        <button @click="updateItem">추가하기</button>
+        <div class="roulette-outer">
+            <div class="roulette-pin"></div>
+            <div class="roulette" v-bind:style="rouletteStyle">
+
+                <!-- 값 영역 -->
+                <div class="item-wrapper">
+                    <div class="item" v-for="(item,index) in items" v-bind:style="itemStyles[index]">{{item.value}}
+                    </div>
+                </div>
+
+                <!-- 선 영역 -->
+                <div class="line-wrapper">
+                    <div class="line" v-for="(item,index) in items" v-bind:style="lineStyles[index]"></div>
+                </div>
+
+            </div>
+            <button class="play-btn" v-on:click="play" style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            width: 120px; 
+            height: 120px; 
+            text-align: center; 
+            line-height: 80px;
+            font-size: 30px;
+            cursor: pointer;">Play!</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    count: 0,
+                    items: [],
+                    itemStyles: [],
+                    lineStyles: [],
+                    current: 0,
+                    userInput: '',
+                    numberOfItems: [], // 사용자가 설정할 항목 수
+                };
+            },
+            computed: {
+                segment() {
+                    return 360 / this.items.length;
+                },
+                offset() {
+                    return this.segment / 2;
+                },
+                angle() {
+                    if (this.count === 0) {
+                        return 0;
+                    }
+                    let temp = -this.current * this.segment;
+                    let randomOffset = Math.floor(Math.random() * this.segment);
+                    let cycle = this.count * 360 * 5;
+                    return -(temp + randomOffset + cycle);
+                },
+                rouletteStyle() {
+                    return {
+                        "transform": "rotate(" + this.angle + "deg)"
+                    };
+                },
+                currentItem() {
+                    return this.items[this.current];
+                }
+            },
+            methods: {
+                initializeItems() {
+                    this.items = Array.from({ length: this.numberOfItems }, () => ({ value: "" }));
+                    this.recalculateStyles();
+                },
+                recalculateStyles() {
+                    this.itemStyles = [];
+                    this.lineStyles = [];
+                    this.items.forEach((el, idx) => {
+                        const segment = 360 / this.items.length;
+                        const offset = segment / 2;
+                        this.itemStyles.push({
+                            "transform": "rotate(" + (segment * idx) + "deg)",
+                        });
+                        this.lineStyles.push({
+                            "transform": "rotate(" + (segment * idx + offset) + "deg)",
+                        });
+                    });
+                },
+                play() {
+                    this.count++;
+                    this.current = Math.floor(Math.random() * this.items.length);
+                },
+                updateItem() {
+                    if (this.userInput.trim() !== '') {
+                        const emptyIndex = this.items.findIndex(item => item.value === '');
+                        if (emptyIndex !== -1) {
+                            this.items[emptyIndex].value = this.userInput;
+                            this.userInput = ''; // 입력 필드 초기화
+                        }
+                    }
+                }
+            },
+        }).mount("#app");
+    </script>
+</body>
+
+</html>

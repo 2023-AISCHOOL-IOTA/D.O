@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', path='/images/logo.png') }}" type="image/x-icon">
+    <title>Login</title>
+</head>
+
+<body>
+    <div>
+        <h1>Login Information</h1>
+        <p>아이디: <span id="userId">{{ user_info.id }}</span></p>
+        <div id="loginInfo">
+            
+            <p>비밀번호: <span id="userId">{{ user_info.password }}</span></p>
+            <p>이름: <span id="userId">{{ user_info.nickname }}</span></p>
+            <button onclick="editLoginInfo()">Edit</button>
+        </div>
+
+        <form id="editForm" style="display: none;">
+            <label for="password">New Password:</label>
+            <input type="password" id="password" name="password" placeholder=새 비밀번호를 입력해주세요><br><br>
+            <label for="nickname">New Nickname:</label>
+            <input type="text" id="nickname" name="nickname" placeholder=새 이름을 입력해주세요><br><br>
+            <button type="button" onclick="updateLoginInfo()">Complete</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', path= 'js/user_info.js') }}"></script>
+        
+
+</body>
+
+</html>

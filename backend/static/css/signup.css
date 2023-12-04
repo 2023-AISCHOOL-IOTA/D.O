@@ -1,0 +1,252 @@
+html {
+    height: 100%;
+}
+
+
+body {
+    height: 100%;
+    /* display: grid; */
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    font-family: Kakao, 맑은 고딕, Malgun Gothic, Apple SD Gothic Neo, 돋움, dotum, sans-serif;
+    -webkit-text-size-adjust: none;
+}
+
+/* 로고가 있는 헤더 */
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inner_header {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    max-width: 1296px;
+    margin: 0 auto;
+    padding: 19px 0;
+    background: #fff;
+    position: relative;
+    z-index: 1000;
+}
+
+#list {
+    display: flex;
+}
+
+
+.list_btn {
+    display: flex;
+    align-items: center;
+}
+
+.list_btn .btn {
+    padding: 0px 25px;
+}
+
+#nav1,
+#nav2 {
+    display: flex;
+    justify-content: center;
+}
+
+/*최소 크기 : 줄여도 글자가 재졍렬 되지 않을 크기*/
+#nav2{
+    min-width: 260px;   
+}
+#nav1{
+    min-width:500px;
+}
+
+#nav1 ul,
+#nav2 ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#nav1 li {
+    list-style: none;
+    margin-right: 50px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#nav2 li {
+    list-style: none;
+}
+
+
+#nav1 li a{
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+}
+
+#nav2 li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 10px;
+    margin-right: 20px;
+}
+
+#nav1 li a:hover,
+#nav2 li a:hover {
+    color: #555;
+}
+
+/* 메인(바디) */
+main {
+    /* margin-top: 0px; 
+    margin-top: 60px;
+    margin-bottom: 60px;
+    height: auto; */
+    padding: 10px;
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    margin: 0 auto;
+    width: 100%;
+  
+
+}
+
+@media(min-width:900px){
+    #sign-container{
+        width: 650px;
+    }
+}
+
+
+/* 회원가입 박스 */
+#sign-container {
+    width: 40%;
+    height: 600px;
+    display: grid;
+    /* align-content:space-around; */
+    justify-items: center;
+    /* align-items: center; */
+    border-radius: 7px;
+    box-shadow: 0px 0px 2px 2px black;
+}
+
+#sign-header {
+    display: grid;
+    align-content: center;
+}
+
+
+.sign-input container {
+    position: fixed;
+}
+
+#sign-form {
+    align-self:flex-end;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+/* 입력창 크기 */
+#username-field,
+#password-field,
+#password-field_check,
+#name-field {
+    width: 300px;
+    height: 50px;
+
+}
+
+/* 아이디 입력+중복확인 */
+.id_check{
+    position: relative;  /*부모요소에 relative*/
+    display: flex;
+}
+
+/* 아이디 입력창 크기 조절 */
+#username-field{
+    flex: 1;  /*가능한 많은 공간을 차지하도록 설정*/
+}
+
+/* 중복확인버튼 */
+#id_check-form-submit{
+    position: absolute;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    width: 90px;
+    height: 40px;
+    right: 0;
+    top: 0;
+    height: 40px;
+}
+
+#id_check-form-submit:hover{
+    color:darkkhaki;
+}
+
+/* 입력창 holder */
+.sign-form-field::placeholder {
+    color: #3a3a3a;
+}
+
+
+
+.sign-form-field {
+    border: none;  /*밑에만 나오게한다*/
+    border-bottom: 1px solid #3a3a3a;  /*두께*/
+    margin-bottom: 10px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px 0px 5px 5px;
+}
+
+
+/* 회원가입 버튼 */
+.btn-container {
+    width: 100%;
+    display:grid;
+    align-content:center;
+    justify-items: center;
+
+}
+
+#signup-btn {
+    width: 300px;
+    padding: 7px;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    margin: auto;
+
+}
+
+#signup-btn:hover{
+    color:darkkhaki;
+}
+
+
+/* footer */
+footer {
+    /* position:fixed; */
+    bottom: 0;
+    width: 100%;
+    background-color: lightgray;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    min-width:600px;
+}
