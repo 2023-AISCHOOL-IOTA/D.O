@@ -18,7 +18,7 @@ import requests
 import secrets
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
+import json
 
 
 #주석 참조
@@ -39,6 +39,15 @@ class User(BaseModel):
 
 class only(BaseModel):
     id: str
+
+class simple(BaseModel):
+    title:str
+    content:str
+    title:str
+    time:str
+    number:int
+
+
 SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
 
 url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
@@ -47,6 +56,7 @@ client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]
 collection_user = db["User"]
 collection_dialog = db["Dialog"]
+collection_review = db["Review"]
 
 
 #여기서 로그인 버튼을 누르면 가는건데 로그인이 되어 있으면 log를 로그아웃으로 보낼꺼고 토큰이 있으면 토큰 삭제하고 홈으로
@@ -126,31 +136,55 @@ def join(user: User):
 def review_get(request: Request):
     token = request.cookies.get("access_token")
     if not token:
+        message = "로그인을 해주세요"
+        log = "login"
         response = RedirectResponse(url="/login") 
-        return response# 토큰이 없는 경우 로그인 페이지로 리디렉션
+        return response
+        
+    else:
+        
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        user_id = payload.get("ID")
+        users = collection_user.find_one({"id": user_id})
+        if users:
+            user_name = users.get("nickname")
+            if user_name:
+                message = user_name + "님 환영합니다!"
+                log = "logout"
+                all_documents = collection_review.find({}, {'_id': 0})
+                all_document = list(all_documents)
+                all_document_j = json.dumps(all_document)
+                return templates.TemplateResponse("review.html", {"request": request, "message": message, "log":log ,"name":user_name+"님", "login" : True, "all_list":all_document_j})
+            else :
+                message = "로그인을 해주세요"
+                log = "login"
+                response.delete_cookie(key="access_token")
+                response = RedirectResponse(url="/") 
+
+
+@router.post('/review')
+def review_db(request:Request, review:simple):
+    token = request.cookies.get("access_token")
     payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
     user_id = payload.get("ID")
-    users = collection_user.find_one({"id":user_id})
-    user_name = users.get("nickname")
-    message = user_name +"님 환영합니다!"
+    users = collection_user.find_one({"id": user_id})
+    user_name  = users.get("nickname")   #이걸로 들어갈 닉너임 찾기 완료
 
-    user_info_list = []
-    
-
-    dialog_documents = collection_dialog.find({"id": user_id}) #아이디로 찾아 일치하는 도큐먼트(컬렉션 안의 데이터) 찾아냄
-    if dialog_documents:
-        for dialog_document in dialog_documents:
-            user_info = {
-                "user_message": dialog_document.get("message"),
-                "user_answer": dialog_document.get("answer"),
-                "user_date": dialog_document.get("date"),
-            }
-            user_info_list.append(user_info)
-    
-    return templates.TemplateResponse("review.html", {"request": request, "user_info_list": user_info_list, "message":message})
-
+    title = review.title #가져올 제목
+    content  = review.content   #가져올 내용
+    date =  datetime.now().strftime("%Y-%m-%d") #가져올 날짜
+    time = review.time
+    number = review.number
+    review_data = {"num":number,
+                    "user_name":user_name,
+                    "title":title,
+                   "content":content,
+                   "date":date,
+                   "time":time}
+    collection_review.insert_one(review_data)
 
     
+    return {"user_name":user_name, "review":True}
 
 @router.post('/check')  #아이디 중복 체크
 def check_id(only: only, request: Request):
@@ -160,7 +194,7 @@ def check_id(only: only, request: Request):
         # 이미 존재하는 아이디인 경우
         raise HTTPException(status_code=400, detail="exists") #강제 에러
     
-    return templates.TemplateResponse("login.html", {"request": request})
+    return {"message":"sucess"}
 
 @router.get('/user_info')
 def get_user_info(request: Request):

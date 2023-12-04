@@ -5,13 +5,16 @@ from datetime import datetime, timedelta
 
 
 # 토큰을 발급하는 함수
-def create_jwt_token(ID: str ):
+def create_jwt_token(ID: str ,expiration_minutes: int = 20):
     # 비밀 키 (secret key) - 토큰 서명에 사용됨
     SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
+    expiration_time = datetime.utcnow() + timedelta(minutes=expiration_minutes)
+
 
     # 토큰에 추가할 페이로드 (Payload) - 토큰에 포함할 정보
     payload = {
         "ID": ID,
+        # "exp": expiration_time  # 만료 시간 추가
         
     }
 

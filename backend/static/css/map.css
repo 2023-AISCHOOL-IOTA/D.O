@@ -151,14 +151,12 @@ header {
     font-family: 'Noto Sans KR', sans-serif;
     box-sizing: border-box;
 }
-
 footer {
     /* position:fixed; */
     bottom: 0;
-    width: 120%;
+    width: 100%;
     background-color: lightgray;
     color: black;
     text-align: center;
     padding: 10px;
-    min-width:600px;
 }

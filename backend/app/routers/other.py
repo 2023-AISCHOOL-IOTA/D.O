@@ -36,7 +36,7 @@ def read_home(request: Request, response: Response):
     if not token:
         message = "로그인을 해주세요"
         log = "login"
-        return templates.TemplateResponse("home.html", {"request": request, "message": message, "log": log})
+        return templates.TemplateResponse("home.html", {"request": request, "message": message,"log": log})
     else:
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         user_id = payload.get("ID")
@@ -51,7 +51,7 @@ def read_home(request: Request, response: Response):
             log  = "logout"
               
     
-    return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log, "name":user_name+"님", "login" : True})
+    return templates.TemplateResponse("home.html", {"request": request, "message": message, "log":log, "name":user_name, "login" : True})
 
 
 @router.get("/chat")
@@ -71,7 +71,7 @@ def read_dobot(request: Request, response: Response):
             user_name = users.get("nickname")
             message = user_name + "님 환영합니다!"
             log  = "logout"
-            return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log, "chat_end": True})
+            return templates.TemplateResponse("chat.html", {"request": request, "message": message, "log": log, "chat_end": True,})
         else :
             message = "로그인을 해주세요"
             log = "login"
@@ -101,7 +101,7 @@ def map(request:Request, response: Response):
             else:
                 message = "사용자 이름이 없습니다."
             log  = "logout"
-            return templates.TemplateResponse("map.html", {"request": request, "message": message, "log":log, "name":user_name+"님", "login" : True, "map":True})
+            return templates.TemplateResponse("map.html", {"request": request, "message": message, "log":log, "name":user_name, "login" : True, "map":True})
         else :
             message = "로그인을 해주세요"
             log = "login"

@@ -12,7 +12,7 @@ Application Programing Interface로 서비스 요청과 응답을 처리하는 �
 - 적은 버그와 높은 생산성
 - 베우기 쉽게 되어 있는 공식 문서
 - 파이썬 언어에서 오는 여러 라이브러리 사용 가능의 장점
-- 플라스크는  문서의 자동화가 안되지만 fast api는 3가지 엔드퐁린트 발생 /docs, /redoc, /openai.json
+- 플라스크는  문서의 자동화가 안되지만 fast api는 3가지 엔드포인트 발생 /docs, /redoc, /openai.json
 - 데이터 타입을 앤드포인트로 명시하지 않아도 된다
     - end point란  api가 서버에서 리소스에 접근 할 수 있도록 기능하게 해주는 URL
     - request 를 받는다고 가정 하면 이걸 받을 지점이 필요  → 이 위치를 endpoint라고 한다

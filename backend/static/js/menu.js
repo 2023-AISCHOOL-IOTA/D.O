@@ -25,7 +25,7 @@ Vue.createApp({
       let temp = -this.current * this.segment;
       let randomOffset = Math.floor(Math.random() * this.segment);
       let cycle = this.count * 360 * 5;
-      return -(temp + randomOffset + cycle);
+      return temp + randomOffset + cycle; // 오른쪽으로 회전하도록 부호 변경
     },
     rouletteStyle() {
       return {
