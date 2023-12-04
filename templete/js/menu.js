@@ -24,7 +24,7 @@ Vue.createApp({
             let temp = -this.current * this.segment;
             let randomOffset = Math.floor(Math.random() * this.segment);
             let cycle = this.count * 360 * 5;
-            return -(temp + randomOffset + cycle);
+            return temp + randomOffset + cycle; // 오른쪽으로 회전하도록 부호 변경
         },
         rouletteStyle() {
             return {
@@ -71,9 +71,13 @@ Vue.createApp({
     
 }).mount("#app");
 
-// 메시지 보내기 이벤트 리스너들
-document.getElementById('push-btn').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        updateItem();
-    }
-})
+// document.getElementById('userInput').addEventListener('keyup', function(e) {
+//     if (e.key === 'Enter') {
+//         app.updateItem(); // Vue 인스턴스의 메서드 호출
+//     }
+// });
+// document.getElementById('numberOfItems').addEventListener('keyup', function(e) {
+//     if (e.key === 'Enter') {
+//         app.recalculateStyles(); // Vue 인스턴스의 메서드 호출
+//     }
+// });

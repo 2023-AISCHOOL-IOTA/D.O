@@ -11,7 +11,7 @@ body{
 
 header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position:sticky;
+    /* position:sticky; */  /*이게 있으니깐 캐러셀 사진이 z-index를 줘도 튀어나와*/
 }
 
 .inner_header {
@@ -108,7 +108,7 @@ header {
 @media(min-width:600px){
     .cont_main{
         width: 600px;
-        height: 750px;
+        height: auto;
     }
 }
 
@@ -116,7 +116,7 @@ main {
     padding: 20px;
     /* margin-top: 40px;
     margin-bottom: 40px; */
-    /* height: auto; */
+    min-height: 80%;
     justify-items: center;
     align-items: center;
     display: grid;
@@ -124,10 +124,21 @@ main {
 
 }
 
-.carousel-container{
-    width: 100%;
-}
+/* 오프캔버스에 높은 z-index 값을 주어 화면의 다른 요소들 위에 오도록 합니다. */
+.offcanvas {
+    z-index: 1040; /* Bootstrap의 모달 z-index보다 약간 낮은 값 */
+  }
+  
+  /* 캐러셀 이미지가 오프캔버스 메뉴 뒤로 가도록 z-index를 설정합니다. */
+  .carousel {
+    z-index: 1030; /* 오프캔버스 메뉴보다 낮은 값 */
+  }
 
+
+h4 a{
+    text-decoration: none;
+    color: black;
+  }
 #newChatBtn {
     display: block;
     width: 100%;

@@ -184,6 +184,7 @@ main {
     position: fixed;
 }
 
+/* 로그인 */
 #login-form {
     align-self: flex-start;
     display: grid;
@@ -191,14 +192,11 @@ main {
     align-items: center;
 }
 
+/* 아이디, 비밀번호 입력하는 곳 */
 #username-field,
 #password-field {
     width: 300px;
     height: 50px;
-}
-
-.login-form-field::placeholder {
-    color: #3a3a3a;
 }
 
 .login-form-field {
@@ -211,8 +209,16 @@ main {
 }
 
 
+/* 입력창에 holder */
+.login-form-field::placeholder {
+    color: #3a3a3a;
+}
 
 
+
+
+
+/* 버튼 컨테이너 */
 .btn-container {
     width: 100%;
     display:grid;
