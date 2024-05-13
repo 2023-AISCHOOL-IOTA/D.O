@@ -15,7 +15,8 @@ from utils.middleware import create_jwt_token #미들웨어에 있는 토큰 발
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from tokenizers import Tokenizer, SentencePieceBPETokenizer
-
+from dotenv import load_dotenv
+import os
 from fastapi.responses import RedirectResponse 
 """미들웨어란? ->  middleware란 모든 리퀘스트에 대해 path operation이 수행되기전 실행되는 함수를 말한다.
 프론트 엔드와 백엔드 사이?
@@ -31,7 +32,7 @@ jwt 서명은 헤더(타입, 사용된 알고리즘), 패이로드(안에 들어
 서명 검증시 토큰을 받고 다시 헤더와 페이로드에서 값을 꺼내 만들때와 동일한 방식으로 조합 해 확인
 만약 다르다면 유효하지 않음"""
 
-
+load_dotenv()  
 app = FastAPI() #app이라는 이름으로 fast api 인스턴스를 생성하곘다
 
 # 템플릿 디렉토리 설정
@@ -45,7 +46,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static") #정적 파
 app.include_router(db.router) # 이 db라는 파일에서 정의된 라우터를 현재 fast api인스턴스에 추가하겠다
 app.include_router(other.router) #이 other이라는 파일에서 정의된 라우터를 현재 fast api인스턴스에 추가하겠다
 
-SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492" #암호화시 사용하는 시크릿키 보통 32바이트의 길이 나 그 이상 
+SECRET_KEY = os.getenv(SECRET_KEY)
 
 
 
@@ -65,7 +66,7 @@ def get_next_sequence_value(sequence_name):
 class DataInput(BaseModel):  # DataInput이라는 이름으로 받을 데이터 정의함
     data: list
 
-url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
+url = os.getenv(url)
 
 client = MongoClient(url, server_api=ServerApi('1')) #pymongo사용해 DB에 연결 서버주소
 db = client["chat"] #chat이라는 이름의 데에터베이스 선택
