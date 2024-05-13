@@ -9,15 +9,14 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi#메인 파일 주석 참조
 from fastapi.responses import RedirectResponse 
 import os
-from dotenv import load_dotenv
-load_dotenv()  
-SECRET_KEY =  os.getenv(SECRET_KEY)
+from dotenv import load_dotenv 
+
 #그외 모아둔 라우터
 router = APIRouter()  # apirouter이라는 인스턴스 생성
 #메인 파일 주석 참조
 load_dotenv()
 
-
+SECRET_KEY =  os.getenv(SECRET_KEY)
 url = os.getenv(url)
 client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]

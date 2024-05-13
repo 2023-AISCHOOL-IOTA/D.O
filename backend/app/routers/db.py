@@ -49,7 +49,7 @@ class simple(BaseModel):
     number:int
 
 
-SECRET_KEY =  os.getenv('SECRET_KEY')
+SECRET_KEY =  os.getenv(SECRET_KEY)
 
 url = os.getenv(url)
 
