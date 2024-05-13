@@ -19,8 +19,9 @@ import secrets
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import json
-
-
+from dotenv import load_dotenv
+import os
+load_dotenv() 
 #주석 참조
 router = APIRouter()
 
@@ -48,9 +49,9 @@ class simple(BaseModel):
     number:int
 
 
-SECRET_KEY = "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
+SECRET_KEY =  os.getenv('SECRET_KEY')
 
-url = "mongodb+srv://010127js:ninosoi2001!@soi.hhnr8fk.mongodb.net/?retryWrites=true&w=majority"
+url = os.getenv(url)
 
 client = MongoClient(url, server_api=ServerApi('1'))
 db = client["chat"]
